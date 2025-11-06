@@ -1,0 +1,25 @@
+[Shipment Update]
+Hello {customer_name},
+Your order {order_id} is currently {status}.
+Expected delivery: {eta}.
+Track anytime at shipcube.com/track.
+
+[Refund Confirmation]
+Dear {customer_name},
+Your refund for order {order_id} has been initiated.
+Amount will be credited within 5–7 business days.
+
+[Damage Claim]
+Hi {customer_name},
+We’ve received your damage report for order {order_id}.
+Our claims team will update you within 48 hours.
+
+[Escalation Notice]
+Dear {customer_name},
+Your issue has been escalated to our senior support team.
+You’ll receive an update within 48 hours.
+
+[Feedback Response]
+Hello {customer_name},
+Thank you for your feedback. We truly appreciate your time.
+Your inputs help us make ShipCube better for everyone.

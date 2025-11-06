@@ -1,0 +1,6 @@
+1. All shipments are bound by ShipCube’s logistics policy.
+2. ShipCube is not liable for third-party or customs delays.
+3. Clients must declare correct value for insurance.
+4. Customers must verify address details before dispatch.
+5. ShipCube reserves the right to refuse restricted goods.
+6. Tracking and refund claims must follow ShipCube procedures.

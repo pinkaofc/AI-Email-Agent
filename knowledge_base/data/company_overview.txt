@@ -1,0 +1,22 @@
+ShipCube is a logistics and supply chain management company providing reliable domestic and international parcel delivery, freight forwarding, and warehouse automation.
+
+Founded: 2016
+Headquarters: Mumbai, India
+Employees: 500+
+Operational Hubs: Delhi, Mumbai, Bengaluru, Chennai, and Kolkata.
+
+ShipCube offers integrated logistics services for retail, e-commerce, and enterprise clients. Our services include:
+- Domestic & International Shipping
+- Real-time Tracking and Notifications
+- Reverse Logistics and Returns Management
+- API-based Integration for Business Clients
+- Warehouse Storage and Inventory Optimization
+
+Mission: To simplify global delivery through intelligent automation.
+Vision: To make logistics transparent, predictable, and human-friendly.
+
+Departments:
+1. Operations – manages shipments, pickups, and route optimization.
+2. Finance – handles billing, invoicing, and claims.
+3. Customer Care – manages support and client communication.
+4. Technical Team – maintains systems, integrations, and AI automation.

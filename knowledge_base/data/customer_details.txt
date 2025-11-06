@@ -1,0 +1,49 @@
+Customer ID: CU1001
+Name: Riya Sharma
+Email: riya.sharma@example.com
+Location: Mumbai
+Account Type: Individual
+Orders:
+ - SCX12039 | Mumbai → Delhi | Delivered | 2.5kg | 2025-10-25
+ - SCX12400 | Mumbai → Kolkata | In Transit | ETA: 2025-11-06
+Loyalty Tier: Silver
+Notes: Prefers pickup at 5 PM; email notifications enabled.
+
+---
+
+Customer ID: CU1002
+Name: Arjun Mehta
+Email: arjun.mehta@example.com
+Location: Bengaluru
+Account Type: Business
+Orders:
+ - SCX13450 | Bengaluru → Hyderabad | Delivered | 8kg | 2025-10-29
+ - SCX13999 | Bengaluru → Chennai | Out for Delivery | ETA: 2025-11-05
+Loyalty Tier: Gold
+Notes: Uses API integration for warehouse management.
+
+---
+
+Customer ID: CU1003
+Name: Sneha Verma
+Email: sneha.verma@example.com
+Location: Delhi
+Account Type: Individual
+Orders:
+ - SCX14550 | Delhi → Jaipur | Delivered | 1kg | 2025-10-24
+ - SCX14588 | Delhi → Lucknow | Processing | ETA: 2025-11-07
+Loyalty Tier: Bronze
+Notes: Requests SMS updates for every status change.
+
+---
+
+Customer ID: CU1004
+Name: Rajesh Singh
+Email: rajesh.singh@rajsupplies.com
+Location: Pune
+Account Type: Corporate
+Orders:
+ - SCX15570 | Pune → Ahmedabad | Delivered | 15kg | 2025-10-30
+ - SCX15571 | Pune → Surat | In Transit | ETA: 2025-11-06
+Loyalty Tier: Platinum
+Notes: Has assigned account manager and monthly billing summary.

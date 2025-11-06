@@ -1,0 +1,17 @@
+Q: How can I track my shipment?
+A: Use the chatbot or visit shipcube.com/track with your order ID.
+
+Q: Can I change my address after booking?
+A: Yes, before status changes to “Out for Delivery.”
+
+Q: What is the refund timeline?
+A: 5–7 business days post-verification.
+
+Q: Do you support API integration?
+A: Yes, for Gold and Platinum clients.
+
+Q: What are your delivery hours?
+A: 9 AM – 8 PM on working days.
+
+Q: How can I contact support?
+A: Email support@shipcube.com or use chatbot.

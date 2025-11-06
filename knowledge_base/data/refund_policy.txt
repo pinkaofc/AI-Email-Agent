@@ -1,0 +1,17 @@
+Refund Eligibility:
+1. Shipment lost in transit.
+2. Delivery delayed beyond 10 business days (domestic).
+3. Damaged goods reported within 48 hours of delivery.
+
+Refund Process:
+- Raise claim within 7 days via chatbot or support@shipcube.com.
+- Investigation completed within 72 hours.
+- Refund processed within 5–7 business days after verification.
+
+Exclusions:
+- Incorrect address or poor packaging by sender.
+- Delays due to weather or customs.
+- Shipments without valid tracking IDs.
+
+Refund Method:
+- Refund issued to original payment mode or ShipCube wallet.

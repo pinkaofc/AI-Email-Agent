@@ -1,0 +1,100 @@
+[
+  {
+    "id": "1",
+    "from": "sophia.gonzalez@globalimports.mx",
+    "subject": "Invoice Request for Order #12345",
+    "body": "Hello ShipCube Support, could you please send us the official invoice for Order #12345? We need it for our accounting records and tax filing. Thank you.",
+    "timestamp": "2025-08-01T14:30:00"
+  },
+  {
+    "id": "2",
+    "from": "raj.malhotra@malhotragoods.in",
+    "subject": "Missing Items in Shipment SC-PO53804",
+    "body": "Dear ShipCube Team, our shipment SC-PO53804 arrived today but three cartons were missing. Kindly check your dispatch records and resend the missing stock as per our agreement.",
+    "timestamp": "2025-07-19T23:52:00"
+  },
+  {
+    "id": "3",
+    "from": "evelyn.harper@urbanthreads.com",
+    "subject": "Shipment SC-97694 Delivered to Wrong Address",
+    "body": "Hi, the package for shipment SC-97694 was marked delivered but it reached another warehouse location. Please coordinate with your logistics partner and confirm redelivery.",
+    "timestamp": "2025-03-23T03:49:00"
+  },
+  {
+    "id": "4",
+    "from": "alex.johnson@northtech.us",
+    "subject": "Shipment SC-67843 Marked Delivered but Not Received",
+    "body": "Hello, shipment SC-67843 shows as delivered in the portal, but we have not received it yet. Could you please investigate with your delivery partner and update us?",
+    "timestamp": "2025-06-04T08:56:00"
+  },
+  {
+    "id": "5",
+    "from": "evelyn.harper@urbanthreads.com",
+    "subject": "Appreciation for Order SC-64665 Resolution",
+    "body": "Dear ShipCube, thank you for resolving the delay issue with order SC-64665 so efficiently. Your prompt communication and follow-up were excellent!",
+    "timestamp": "2025-06-08T21:23:00"
+  },
+  {
+    "id": "6",
+    "from": "carla.mendes@brazconnect.com",
+    "subject": "Request for Delivery Estimate PO-19134",
+    "body": "Hello ShipCube, could you please confirm the expected delivery date for purchase order PO-19134? Our client has requested an update for internal scheduling.",
+    "timestamp": "2025-06-19T10:45:00"
+  },
+  {
+    "id": "7",
+    "from": "sofia.kim@kimsimports.kr",
+    "subject": "Delayed Shipment for Order SC-21323",
+    "body": "Dear ShipCube Team, shipment SC-21323 is delayed by over a week. Please share the latest transit update or reshipment timeline as per your delivery policy.",
+    "timestamp": "2025-06-19T04:20:00"
+  },
+  {
+    "id": "8",
+    "from": "mark.peters@eurotrade.de",
+    "subject": "Damaged Goods in Order SC-95479",
+    "body": "Hello Support, several units in our Order SC-95479 were received damaged. Kindly advise on replacement procedure under your damage policy.",
+    "timestamp": "2025-06-21T16:28:00"
+  },
+  {
+    "id": "9",
+    "from": "evelyn.harper@urbanthreads.com",
+    "subject": "Appreciation for Order SC-24311 Resolution",
+    "body": "Dear ShipCube, thank you once again for promptly resolving the stock discrepancy for Order SC-24311. We appreciate your professionalism.",
+    "timestamp": "2025-07-27T22:13:00"
+  },
+  {
+    "id": "10",
+    "from": "james.liu@fasttrackglobal.cn",
+    "subject": "Customs Clearance Delay - Order SC-36712",
+    "body": "Dear Support, Order SC-36712 is on hold at customs due to documentation mismatch. Kindly resend the commercial invoice and declaration papers urgently.",
+    "timestamp": "2025-04-30T00:32:00"
+  },
+  {
+    "id": "11",
+    "from": "raj.malhotra@malhotragoods.in",
+    "subject": "Delivery Status Inquiry for Order SC-35452",
+    "body": "Hello ShipCube, shipment SC-35452 has not arrived even though it was marked as shipped last week. Could you please confirm its current tracking status?",
+    "timestamp": "2025-06-16T21:46:00"
+  },
+  {
+    "id": "12",
+    "from": "sofia.kim@kimsimports.kr",
+    "subject": "Billing Clarification for Order SC-99831",
+    "body": "Dear Finance Team, the invoice for Order SC-99831 shows an incorrect unit price. Kindly verify and send an updated invoice as per our quotation.",
+    "timestamp": "2025-07-05T13:42:00"
+  },
+  {
+    "id": "13",
+    "from": "liam.taylor@eastcoasttraders.uk",
+    "subject": "Request for Return Label - Order SC-10567",
+    "body": "Hi, we need to return 2 damaged pallets from Order SC-10567. Please send the return label and pickup schedule as per your return policy.",
+    "timestamp": "2025-08-03T09:25:00"
+  },
+  {
+    "id": "14",
+    "from": "sophia.gonzalez@globalimports.mx",
+    "subject": "Appreciation for Timely Delivery - Order SC-11592",
+    "body": "Hello ShipCube, we appreciate your prompt delivery of Order SC-11592 ahead of schedule. Your logistics team did an excellent job.",
+    "timestamp": "2025-08-10T17:18:00"
+  }
+]

@@ -1,0 +1,19 @@
+ShipCube Shipping Policy:
+
+Domestic Delivery:
+- Standard: 2–5 business days.
+- Express: 1–2 days (additional 5% surcharge).
+- Same-day delivery for bookings before 4 PM.
+
+International Delivery:
+- Standard: 5–10 business days.
+- Express: 3–6 business days.
+
+Packaging Guidelines:
+- Fragile items must be labeled and double-packed.
+- Liquids must be leak-proof.
+- Oversized items may require special handling.
+
+Liability:
+- Maximum liability ₹10,000 per shipment unless insured.
+- ShipCube not responsible for customs delays or incorrect addresses.

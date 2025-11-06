@@ -1,0 +1,5 @@
+Query: Customer asking about shipment delay for order SCX12400.
+Response: Hi Riya, your order SCX12400 from Mumbai to Kolkata is in transit and expected to arrive by November 6.
+
+Query: Customer reporting damaged goods.
+Response: Hello Sneha, your replacement for order SCX14550 has been dispatched and will reach by October 28.

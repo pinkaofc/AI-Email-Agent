@@ -1,0 +1,20 @@
+Tracking Policy:
+
+Tracking numbers are assigned upon booking confirmation.
+You can track shipments through:
+1. ShipCube dashboard
+2. Chatbot / Email Query
+3. SMS updates
+
+Tracking Status Stages:
+- Order Received
+- In Transit
+- Out for Delivery
+- Delivered
+
+If no tracking update for 48+ hours, contact support@shipcube.com.
+
+Sample Routes & Times:
+- Delhi → Mumbai: 2–3 days
+- Bengaluru → Chennai: 1–2 days
+- Delhi → London: 6–8 days

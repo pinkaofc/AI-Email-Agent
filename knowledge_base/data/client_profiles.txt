@@ -1,0 +1,32 @@
+# ShipCube Key Clients
+
+Client: Alpha Traders Pvt. Ltd.
+Client ID: C001
+Tier: Gold
+Location: Delhi
+Contract Type: Annual
+Discount: 12% on all domestic shipments.
+Preferred Routes: Delhi → Mumbai, Delhi → Kolkata.
+Special Notes: Requires same-day pickup on weekdays.
+
+---
+
+Client: Nova Electronics
+Client ID: C002
+Tier: Silver
+Location: Bengaluru
+Contract Type: Monthly
+Discount: 7% on shipments below 50kg.
+Preferred Routes: Bengaluru → Chennai, Bengaluru → Hyderabad.
+Special Notes: Requests invoice summary every Friday.
+
+---
+
+Client: GreenMart Exports
+Client ID: C003
+Tier: Platinum
+Location: Mumbai
+Contract Type: Annual
+Discount: 15% on all international shipments.
+Preferred Routes: Mumbai → Dubai, Mumbai → Singapore.
+Special Notes: Weekly bulk pickup every Friday.
