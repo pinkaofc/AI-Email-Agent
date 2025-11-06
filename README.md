@@ -1,6 +1,6 @@
 ---
 
-# AI Email Agent (ShipCube)
+# AI Email Agent 
 
 An AI-powered email automation system that fetches, filters, summarizes, and generates intelligent replies to emails using advanced language models. The system integrates with IMAP and SMTP servers and uses a state-driven LangGraph workflow to manage the complete lifecycle of email processing — from ingestion to automated response generation.
 
@@ -245,3 +245,4 @@ All code contributions should follow Pythonic conventions (PEP8) and include app
 * **Open Source Community** – For maintaining the essential libraries that make this system possible.
 
 ---
+
