@@ -1,6 +1,6 @@
 ---
 
-# **AI Email Agent (ShipCube)**
+# **AI Email Agent**
 
 An advanced AI-powered email automation system that fetches, filters, summarizes, and generates intelligent replies using state-driven workflows and large language models. The system integrates IMAP/SMTP email handling with **LangGraph**, **Google Gemini**, and a **Retrieval-Augmented Generation (RAG)** knowledge base. It supports end-to-end automation—from inbox ingestion to final email dispatch—while maintaining human-review control when needed.
 
@@ -287,5 +287,6 @@ Follow PEP8 and include proper logging.
 * **Open Source Community** – for tools that enable this system
 
 ---
+
 
 
