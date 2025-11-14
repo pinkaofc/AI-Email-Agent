@@ -1,20 +1,30 @@
 import os
 import sys
 import time
+import warnings
 from datetime import datetime
 from pathlib import Path
 
-# --- Fix for local package imports ---
+# Suppress non-critical startup warnings globally
+warnings.filterwarnings("ignore")
+
+# ============================================================
+#                   PATH SETUP
+# ============================================================
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-# --- Config ---
+# ============================================================
+#                   CONFIG IMPORTS
+# ============================================================
 from config import (
     EMAIL_USERNAME,
     YOUR_NAME,
     YOUR_GMAIL_ADDRESS_FOR_DRAFTS,
 )
 
-# --- Utils ---
+# ============================================================
+#                   UTILITIES
+# ============================================================
 from utils.logger import get_logger
 from utils.records_manager import (
     log_email_record,
@@ -23,26 +33,28 @@ from utils.records_manager import (
 )
 from core.email_sender import extract_name_from_email
 
-# --- Core Components ---
+# ============================================================
+#                   CORE COMPONENTS
+# ============================================================
 from core.email_ingestion import fetch_email
 from core.supervisor import supervisor_langgraph
 from core.email_sender import send_email, send_draft_to_gmail
 from core.state import EmailState
 
-# --- Logger Initialization ---
+# Import unified fallback message from formatter to keep text consistent
+from utils.formatter import FALLBACK_RESPONSE
+
+# ============================================================
+#                   LOGGER INITIALIZATION
+# ============================================================
 logger = get_logger(__name__, log_to_file=True)
 
 
+# ============================================================
+#                   HELPER FUNCTIONS
+# ============================================================
 def _get_sender_email_and_name(email_record: dict):
-    """
-    Normalize email record fields so we accept multiple JSON / IMAP formats.
-    Prefer these keys in order:
-      - 'from' (sample_emails.json)
-      - 'sender_email' (IMAP loader)
-      - 'sender' (any other variant)
-    Returns (email_address, friendly_name)
-    """
-    # Possible keys that might hold the sender's email address
+    """Extract sender email and name, normalized for IMAP or JSON inputs."""
     candidate_email = (
         email_record.get("from")
         or email_record.get("sender_email")
@@ -50,95 +62,97 @@ def _get_sender_email_and_name(email_record: dict):
         or ""
     )
 
-    # If the sample includes sender_name explicitly prefer it
     candidate_name = (
         email_record.get("sender_name")
         or email_record.get("from_name")
         or None
     )
 
-    # If candidate_name is missing, derive it from email
     if not candidate_name:
         candidate_name = extract_name_from_email(candidate_email)
 
-    # Ensure we never return an empty email; fallback is empty string (handled later)
     return candidate_email or "", candidate_name or "Customer"
 
 
 def handle_email_sending(final_state: EmailState, user_name: str, dry_run: bool) -> str:
-    """Handles sending or drafting an email based on workflow state."""
+    """Handles sending or drafting based on AI pipeline results."""
     email_data = final_state.current_email
-    generated_response = final_state.generated_response_body
-
-    # --- Normalize sender address and name from email record ---
+    generated_response = final_state.generated_response_body or ""
     original_sender_email, original_sender_name = _get_sender_email_and_name(email_data)
-
     original_subject = email_data.get("subject", "No Subject")
 
-    if not generated_response or final_state.processing_error:
-        logger.warning(
-            f"[Main] Skipping send/draft for email ID {final_state.current_email_id} "
-            f"due to missing response or previous error."
-        )
-        return "Skipped (No Response/Error)"
+    # Ensure non-empty response (global fallback)
+    if not generated_response.strip():
+        logger.warning(f"[Main] Empty generated response for ID {final_state.current_email_id} — inserting fallback.")
+        generated_response = FALLBACK_RESPONSE
+        final_state.generated_response_body = generated_response
 
-    # Build the payload expected by send_email / send_draft_to_gmail.
-    # Important: 'to' is the recipient (customer), 'from' is your account (EMAIL_USERNAME).
+    # Ensure recipient present
+    if not original_sender_email:
+        logger.error(f"[Main] Missing recipient address for ID {final_state.current_email_id}; skipping send.")
+        return "Skipped (No Recipient)"
+
+    # If previous processing error flagged, skip sending
+    if final_state.processing_error:
+        logger.warning(
+            f"[Main] Skipping send/draft for ID {final_state.current_email_id} — prior processing error: "
+            f"{final_state.processing_error}"
+        )
+        return "Skipped (Processing Error)"
+
     email_for_sending = {
         "subject": original_subject,
         "response": generated_response,
-        "to": original_sender_email,   # send to actual customer
-        "from": EMAIL_USERNAME         # your sending address (used in headers)
+        "to": original_sender_email,
+        "from": EMAIL_USERNAME,
     }
 
-    # If draft mode or flagged for human review -> send draft to your review Gmail
+    # Draft mode for human review or dry run
     if dry_run or final_state.requires_human_review:
         logger.info(
-            f"[Main] Email ID {final_state.current_email_id} flagged for human review "
-            f"or in dry-run mode. Sending draft to '{YOUR_GMAIL_ADDRESS_FOR_DRAFTS}'."
+            f"[Main] ID {final_state.current_email_id} flagged for review/dry-run. "
+            f"Sending draft to {YOUR_GMAIL_ADDRESS_FOR_DRAFTS}."
         )
-        # send_draft_to_gmail expects the original sender's name to create greeting in draft.
-        # It will call extract_name_from_email() internally if needed.
         if send_draft_to_gmail(email_for_sending, user_name, YOUR_GMAIL_ADDRESS_FOR_DRAFTS):
             return "Drafted"
-        else:
-            logger.error(f"[Main] Failed to send draft for email ID {final_state.current_email_id}.")
-            return "Draft Failed"
-    else:
-        # Send directly to customer
-        logger.info(
-            f"[Main] Email ID {final_state.current_email_id} ready for direct reply to "
-            f"'{original_sender_email}'."
-        )
-        if send_email(email_for_sending, user_name):
-            return "Sent Directly"
-        else:
-            logger.error(f"[Main] Failed to send email for email ID {final_state.current_email_id}.")
-            return "Send Failed"
+        logger.error(f"[Main] Failed to send draft for ID {final_state.current_email_id}.")
+        return "Draft Failed"
+
+    # Direct send
+    logger.info(f"[Main] ID {final_state.current_email_id} — sending reply to {original_sender_email}")
+    if send_email(email_for_sending, user_name):
+        return "Sent Directly"
+
+    logger.error(f"[Main] Failed to send direct reply for ID {final_state.current_email_id}.")
+    return "Send Failed"
 
 
+# ============================================================
+#                   MAIN WORKFLOW
+# ============================================================
 def main():
-    """Main orchestration loop for the AI email agent."""
-    logger.info("[Main] Starting AI email automation pipeline...")
+    """Main orchestration for the AI-powered email workflow."""
+    logger.info("=" * 60)
+    logger.info("[Main] Starting ShipCube AI Email Automation Pipeline...")
+    logger.info("=" * 60)
 
-    # Initialize CSV records
     initialize_csv(RECORDS_CSV_PATH)
 
-    # --- Configuration Mode ---
-    simulate_fetch = input("Use simulated emails from sample_emails.json? (y/n): ").strip().lower() == "y"
-    email_limit = int(input("How many emails to process (max)? (e.g., 1): ") or "1")
-    dry_run_send = input("Send all responses as DRAFTS to your Gmail address (dry run)? (y/n): ").strip().lower() == "y"
+    # ---------------- CONFIG INPUTS ----------------
+    simulate_fetch = input("Use sample_emails.json instead of IMAP? (y/n): ").strip().lower() == "y"
+    email_limit = int(input("Number of emails to process (e.g. 1, 5, 10): ") or "1")
+    dry_run_send = input("Send all responses as DRAFTS (dry-run)? (y/n): ").strip().lower() == "y"
     mark_as_seen = (
-        input("Mark fetched emails as 'seen' on IMAP server (only for real fetch)? (y/n): ").strip().lower() == "y"
+        input("Mark fetched emails as 'seen' on IMAP? (y/n): ").strip().lower() == "y"
         if not simulate_fetch
         else False
     )
 
-    logger.info(f"[Main] Using simulation mode: {simulate_fetch}")
-    logger.info(f"[Main] Email limit set to {email_limit}")
-    logger.info(f"[Main] Dry-run mode: {dry_run_send}")
+    logger.info(f"[Main] Simulation Mode: {simulate_fetch}")
+    logger.info(f"[Main] Processing Limit: {email_limit}")
+    logger.info(f"[Main] Dry Run: {dry_run_send}")
 
-    # --- Fetch Emails ---
+    # ---------------- FETCH EMAILS ----------------
     logger.info("[Main] Fetching emails...")
     emails_to_process = fetch_email(
         simulate=simulate_fetch,
@@ -150,27 +164,30 @@ def main():
         logger.info("[Main] No emails found to process. Exiting.")
         return
 
-    logger.info(f"[Main] Fetched {len(emails_to_process)} email(s). Beginning processing.")
+    logger.info(f"[Main] {len(emails_to_process)} emails ready for processing.")
 
-    # --- Process Each Email ---
+    # Detect if using Gemini free-tier
+    using_free_tier = os.getenv("GEMINI_FREE_TIER", "true").lower() == "true"
+    base_cooldown = 40 if using_free_tier else 10
+
+    # ---------------- PROCESS LOOP ----------------
     for i, email_data_raw in enumerate(emails_to_process, start=1):
         email_id = email_data_raw.get("id", f"simulated_{i}")
-
-        # Normalize sender fields (supports both sample JSON and IMAP results)
         sender_email, sender_name_calc = _get_sender_email_and_name(email_data_raw)
-
-        # If sample JSON provides 'from' but not sender_name, we compute friendly name.
-        # Also allow an explicit 'sender_name' field to override.
         sender_name = email_data_raw.get("sender_name") or sender_name_calc
-
         subject = email_data_raw.get("subject", "No Subject")
 
-        logger.info(f"[Main] Processing Email {i} (ID: {email_id})")
-        logger.info(f"[Main] Subject: {subject}")
+        logger.info("-" * 60)
+        logger.info(f"[Main] Processing Email {i}/{len(emails_to_process)} — ID: {email_id}")
         logger.info(f"[Main] From: {sender_name} <{sender_email}>")
+        logger.info(f"[Main] Subject: {subject}")
 
         try:
             recipient_name_for_llm = extract_name_from_email(sender_email)
+
+            # --- PROCESS THROUGH PIPELINE ---
+            logger.info("[Main] Running email through AI pipeline (Filter → Summarize → Respond)...")
+            start_time = time.time()
 
             final_state: EmailState = supervisor_langgraph(
                 selected_email=email_data_raw,
@@ -178,38 +195,41 @@ def main():
                 recipient_name=recipient_name_for_llm,
             )
 
+            elapsed_time = time.time() - start_time
+            logger.info(f"[Main] Processing completed in {elapsed_time:.2f}s for Email ID {email_id}")
+
+            # --- DEBUG SUMMARY ---
             logger.debug(
-                f"[Main] Email ID {email_id} results: "
-                f"Classification='{final_state.classification}', "
+                f"[Main] Results for {email_id} — "
+                f"Classification={final_state.classification}, "
                 f"Summary length={len(final_state.summary or '')}, "
                 f"Response length={len(final_state.generated_response_body or '')}, "
-                f"Requires Review={final_state.requires_human_review}, "
-                f"Error='{final_state.processing_error}'"
+                f"Review={final_state.requires_human_review}, "
+                f"Error={final_state.processing_error}"
             )
 
+            # --- DETERMINE NEXT STEP ---
             if final_state.processing_error:
                 response_status_action = "Error During Processing"
-                logger.error(f"[Main] Skipping email ID {email_id}: {final_state.processing_error}")
             elif final_state.classification in ["spam", "promotional"]:
                 response_status_action = f"Skipped ({final_state.classification.capitalize()})"
-                logger.info(f"[Main] Skipping spam/promotional email ID {email_id}.")
             else:
                 response_status_action = handle_email_sending(final_state, YOUR_NAME, dry_run_send)
 
         except Exception as e:
-            logger.critical(f"[Main] Critical error processing email ID {email_id}: {e}", exc_info=True)
+            logger.critical(f"[Main] Critical error while processing {email_id}: {e}", exc_info=True)
             final_state = EmailState(
                 current_email=email_data_raw,
                 current_email_id=email_id,
                 classification="error",
-                summary="Processing failed due to critical error.",
+                summary="Critical pipeline failure.",
                 generated_response_body="Error occurred during processing.",
-                processing_error=f"Critical error: {str(e)}",
+                processing_error=str(e),
             )
             response_status_action = "Critical Error"
 
-        # --- Log Record ---
-        record_data_to_log = {
+        # ---------------- LOG RECORD ----------------
+        record_data = {
             "SR No": i,
             "Timestamp": email_data_raw.get("timestamp") or datetime.now().isoformat(),
             "Sender Email": sender_email,
@@ -226,19 +246,24 @@ def main():
             "Record Save Time": datetime.now().isoformat(),
         }
 
-        log_email_record(record_data_to_log, RECORDS_CSV_PATH)
+        log_email_record(record_data, RECORDS_CSV_PATH)
 
-        # --- Delay between emails ---
+        # --- DELAY BETWEEN EMAILS ---
         if i < len(emails_to_process):
-            time.sleep(10)
+            logger.info(f"[Main] Cooling down for {base_cooldown}s before next email to respect Gemini API limits...")
+            time.sleep(base_cooldown)
 
-    logger.info("[Main] All selected emails processed. Workflow finished successfully.")
+    logger.info("[Main] All emails processed successfully.")
+    logger.info("=" * 60)
 
 
+# ============================================================
+#                   ENTRY POINT
+# ============================================================
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        logger.warning("[Main] Process interrupted manually by user.")
+        logger.warning("[Main] Process manually interrupted by user.")
     except Exception as e:
         logger.critical(f"[Main] Unhandled exception: {e}", exc_info=True)

@@ -1,10 +1,10 @@
 [
-  {
+ {
     "id": "1",
     "from": "sophia.gonzalez@globalimports.mx",
-    "subject": "Invoice Request for Order #12345",
-    "body": "Hello ShipCube Support, could you please send us the official invoice for Order #12345? We need it for our accounting records and tax filing. Thank you.",
-    "timestamp": "2025-08-01T14:30:00"
+    "subject": "Appreciation for Timely Delivery - Order SC-11592",
+    "body": "Hello ShipCube, we appreciate your prompt delivery of Order SC-11592 ahead of schedule. Your logistics team did an excellent job.",
+    "timestamp": "2025-08-10T17:18:00"
   },
   {
     "id": "2",
@@ -89,12 +89,6 @@
     "subject": "Request for Return Label - Order SC-10567",
     "body": "Hi, we need to return 2 damaged pallets from Order SC-10567. Please send the return label and pickup schedule as per your return policy.",
     "timestamp": "2025-08-03T09:25:00"
-  },
-  {
-    "id": "14",
-    "from": "sophia.gonzalez@globalimports.mx",
-    "subject": "Appreciation for Timely Delivery - Order SC-11592",
-    "body": "Hello ShipCube, we appreciate your prompt delivery of Order SC-11592 ahead of schedule. Your logistics team did an excellent job.",
-    "timestamp": "2025-08-10T17:18:00"
   }
+  
 ]

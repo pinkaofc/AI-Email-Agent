@@ -42,3 +42,5 @@ openpyxl==3.1.2
 # Dev tools & testing (optional but recommended)
 pytest==7.4.3
 black==23.10.1
+ 
+fastapi==0.121.1

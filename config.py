@@ -1,13 +1,17 @@
 """
 Configuration module for the AI Email Agent.
-Loads all environment variables and provides sane defaults.
+Loads environment variables, supports multi-key Gemini rotation,
+and provides defaults for email, IMAP, and knowledge base setup.
 """
 
 import os
+import random
 from dotenv import load_dotenv
 from utils.logger import get_logger
 
+# --------------------------------------------------
 # Initialize logger
+# --------------------------------------------------
 logger = get_logger(__name__)
 
 # --------------------------------------------------
@@ -16,32 +20,52 @@ logger = get_logger(__name__)
 load_dotenv()
 
 # --------------------------------------------------
-# Gemini + Hugging Face API Configuration
+# Gemini API Configuration (with key rotation)
 # --------------------------------------------------
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+GEMINI_KEYS = [
+    os.getenv("GEMINI_API_KEY"),
+    os.getenv("GEMINI_API_KEY1"),
+    os.getenv("GEMINI_API_KEY2"),
+]
 
-if not GEMINI_API_KEY:
-    logger.error("[CONFIG] GEMINI_API_KEY is missing! Please add it to your .env file.")
+# Filter out any empty or None keys
+GEMINI_KEYS = [key for key in GEMINI_KEYS if key]
+
+if not GEMINI_KEYS:
+    logger.error("[CONFIG]  No Gemini API keys found! Add GEMINI_API_KEY1 and GEMINI_API_KEY2 in your .env file.")
 else:
-    logger.info("[CONFIG] Gemini API key loaded successfully.")
+    logger.info(f"[CONFIG]  Loaded {len(GEMINI_KEYS)} Gemini API key(s).")
 
-if not HUGGINGFACEHUB_API_TOKEN:
-    logger.warning("[CONFIG] HUGGINGFACEHUB_API_TOKEN not found. Knowledge base embedding may fail.")
+def get_gemini_api_key() -> str:
+    """Randomly rotates between available Gemini API keys."""
+    return random.choice(GEMINI_KEYS)
+
+# For backward compatibility — some scripts may import GEMINI_API_KEY directly
+GEMINI_API_KEY = get_gemini_api_key()
 
 # Optional embedding model
 GEMINI_EMBED_MODEL = os.getenv("GEMINI_EMBED_MODEL", "models/embedding-001")
 
 # --------------------------------------------------
+# Hugging Face API Configuration
+# --------------------------------------------------
+HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+
+if not HUGGINGFACEHUB_API_TOKEN:
+    logger.warning("[CONFIG]  HUGGINGFACEHUB_API_TOKEN not found. Knowledge base embeddings may fail.")
+else:
+    logger.info("[CONFIG]  Hugging Face API token loaded successfully.")
+
+# --------------------------------------------------
 # SMTP Email Configuration (for sending)
 # --------------------------------------------------
 EMAIL_SERVER = os.getenv("EMAIL_SERVER", "smtp.gmail.com")
-EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))  # TLS default port
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))  # TLS default
 EMAIL_USERNAME = os.getenv("EMAIL_USERNAME")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD") or os.getenv("EMAIL_APP_PASSWORD")
+EMAIL_APP_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
 
-if not EMAIL_USERNAME or not EMAIL_PASSWORD:
-    logger.error("[CONFIG] Missing email credentials. Outgoing emails will fail.")
+if not EMAIL_USERNAME or not EMAIL_APP_PASSWORD:
+    logger.error("[CONFIG]  Missing email credentials — outgoing emails will fail.")
 else:
     logger.info(f"[CONFIG] Outgoing email configured for: {EMAIL_USERNAME}")
 
@@ -51,7 +75,7 @@ else:
 IMAP_SERVER = os.getenv("IMAP_SERVER", "imap.gmail.com")
 IMAP_PORT = int(os.getenv("IMAP_PORT", 993))
 IMAP_USERNAME = os.getenv("IMAP_USERNAME", EMAIL_USERNAME)
-IMAP_PASSWORD = os.getenv("IMAP_PASSWORD", EMAIL_PASSWORD)
+IMAP_PASSWORD = os.getenv("IMAP_PASSWORD", EMAIL_APP_PASSWORD)
 
 logger.info(f"[CONFIG] IMAP server: {IMAP_SERVER}:{IMAP_PORT}")
 
@@ -62,18 +86,21 @@ YOUR_NAME = os.getenv("YOUR_NAME", "AI Email Agent")
 YOUR_GMAIL_ADDRESS_FOR_DRAFTS = os.getenv("YOUR_GMAIL_ADDRESS_FOR_DRAFTS", EMAIL_USERNAME)
 
 if not YOUR_GMAIL_ADDRESS_FOR_DRAFTS:
-    logger.warning("[CONFIG] Draft destination email not set. Using EMAIL_USERNAME as fallback.")
+    logger.warning("[CONFIG]  Draft destination not set. Using EMAIL_USERNAME as fallback.")
+else:
+    logger.info(f"[CONFIG] Draft destination: {YOUR_GMAIL_ADDRESS_FOR_DRAFTS}")
 
 # --------------------------------------------------
-# Knowledge Base Paths
+# Knowledge Base Configuration
 # --------------------------------------------------
 KNOWLEDGE_BASE_PATH = os.getenv("KNOWLEDGE_BASE_PATH", "knowledge_base/data")
 VECTOR_STORE_PATH = os.getenv("VECTOR_STORE_PATH", "knowledge_base/vector_store")
 
 logger.info(f"[CONFIG] Knowledge base path: {KNOWLEDGE_BASE_PATH}")
+logger.info(f"[CONFIG] Vector store path: {VECTOR_STORE_PATH}")
 
 # --------------------------------------------------
-# CSV Records Path (Email Logging)
+# CSV Records Configuration (Email Logs)
 # --------------------------------------------------
 RECORDS_CSV_PATH = os.getenv("RECORDS_CSV_PATH", "records/records.csv")
 CSV_HEADERS = [
@@ -84,9 +111,9 @@ CSV_HEADERS = [
 ]
 
 # --------------------------------------------------
-# Sanity Diagnostics
+# Sanity Diagnostics Summary
 # --------------------------------------------------
 logger.info(f"[CONFIG] Email server: {EMAIL_SERVER}:{EMAIL_PORT}")
 logger.info(f"[CONFIG] IMAP username: {IMAP_USERNAME}")
-logger.info(f"[CONFIG] Draft destination: {YOUR_GMAIL_ADDRESS_FOR_DRAFTS}")
 logger.info(f"[CONFIG] Records CSV path: {RECORDS_CSV_PATH}")
+logger.info("[CONFIG] Configuration successfully loaded.")
