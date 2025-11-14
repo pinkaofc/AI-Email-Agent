@@ -1,99 +1,129 @@
 ---
 
-# AI Email Agent 
+# **AI Email Agent (ShipCube)**
 
-An AI-powered email automation system that fetches, filters, summarizes, and generates intelligent replies to emails using advanced language models. The system integrates with IMAP and SMTP servers and uses a state-driven LangGraph workflow to manage the complete lifecycle of email processing — from ingestion to automated response generation.
-
----
-
-## Table of Contents
-
-- [Table of Contents](#table-of-contents)
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-  - [Prerequisites](#prerequisites)
-  - [Setup](#setup)
-- [Configuration](#configuration)
-- [Usage](#usage)
-  - [Execution Flow](#execution-flow)
-- [Directory Structure](#directory-structure)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [Acknowledgments](#acknowledgments)
+An advanced AI-powered email automation system that fetches, filters, summarizes, and generates intelligent replies using state-driven workflows and large language models. The system integrates IMAP/SMTP email handling with **LangGraph**, **Google Gemini**, and a **Retrieval-Augmented Generation (RAG)** knowledge base. It supports end-to-end automation—from inbox ingestion to final email dispatch—while maintaining human-review control when needed.
 
 ---
 
-## Overview
+## **Table of Contents**
 
-This repository implements an **AI-driven email assistant** capable of automatically reading, understanding, and responding to emails with minimal human supervision. It utilizes **Google’s Gemini API** for reasoning and text generation, **LangGraph** for orchestrating multi-agent workflows, and **Hugging Face embeddings** for retrieving relevant context from a local knowledge base (RAG).
-
-The pipeline supports both **real-world emails** via IMAP and **simulated emails** via JSON files, making it suitable for production and testing environments.
-
-The workflow performs the following tasks:
-
-* **Email Ingestion** – Fetches live emails or reads simulated ones.
-* **Filtering** – Classifies emails as spam, urgent, or informational.
-* **Summarization** – Generates concise summaries of long messages.
-* **Response Generation** – Drafts polite, context-aware replies.
-* **Sending or Drafting** – Sends emails directly or as drafts for review.
-* **Logging** – Tracks all actions, statuses, and AI responses in CSV logs.
-
----
-
-## Features
-
-* **IMAP & SMTP Integration:** Works with Gmail and other email servers for real-time inbox management.
-* **Filtering Agent:** Classifies emails into meaningful categories using Gemini models.
-* **Summarization Agent:** Produces clear, 2–3 sentence summaries of email content.
-* **Response Agent:** Generates professional, human-like replies using contextual reasoning.
-* **Knowledge Base Support:** Retrieves relevant company data or FAQs from local ChromaDB storage.
-* **Human Review Mode:** Option to send drafts for manual review before final dispatch.
-* **State Graph Workflow:** Manages transitions between agents using LangGraph.
-* **Advanced Logging:** Detailed logs and CSV record tracking for every processed email.
+- [**Table of Contents**](#table-of-contents)
+- [**Overview**](#overview)
+- [**Features**](#features)
+  - [**Email Intelligence**](#email-intelligence)
+  - [**Workflow Automation**](#workflow-automation)
+  - [**RAG Knowledge Base**](#rag-knowledge-base)
+  - [**Dashboard \& Logging**](#dashboard--logging)
+  - [**Developer-Friendly**](#developer-friendly)
+- [**Installation**](#installation)
+  - [**Prerequisites**](#prerequisites)
+  - [**Setup**](#setup)
+- [**Configuration**](#configuration)
+- [**Usage**](#usage)
+  - [**Execution Flow**](#execution-flow)
+- [**Directory Structure**](#directory-structure)
+- [**Testing**](#testing)
+- [**Contributing**](#contributing)
+- [**Acknowledgments**](#acknowledgments)
 
 ---
 
-## Installation
+## **Overview**
 
-### Prerequisites
+ShipCube is an **AI-driven email assistant** designed to automate the complete lifecycle of email handling. It reads, interprets, and replies to emails intelligently while maintaining contextual consistency using a hybrid architecture of rule-based steps and LLM-driven reasoning.
 
-* Python 3.9 or higher
-* [pip](https://pip.pypa.io/) package manager
-* (Optional) [virtualenv](https://virtualenv.pypa.io/) for environment isolation
+Core technologies include:
 
-### Setup
+* **Google Gemini API** for email understanding, summarization, and high-quality response generation
+* **LangGraph** for orchestrating a multi-agent, state-driven processing pipeline
+* **Hugging Face Embeddings + ChromaDB** for knowledge-base retrieval
+* **FastAPI Backend + Dashboard** (added in Week 6) for monitoring pipeline activity
+* **Custom ML Models** (e.g., Categorization Model trained in module A notebook)
 
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/pinkaofc/AI-Email-Agent.git
-   cd AI-Email-Agent
-   ```
-
-2. **Create and activate a virtual environment:**
-
-   ```bash
-   python -m venv venv
-   # On macOS/Linux:
-   source venv/bin/activate
-   # On Windows:
-   venv\Scripts\activate
-   ```
-
-3. **Install dependencies:**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
+The system supports both **live production mode** (IMAP/SMTP) and **offline simulation mode** (JSON files), letting you test workflows safely before deployment.
 
 ---
 
-## Configuration
+## **Features**
 
-The system requires credentials and API keys defined in a `.env` file at the project root.
+### **Email Intelligence**
 
-Example `.env` file:
+* Automatic email ingestion through IMAP
+* Multi-stage pipeline: filtering → sentiment → summarization → context retrieval → response generation
+* Professional, structured AI-generated replies
+* Option to send emails directly or save them as drafts in Gmail
+
+### **Workflow Automation**
+
+* LangGraph-based state machine for repeatable and traceable processing
+* Multi-agent design (filtering, summarization, response, human review)
+* Error handling, fallback logic, and retry mechanisms
+
+### **RAG Knowledge Base**
+
+* ChromaDB-powered vector store
+* Semantic search for company FAQs, service info, client profiles, guidelines
+* Hugging Face MiniLM embeddings for high-quality retrieval
+
+### **Dashboard & Logging**
+
+* FastAPI Dashboard to preview:
+
+  * Processed emails
+  * Predictions
+  * Summaries
+  * Generated replies
+  * Confidence scores
+* CSV logs for all actions and responses
+
+### **Developer-Friendly**
+
+* Modular architecture
+* Clean project structure
+* Fully documented pipeline
+* Easy to extend with new models, knowledge base documents, or agents
+
+---
+
+## **Installation**
+
+### **Prerequisites**
+
+* Python **3.9+**
+* pip package manager
+* (Optional) `virtualenv` for isolation
+
+### **Setup**
+
+Clone the repository:
+
+```bash
+git clone https://github.com/pinkaofc/AI-Email-Agent.git
+cd AI-Email-Agent
+```
+
+Create and activate a virtual environment:
+
+```bash
+python -m venv venv
+# macOS/Linux
+source venv/bin/activate
+# Windows
+venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## **Configuration**
+
+Create a `.env` file in the project root:
 
 ```dotenv
 # Gemini API
@@ -116,133 +146,146 @@ YOUR_NAME=Priyanka Kumari
 YOUR_GMAIL_ADDRESS_FOR_DRAFTS=your_email@gmail.com
 ```
 
-You can use [App Passwords](https://support.google.com/accounts/answer/185833) for Gmail authentication.
+Gmail users should configure an **App Password**.
 
 ---
 
-## Usage
+## **Usage**
 
-To start the assistant:
+Run the complete agent pipeline:
 
 ```bash
 python main.py
 ```
 
-### Execution Flow
+### **Execution Flow**
 
 1. **Email Fetching**
 
-   * Choose whether to use live IMAP emails or simulated emails from `sample_emails.json`.
-   * The system loads up to the configured number of messages.
+   * Fetches live emails from IMAP or loads simulated emails from JSON.
 
-2. **Pipeline Execution**
-   Each email passes through the full pipeline:
+2. **Processing Pipeline**
 
-   * **Filtering Agent** – Determines sentiment and category.
-   * **Summarization Agent** – Creates a brief summary of the message.
-   * **Knowledge Base Query** – Retrieves related information via embeddings.
-   * **Response Agent** – Generates a clear, structured, and human-like reply.
+   * Filtering Agent → sentiment + category
+   * Summarization Agent → short concise summary
+   * Knowledge Base Retrieval
+   * Response Agent → polite, context-aware AI reply
 
 3. **Formatting**
 
-   * The reply is passed through `formatter.py` for proper greeting, body cleaning, and signature formatting.
+   * Clean greeting, body structure, and signature via `formatter.py`.
 
-4. **Send or Draft**
+4. **Sending or Drafting**
 
-   * In review/dry-run mode → `send_draft_to_gmail()` sends a draft to your Gmail for review.
-   * In production mode → `send_email()` dispatches directly to the sender.
+   * Human-review mode: sends to your Gmail drafts
+   * Production mode: sends through SMTP to the original sender
 
-5. **Logging**
+5. **Logging & Dashboard**
 
-   * Each action is logged in `records/records.csv` with timestamps, classification, and status.
+   * All results stored in `/records/records.csv`
+   * FastAPI dashboard displays real-time predictions and outputs
 
 ---
 
-## Directory Structure
+## **Directory Structure**
 
 ```plaintext
 .
 ├── agents
-│   ├── filtering_agent.py          # Classifies emails (spam, urgent, etc.)
-│   ├── summarization_agent.py      # Generates summaries
-│   ├── response_agent.py           # Creates AI-based responses
-│   ├── human_review_agent.py       # Handles manual review steps
+│   ├── filtering_agent.py
+│   ├── summarization_agent.py
+│   ├── response_agent.py
+│   ├── human_review_agent.py
 │   └── __init__.py
 │
-├── config.py                       # Loads .env, sets API & email configuration
+├── config.py
 │
 ├── core
-│   ├── email_ingestion.py          # Handles IMAP fetch & JSON simulation
-│   ├── email_sender.py             # Sends emails via SMTP or drafts via Gmail
-│   ├── state.py                    # Defines EmailState dataclass
-│   ├── supervisor.py               # Manages LangGraph pipeline
+│   ├── email_ingestion.py
+│   ├── email_sender.py
+│   ├── state.py
+│   ├── supervisor.py
 │   └── __init__.py
 │
 ├── knowledge_base
-│   ├── ingest.py                   # Embeds and stores KB documents in ChromaDB
-│   ├── query.py                    # Retrieves context for RAG
-│   └── data/                       # Source documents for knowledge base
+│   ├── ingest.py
+│   ├── query.py
+│   └── data/
 │
-├── records
-│   └── records.csv                 # Logs all processed email metadata
+├── vector_store/
+│   └── chroma.sqlite3, index files...
+│
+├── fastapi_app/ (New in Week 6)
+│   ├── apps.py     # Dashboard launcher
+│   ├── routes/
+│   ├── static/
+│   └── templates/
+│
+├── notebooks/
+│   ├── module_a_categorization.ipynb
+│   ├── module_b_sentiment.ipynb
+│   ├── module_c_summarization.ipynb
+│   ├── module_d_response_generation.ipynb
+│   └── pipeline_integration.ipynb
+│
+├── records/records.csv
 │
 ├── utils
-│   ├── formatter.py                # Formats email text and structure
-│   ├── logger.py                   # Logger setup for system-wide tracking
-│   ├── records_manager.py          # CSV logging for email metadata
-│   └── __init__.py
+│   ├── formatter.py
+│   ├── logger.py
+│   ├── records_manager.py
+│   └── rate_limit_guard.py
 │
-├── sample_emails.json              # Sample emails for simulation/testing
-├── requirements.txt                # Python dependencies
-├── flowchart.md                    # Visual pipeline documentation
-├── main.py                         # Main orchestration entry point
-└── README.md                       # Project documentation
+├── sample_emails.json
+├── requirements.txt
+├── flowchart.md
+├── main.py
+└── README.md
 ```
 
 ---
 
-## Testing
+## **Testing**
 
-Run all tests using `pytest` or Python’s built-in `unittest`:
+Run tests:
 
 ```bash
 pytest
 ```
 
-or
+or:
 
 ```bash
 python -m unittest discover
 ```
 
-Ensure that your `.env` variables are configured before running tests.
+Ensure `.env` is configured before testing modules involving email or Gemini API.
 
 ---
 
-## Contributing
+## **Contributing**
 
-Contributions are welcome.
-
-1. Fork the repository on GitHub.
-2. Create a feature branch:
+1. Fork the repository
+2. Create a new feature branch:
 
    ```bash
-   git checkout -b feature/new-feature
+   git checkout -b feature/your-feature
    ```
-3. Commit your changes and push to your branch.
-4. Open a Pull Request with a detailed description of your modifications.
+3. Commit and push changes
+4. Open a Pull Request with a clear explanation
 
-All code contributions should follow Pythonic conventions (PEP8) and include appropriate logging.
+Follow PEP8 and include proper logging.
+
+---
+
+## **Acknowledgments**
+
+* **Google Gemini API** – for intelligent classification, summarization, and response generation
+* **LangGraph & LangChain** – for the orchestration engine
+* **Hugging Face** – for embeddings powering the KB
+* **ChromaDB** – for efficient vector storage
+* **Open Source Community** – for tools that enable this system
 
 ---
 
-## Acknowledgments
-
-* **Google Gemini API** – For powering classification, summarization, and response generation.
-* **LangGraph & LangChain** – For providing the workflow orchestration and agent framework.
-* **Hugging Face** – For embeddings and knowledge base integration.
-* **ChromaDB** – For efficient vector storage and retrieval.
-* **Open Source Community** – For maintaining the essential libraries that make this system possible.
-
----
 

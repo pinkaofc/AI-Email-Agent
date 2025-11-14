@@ -1,5 +1,5 @@
 +---------------------------------------------------+
-|                   START PIPELINE                  |
+|                   EMAIL BOT PIPELINE                  |
 |     Initialize environment, logger, and config    |
 +---------------------------------------------------+
                      |
@@ -8,30 +8,30 @@
 |        FETCH EMAIL (choose input source)          |
 | - Option 1: Fetch unread emails via IMAP          |
 | - Option 2: Load from sample_emails.json          |
-| - Limit and mark_as_seen handled dynamically      |
+| - Limits, mark_as_seen handled dynamically        |
 +---------------------------------------------------+
                      |
                      v
 +---------------------------------------------------+
-|        CREATE INITIAL EmailState OBJECT           |
-| - Stores: current_email, id, metadata, status     |
-| - Prepares context for supervisor_langgraph       |
+|         CREATE INITIAL EmailState OBJECT          |
+| - Stores email content, ID, metadata, status      |
+| - Prepares context for supervisor workflow        |
 +---------------------------------------------------+
                      |
                      v
 +---------------------------------------------------+
 |                 SUPERVISOR PIPELINE               |
-|   (Manages the complete AI reasoning workflow)    |
+|   (LangGraph orchestrates full reasoning steps)   |
 +---------------------------------------------------+
                      |
                      v
 +---------------------------------------------------+
 |             FILTERING NODE (Gemini)               |
-| - Analyze email subject/body                      |
-| - Classify sentiment or type:                     |
-|     spam / negative / positive / neutral /        |
-|     needs_review / informational                  |
-| - If spam or promotional → skip processing        |
+| - Analyze subject + body                           |
+| - Predict sentiment/type:                          |
+|     spam / negative / positive / neutral /         |
+|     needs_review / informational                   |
+| - Spam & promos → skipped automatically            |
 +---------------------------------------------------+
                      |
                      v
@@ -39,82 +39,80 @@
             | Is classification == spam?  |
             +-----------------------------+
                      |
-        Yes -------->| Skip and exit loop  |
-                     |
+        Yes -------->|        SKIP        |
+                     |   Exit this email  |
         No  -------->v
 +---------------------------------------------------+
 |           SUMMARIZATION NODE (Gemini)             |
-| - Generates a clear summary of sender’s request   |
-| - Extracts main intent, issue, or requirement     |
+| - Generates a concise 2–3 sentence summary        |
+| - Extracts request, intent, or issue              |
 +---------------------------------------------------+
                      |
                      v
 +---------------------------------------------------+
 |           KNOWLEDGE BASE RETRIEVAL (RAG)          |
-| - Uses ChromaDB and Hugging Face embeddings       |
-| - Retrieves context documents from knowledge_base |
-| - Adds retrieved info to prompt context           |
+| - ChromaDB + HF MiniLM embeddings                  |
+| - Semantic search based on email context           |
+| - Retrieves matched chunks from knowledge_base/    |
 +---------------------------------------------------+
                      |
                      v
 +---------------------------------------------------+
 |         RESPONSE GENERATION NODE (Gemini)         |
-| - Composes a context-aware reply                  |
-| - Uses: summary + classification + KB context     |
-| - Produces structured AI response text            |
+| - Creates final structured reply                   |
+| - Uses summary + classification + KB context       |
+| - Ensures professional tone and clarity            |
 +---------------------------------------------------+
                      |
                      v
 +---------------------------------------------------+
 |             EMAIL FORMATTING MODULE               |
-| - Uses utils/formatter.py                         |
-| - Cleans body, removes redundant greetings        |
-| - Adds proper name extraction                     |
-| - Final structure:                                |
-|       Hi <CustomerName>,                          |
-|       <Generated Response Body>                   |
-|       Best regards,                               |
-|       <Your Name>                                 |
+| - Cleans redundant greetings & spacing             |
+| - Extracts sender name                             |
+| - Builds final structure:                          |
+|       Hi <Name>,                                   |
+|       <Generated response>                         |
+|       Best regards,                                |
+|       <Your Name>                                  |
 +---------------------------------------------------+
                      |
                      v
 +---------------------------------------------------+
 |           RESPONSE REVIEW DECISION NODE           |
-| - Checks EmailState.requires_human_review         |
-| - If True: draft email to your Gmail for review   |
-| - If False: auto-send to original sender          |
+| - Check EmailState.requires_human_review          |
+| - If True → send draft to your Gmail              |
+| - If False → auto-send to original sender         |
 +---------------------------------------------------+
-          /                                 \
-         /                                   \
-        v                                     v
+          /                                   \
+         /                                     \
+        v                                       v
 +---------------------------------+   +-----------------------------------+
-|   send_draft_to_gmail()         |   |        send_email()               |
-| - Sends draft to YOUR_GMAIL_    |   | - Sends directly via SMTP         |
-|   ADDRESS_FOR_DRAFTS (config)   |   | - Recipient = sender in JSON/mail |
-| - Allows manual review          |   | - Auto-formatted with formatter   |
+|         send_draft_to_gmail()   |   |            send_email()           |
+| - Sends draft to your Gmail     |   | - Sends via SMTP                  |
+| - For manual review/approval    |   | - Delivered to original sender    |
 +---------------------------------+   +-----------------------------------+
-          \                                   /
-           \                                 /
-            +-------------------------------+
+          \                                     /
+           \                                   /
+            +---------------------------------+
                      |
                      v
 +---------------------------------------------------+
 |           UPDATE EMAIL RECORDS (CSV)              |
-| - Logs timestamp, classification, summary,        |
-|   response, review flag, and send status          |
-| - Stored in records/records.csv                   |
+| - Logs: timestamp, classification, summary,        |
+|   AI reply, review flag, send status               |
+| - Saved in records/records.csv                     |
 +---------------------------------------------------+
                      |
                      v
 +---------------------------------------------------+
 |     DELAY AND CONTINUE TO NEXT EMAIL              |
-| - 10-second sleep to prevent rate-limit spam      |
-| - Moves to next fetched or simulated email        |
+| - 10-second sleep (rate-limit protection)         |
+| - Move to next fetched/simulated message          |
 +---------------------------------------------------+
                      |
                      v
 +---------------------------------------------------+
 |               END PIPELINE EXECUTION              |
 | - All emails processed or limit reached           |
-| - Logs summary completion message                 |
+| - Logs final completion summary                   |
 +---------------------------------------------------+

@@ -1,0 +1,205 @@
+/* ==============================
+   Global Layout & Color Palette
+============================== */
+:root {
+  --primary-color: #005eff;
+  --primary-dark: #003fb8;
+  --accent-color: #2563eb;
+  --bg-light: #f7f9fc;
+  --text-dark: #222;
+  --text-gray: #6b7280;
+  --border-gray: #e0e0e0;
+  --success-color: #16a34a;
+  --error-color: #dc2626;
+  --neutral-color: #ca8a04;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-light);
+  margin: 0;
+  padding: 0;
+  color: var(--text-dark);
+}
+
+/* ==============================
+   Navigation Bar
+============================== */
+.navbar {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar img {
+  height: 42px;
+  width: 42px;
+  border-radius: 8px;
+}
+
+.navbar h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+}
+
+.navbar span {
+  font-size: 0.9rem;
+  color: var(--text-gray);
+}
+
+/* ==============================
+   Main Container & Header
+============================== */
+.container {
+  padding: 25px 40px;
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+.header-info h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--text-dark);
+}
+
+.auto-refresh {
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  margin-top: 5px;
+}
+
+/* ==============================
+   Buttons
+============================== */
+#refresh-btn {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#refresh-btn:hover {
+  background: var(--primary-dark);
+  transform: scale(1.02);
+}
+
+/* ==============================
+   Table Styling
+============================== */
+.table-container {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-gray);
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+th {
+  background: #f3f4f6;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+tr:hover {
+  background-color: #eef3ff;
+}
+
+/* ==============================
+   Status & Sentiment Tags
+============================== */
+.positive {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.negative {
+  color: var(--error-color);
+  font-weight: 600;
+}
+
+.neutral {
+  color: var(--neutral-color);
+  font-weight: 600;
+}
+
+/* ==============================
+   Footer
+============================== */
+footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  padding: 15px 0;
+  border-top: 1px solid var(--border-gray);
+  background: #fff;
+}
+
+/* ==============================
+   Responsive Design
+============================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px 20px;
+  }
+
+  th, td {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  #refresh-btn {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .header-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
