@@ -1,0 +1,38 @@
+# ShipCube Delivery & Delay Resolution Policy
+
+## 1. General Delivery Standards
+- All domestic orders are shipped within 1–2 business days after confirmation.
+- Standard delivery time is 3–7 business days depending on the destination city.
+- Orders are dispatched through verified courier partners with live tracking enabled.
+
+## 2. Handling Delays
+- If an order is delayed beyond 7 days of dispatch, the customer service team must:
+  - Check the tracking status with the courier partner.
+  - Inform the customer with an updated delivery estimate.
+  - Offer an apology for the inconvenience caused.
+  - Provide the tracking ID and courier partner name in the response.
+
+## 3. Customer Communication Guidelines
+- Always begin responses with an acknowledgment and apology for the delay.
+- Use clear, polite, and empathetic language.
+- Example opening line:
+  “We sincerely apologize for the delay in your shipment. Our team has checked the status and found that your order is currently in transit.”
+
+## 4. Compensation or Escalation (if applicable)
+- If delay exceeds 10 business days:
+  - Offer a shipping fee refund or discount on the next purchase.
+  - Escalate to the logistics partner’s regional support team.
+- If the order is lost, initiate a replacement or full refund within 3 working days.
+
+## 5. Expected Response Template
+- Greeting → Apology → Update → Action → Gratitude.
+- Example:
+  “Thank you for reaching out about your order SC-21323. We apologize for the delay. 
+  Our records show it is currently in transit and expected to arrive within 3–5 business days. 
+  You can track your shipment using the link below. 
+  We appreciate your patience and continued trust in ShipCube.”
+
+## 6. Do Not
+- Provide tracking numbers unless confirmed by the courier API.
+- Blame courier partners publicly in communications.
+- Use technical or internal jargon when replying to customers.

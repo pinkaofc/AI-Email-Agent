@@ -1,6 +1,40 @@
-1. All shipments are bound by ShipCube’s logistics policy.
-2. ShipCube is not liable for third-party or customs delays.
-3. Clients must declare correct value for insurance.
-4. Customers must verify address details before dispatch.
-5. ShipCube reserves the right to refuse restricted goods.
-6. Tracking and refund claims must follow ShipCube procedures.
+# ShipCube Terms and Conditions
+
+## 1. General Agreement
+By placing an order with ShipCube, the customer agrees to the company’s shipping, return, and liability policies.  
+All shipments are governed by ShipCube’s logistics and service terms, applicable within domestic and international jurisdictions.
+
+## 2. Shipping Liability
+- ShipCube is not liable for delays caused by third-party courier services, customs clearance, natural disasters, or government restrictions.  
+- Our responsibility ends once a shipment is successfully handed over to the designated carrier.  
+- Insurance coverage applies only if the declared value and insurance option were confirmed at booking.
+
+## 3. Customer Responsibilities
+- Clients must declare the correct value of shipments for insurance and customs purposes.  
+- Customers must verify address details, contact numbers, and email information before dispatch. ShipCube is not responsible for incorrect or incomplete addresses.  
+- It is the customer’s duty to ensure that items shipped comply with all national and international shipping regulations.
+
+## 4. Restricted Goods
+ShipCube reserves the right to refuse or restrict transport of certain goods, including:
+- Hazardous, flammable, or perishable materials  
+- Weapons, currency, live animals, and government-restricted articles  
+- Any item prohibited by law or deemed unsafe for transport
+
+## 5. Tracking and Claims
+- Customers can track their shipments using the provided tracking ID on the ShipCube portal.  
+- All refund or loss claims must be submitted through ShipCube’s official claims process within 10 business days of the expected delivery date.  
+- Claims are reviewed on a case-by-case basis, and supporting documentation (invoice, tracking proof, photos) may be required.
+
+## 6. Refund and Compensation
+- Refunds or compensations are processed only after investigation by the logistics team.  
+- In the event of confirmed loss or damage, ShipCube’s maximum liability is limited to ₹10,000 per shipment, unless additional insurance was purchased.  
+- Refunds are credited to the original payment method within 5–7 business days after approval.
+
+## 7. Service Modifications
+ShipCube reserves the right to modify service terms, delivery timelines, or pricing based on logistics or regulatory conditions without prior notice.  
+Customers are advised to review the latest terms at the time of booking.
+
+## 8. Communication and Support
+- All official correspondence must be directed to support@shipcube.ai.  
+- Responses are typically issued within 24–48 business hours.  
+- ShipCube’s representatives will never request confidential information such as passwords or payment credentials via email.

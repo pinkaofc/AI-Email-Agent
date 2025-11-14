@@ -1,17 +1,48 @@
-Refund Eligibility:
-1. Shipment lost in transit.
-2. Delivery delayed beyond 10 business days (domestic).
-3. Damaged goods reported within 48 hours of delivery.
+# ShipCube Refund & Cancellation Policy
 
-Refund Process:
-- Raise claim within 7 days via chatbot or support@shipcube.com.
-- Investigation completed within 72 hours.
-- Refund processed within 5–7 business days after verification.
+## 1. Refund Eligibility
+Customers are eligible for a refund under the following circumstances:
+1. **Shipment lost in transit:** The courier confirms that the package is missing or untraceable.  
+2. **Delivery delay:** For domestic shipments delayed beyond **10 business days** from the dispatch date.  
+3. **Damaged goods:** If the customer reports physical damage or missing items within **48 hours** of delivery.
 
-Exclusions:
-- Incorrect address or poor packaging by sender.
-- Delays due to weather or customs.
-- Shipments without valid tracking IDs.
+Refunds are subject to verification and adherence to ShipCube’s logistics and claims policies.
 
-Refund Method:
-- Refund issued to original payment mode or ShipCube wallet.
+## 2. Refund Claim Process
+- Customers must raise a refund claim within **7 days** of the issue via:
+  - The ShipCube AI Chatbot, or  
+  - Email at **support@shipcube.com**  
+- Once the claim is received, ShipCube’s logistics team investigates and verifies the issue within **72 hours**.  
+- Refunds are processed within **5–7 business days** after successful verification and approval.
+
+Customers will be notified via email once the refund has been initiated.
+
+## 3. Exclusions from Refund Eligibility
+Refunds are **not applicable** under the following circumstances:
+- Incorrect or incomplete delivery address provided by the sender.  
+- Poor or inadequate packaging by the sender leading to damage.  
+- Delays caused by **weather conditions**, **courier strikes**, **natural disasters**, or **customs clearance** for international shipments.  
+- Shipments without a valid or traceable tracking ID.  
+- Cancellations requested after the shipment has been dispatched.
+
+## 4. Refund Method
+Approved refunds are credited to:
+- The **original mode of payment** used during the booking, or  
+- The customer’s **ShipCube Wallet** (for future bookings or credit usage).
+
+Refund confirmation details, including reference number and transaction ID, will be shared via email once processed.
+
+## 5. Cancellations
+- Orders can be cancelled **only before dispatch** from the ShipCube warehouse.  
+- To cancel, customers must contact **support@shipcube.com** or use the chatbot cancellation option.  
+- Once an order is marked as “In Transit,” it cannot be cancelled.  
+- Refunds for cancelled shipments follow the same processing time as standard refunds (5–7 business days).
+
+## 6. Additional Notes
+- ShipCube reserves the right to decline refund requests that do not comply with the above conditions.  
+- Refund timelines may vary slightly based on the customer’s bank or payment gateway policies.  
+- For assistance during the refund process, customers can contact the support team between 9 AM and 6 PM IST, Monday to Saturday.
+
+## 7. Missing or Partial Shipments
+If a shipment arrives with missing cartons or items, customers should report it within 48 hours.
+ShipCube will verify dispatch records and, if confirmed, send replacement stock or process a refund according to the Refund Policy.

@@ -17,3 +17,7 @@ Packaging Guidelines:
 Liability:
 - Maximum liability ₹10,000 per shipment unless insured.
 - ShipCube not responsible for customs delays or incorrect addresses.
+
+## Missing or Partial Shipments
+If a shipment arrives with missing cartons or items, customers should report it within 48 hours.
+ShipCube will verify dispatch records and, if confirmed, send replacement stock or process a refund according to the Refund Policy.

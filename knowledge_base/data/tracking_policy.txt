@@ -1,20 +1,36 @@
-Tracking Policy:
+# ShipCube Tracking Policy
 
-Tracking numbers are assigned upon booking confirmation.
-You can track shipments through:
-1. ShipCube dashboard
-2. Chatbot / Email Query
-3. SMS updates
+## 1. Tracking Overview
+Tracking numbers are automatically generated and assigned once a shipment booking is confirmed.  
+Customers can use the provided tracking ID to monitor the shipment’s journey from dispatch to final delivery.
 
-Tracking Status Stages:
-- Order Received
-- In Transit
-- Out for Delivery
-- Delivered
+## 2. How to Track Your Shipment
+You can check the real-time status of your order through any of the following channels:
+1. The ShipCube customer dashboard (available on web and mobile)
+2. The ShipCube AI chatbot or by replying directly to shipment notification emails
+3. SMS updates sent automatically at key transit stages
 
-If no tracking update for 48+ hours, contact support@shipcube.com.
+## 3. Tracking Status Stages
+Shipments typically progress through the following status milestones:
+- **Order Received:** Shipment booking confirmed and ready for dispatch.  
+- **In Transit:** Package has been handed over to the courier and is moving through logistics hubs.  
+- **Out for Delivery:** The package has reached the destination hub and is en route to the recipient.  
+- **Delivered:** Delivery confirmed and marked as complete in the system.
 
-Sample Routes & Times:
-- Delhi → Mumbai: 2–3 days
-- Bengaluru → Chennai: 1–2 days
-- Delhi → London: 6–8 days
+## 4. Missing or Delayed Tracking Updates
+If no tracking update is visible for more than **48 hours**, customers should contact the ShipCube support team at **support@shipcube.com**.  
+The support team will investigate the courier’s system logs and provide an updated delivery estimate within 1–2 business days.
+
+## 5. Sample Routes and Estimated Transit Times
+For reference, average delivery durations for common routes are as follows:
+- Delhi → Mumbai: 2–3 business days  
+- Bengaluru → Chennai: 1–2 business days  
+- Delhi → London: 6–8 business days
+
+These times are estimates and may vary based on weather conditions, courier workload, or customs clearance processes.
+
+## 6. Important Notes
+- Tracking numbers become active within 12–24 hours after dispatch.  
+- Some courier partners may show partial updates until the first hub scan.  
+- International shipments may experience temporary tracking gaps during customs transfer.  
+- Always verify the tracking number format if you cannot locate your order status online.

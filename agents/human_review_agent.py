@@ -1,20 +1,21 @@
 def review_email(email: dict, response: str) -> str:
     """
-    Simulates human review of the generated email response.
-    Displays the response and prompts the user to decide if it should be modified.
+    Simulates human review of the AI-generated email response.
+    Displays the response and allows the reviewer to modify it if needed.
 
-    Arguments:
-        email (dict): The email being processed (can be used for context).
-        response (str): The auto-generated response.
+    Args:
+        email (dict): The email being processed (for context).
+        response (str): The AI-generated response.
 
     Returns:
-        str: The final response after human review.
+        str: The final response text after optional human review.
     """
-    print("\n Generated Response:\n")
+    print("\n--- Generated Response ---\n")
     print(response)
+    print("\n---------------------------")
 
-    user_input = input("\n Do you want to make any changes to the response? (y/n): ").strip().lower()
+    user_input = input("Do you want to make any changes to the response? (y/n): ").strip().lower()
     if user_input == "y":
-        modified_response = input("\n Enter the corrected response: ").strip()
+        modified_response = input("\nEnter the corrected response:\n").strip()
         return modified_response
     return response

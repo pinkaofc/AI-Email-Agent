@@ -1,5 +1,49 @@
-Query: Customer asking about shipment delay for order SCX12400.
-Response: Hi Riya, your order SCX12400 from Mumbai to Kolkata is in transit and expected to arrive by November 6.
+# ShipCube — Example Customer Query and Response Pairs
 
-Query: Customer reporting damaged goods.
-Response: Hello Sneha, your replacement for order SCX14550 has been dispatched and will reach by October 28.
+These examples are drawn from real or simulated interactions. They demonstrate correct tone, personalization, and factual accuracy for handling customer support emails.
+
+---
+
+## 1. Shipment Delay Inquiry
+
+**Query:**  
+Customer asking about shipment delay for order SCX12400.
+
+**Response:**  
+Hi Riya,  
+Your order **SCX12400** from **Mumbai to Kolkata** is currently **in transit** and is expected to arrive by **November 6**.  
+Thank you for your patience! You can continue tracking your shipment via the ShipCube dashboard or by replying to this email.
+
+**Response Style Notes:**  
+- Start with a warm greeting and name.  
+- Clearly mention order ID and route.  
+- Provide estimated delivery date.  
+- Maintain professional tone and gratitude.
+
+---
+
+## 2. Damaged Goods Report
+
+**Query:**  
+Customer reporting damaged goods.
+
+**Response:**  
+Hello Sneha,  
+We’re sorry to hear about the damage to your order **SCX14550**.  
+A **replacement shipment has already been dispatched** and is expected to reach you by **October 28**.  
+Please confirm once received, or contact us if any further issue arises.  
+Thank you for your understanding and patience.
+
+**Response Style Notes:**  
+- Show empathy first (“We’re sorry to hear…”).  
+- Acknowledge the issue and confirm action taken.  
+- Give the replacement ETA.  
+- Close positively.
+
+---
+
+## Tone and Intent Summary
+- Tone: Empathetic, calm, concise.  
+- Intent: Inform, reassure, and close the issue confidently.  
+- Signature: ShipCube Support Team (or personalized agent name).  
+- Avoid: Blame, speculation, or technical jargon.

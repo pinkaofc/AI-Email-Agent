@@ -1,22 +1,83 @@
-ShipCube is a logistics and supply chain management company providing reliable domestic and international parcel delivery, freight forwarding, and warehouse automation.
+# ShipCube Company Overview
 
-Founded: 2016
-Headquarters: Mumbai, India
-Employees: 500+
-Operational Hubs: Delhi, Mumbai, Bengaluru, Chennai, and Kolkata.
+**Company Name:** ShipCube  
+**Industry:** Logistics, Supply Chain Management, and Automation  
+**Founded:** 2016  
+**Headquarters:** Mumbai, India  
+**Employees:** 500+  
+**Operational Hubs:** Delhi, Mumbai, Bengaluru, Chennai, and Kolkata  
 
-ShipCube offers integrated logistics services for retail, e-commerce, and enterprise clients. Our services include:
-- Domestic & International Shipping
-- Real-time Tracking and Notifications
-- Reverse Logistics and Returns Management
-- API-based Integration for Business Clients
-- Warehouse Storage and Inventory Optimization
+---
 
-Mission: To simplify global delivery through intelligent automation.
-Vision: To make logistics transparent, predictable, and human-friendly.
+## About ShipCube
+ShipCube is a leading logistics and supply chain management company offering **domestic and international parcel delivery**, **freight forwarding**, and **warehouse automation**.  
 
-Departments:
-1. Operations – manages shipments, pickups, and route optimization.
-2. Finance – handles billing, invoicing, and claims.
-3. Customer Care – manages support and client communication.
-4. Technical Team – maintains systems, integrations, and AI automation.
+Founded in 2016, ShipCube focuses on providing **reliable, technology-driven logistics solutions** that simplify delivery operations for individuals, small businesses, and large enterprises. The company has built a robust infrastructure across major Indian cities, supported by intelligent automation and data-driven route optimization.
+
+---
+
+## Our Services
+ShipCube provides an integrated logistics ecosystem designed to meet diverse client needs across retail, e-commerce, and enterprise sectors.
+
+### 1. Domestic & International Shipping
+Fast, reliable, and trackable delivery across India and to major international destinations, with both standard and express options.
+
+### 2. Real-Time Tracking and Notifications
+Advanced tracking systems with real-time status updates via email, SMS, and chatbot integration. Customers receive notifications at each stage of the shipment lifecycle.
+
+### 3. Reverse Logistics and Returns Management
+End-to-end return handling, including pickup coordination, verification, and restocking for businesses.
+
+### 4. API-Based Integration for Business Clients
+Seamless integration for e-commerce platforms and warehouse systems through RESTful APIs for order syncing, tracking, and automated invoicing.
+
+### 5. Warehouse Storage and Inventory Optimization
+AI-powered inventory placement and space optimization to reduce turnaround time and improve dispatch efficiency.
+
+---
+
+## Mission
+To simplify global delivery through intelligent automation — making shipping faster, smarter, and more accessible for everyone.
+
+## Vision
+To make logistics **transparent**, **predictable**, and **human-friendly** through continuous innovation in AI and automation.
+
+---
+
+## Departments and Responsibilities
+
+### 1. Operations
+- Manages pickups, deliveries, and route optimization.  
+- Oversees fleet and third-party logistics coordination.  
+
+### 2. Finance
+- Handles client billing, invoicing, and claims management.  
+- Manages refunds and compensation in line with company policies.  
+
+### 3. Customer Care
+- Provides support via email, chat, and phone.  
+- Handles customer queries, complaints, and feedback.  
+- Coordinates with Operations for escalations.  
+
+### 4. Technical Team
+- Maintains system integrations, APIs, and automation pipelines.  
+- Oversees data processing, AI model deployment, and infrastructure stability.  
+
+---
+
+## Brand Tone and Communication Guidelines
+- **Tone:** Professional, empathetic, and helpful.  
+- **Focus:** Accuracy, reassurance, and clear next steps.  
+- **Style:** Friendly yet concise — use the customer’s name and refer to specific order IDs or shipment details when possible.  
+- **Signature Example:**  
+  *Best regards,*  
+  *ShipCube Support Team*  
+  *support@shipcube.com*  
+
+---
+
+## Quick Facts
+- 98% on-time delivery rate (domestic).  
+- 500+ employees across five operational hubs.  
+- 2,000+ enterprise integrations using ShipCube APIs.  
+- Over 1 million shipments handled per year.

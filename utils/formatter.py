@@ -1,8 +1,17 @@
 import re
+import warnings
 from jinja2 import Template
 from utils.logger import get_logger
 
+# Suppress non-critical warnings globally
+warnings.filterwarnings("ignore")
+
 logger = get_logger(__name__)
+
+FALLBACK_RESPONSE = (
+    "Thank you for reaching out. We’ve received your message and our team will get back to you shortly."
+)
+
 
 def clean_text(text: str) -> str:
     """
@@ -25,17 +34,15 @@ def _derive_friendly_name(recipient_name: str) -> str:
     if not recipient_name:
         return "Customer"
 
+    recipient_name = recipient_name.strip()
     if "@" in recipient_name:
         local_part = recipient_name.split("@")[0]
         name_parts = re.split(r"[._-]+", local_part)
         friendly = " ".join(part.capitalize() for part in name_parts if part)
-        return friendly if friendly else "Customer"
+        return friendly or "Customer"
     else:
-        # Handle already-clean names like "Evelyn Harper"
-        parts = recipient_name.strip().split()
-        if len(parts) > 0:
-            return parts[0].capitalize()
-        return "Customer"
+        parts = recipient_name.split()
+        return parts[0].capitalize() if parts else "Customer"
 
 
 def format_email(subject: str, recipient_name: str, body: str, user_name: str) -> str:
@@ -53,7 +60,7 @@ def format_email(subject: str, recipient_name: str, body: str, user_name: str) -
     """
     cleaned_subject = clean_text(subject)
     cleaned_user = clean_text(user_name)
-    cleaned_body = body.strip() if body else ""
+    cleaned_body = (body or "").strip()
 
     friendly_recipient_name = _derive_friendly_name(recipient_name)
 
@@ -63,7 +70,6 @@ def format_email(subject: str, recipient_name: str, body: str, user_name: str) -
 
     if lines:
         first_line = lines[0].strip().lower()
-        # detect any greeting with comma or space
         if any(first_line.startswith(greet) for greet in greeting_starters) and (
             first_line.endswith(",") or " " in first_line
         ):
@@ -85,6 +91,11 @@ def format_email(subject: str, recipient_name: str, body: str, user_name: str) -
             break
     cleaned_body = "\n".join(body_lines).strip()
 
+    # --- Prevent blank responses ---
+    if not cleaned_body:
+        logger.warning("[Formatter] Empty body detected — inserting fallback text.")
+        cleaned_body = FALLBACK_RESPONSE
+
     # --- Build final structured email ---
     template = Template(
         """Hi {{ recipient_name }},
@@ -101,5 +112,8 @@ Best regards,
         user_name=cleaned_user,
     )
 
-    logger.info(f"[Formatter] Created formatted email for '{friendly_recipient_name}' with subject '{cleaned_subject}'.")
+    logger.info(
+        f"[Formatter] Created formatted email for '{friendly_recipient_name}' with subject '{cleaned_subject}'."
+    )
+    logger.debug(f"[Formatter] Final formatted email preview:\n{formatted_email}")
     return formatted_email.strip()
