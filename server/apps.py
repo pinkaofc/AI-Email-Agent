@@ -1,260 +1,326 @@
+import os
+import re
+import time
+import csv
+import traceback
+from pathlib import Path
+from datetime import datetime
+from typing import Optional
+
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional
-from datetime import datetime
-import csv
-import time
-from pathlib import Path
 
-# --- Core Imports ---
+# Core system
 from core.supervisor import supervisor_langgraph
 from core.email_ingestion import fetch_email
 from core.state import EmailState
 from knowledge_base.query import query_knowledge_base
 from utils.records_manager import log_email_record, RECORDS_CSV_PATH
 from utils.logger import get_logger
+from utils.formatter import FALLBACK_RESPONSE
 
-# ------------------------------------------------------
-# Initialize Logger & FastAPI App
-# ------------------------------------------------------
-logger = get_logger(__name__)
+# ---------------------------------------------------------
+# App & Logger
+# ---------------------------------------------------------
+logger = get_logger(__name__, log_to_file=True)
 
 app = FastAPI(
     title="ShipCube AI Email Agent",
-    description=(
-        "<b>ShipCube AI Email Automation System</b> — integrates Gemini, Hugging Face, "
-        "and RAG Knowledge Base for intelligent logistics email processing.<br><br>"
-        "🔗 <a href='/dashboard'>Open Dashboard</a><br>"
-        "📘 <a href='/docs'>View API Docs</a><br>"
-    ),
-    version="2.0.0",
+    version="3.0.0",
+    description="Production-grade AI Email Automation System for Logistics"
 )
 
-# ------------------------------------------------------
-# Static and Templates Configuration
-# ------------------------------------------------------
+# ---------------------------------------------------------
+# Security: CORS (allow only local + ShipCube domain)
+# ---------------------------------------------------------
+allowed_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://shipcube.ai",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ---------------------------------------------------------
+# Templates & Static Files
+# ---------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 
-# Path to CSV records
-RECORDS_FILE = BASE_DIR.parent / "records" / "records.csv"
-
-# ------------------------------------------------------
-# Request Schema
-# ------------------------------------------------------
+# ---------------------------------------------------------
+# Request / Response Schemas
+# ---------------------------------------------------------
 class EmailRequest(BaseModel):
     sender_email: str
     sender_name: Optional[str] = "Customer"
     subject: str
     body: str
-    simulate: Optional[bool] = False
 
 
-# ------------------------------------------------------
-# Root Endpoint — Overview
-# ------------------------------------------------------
+class ProcessEmailResponse(BaseModel):
+    status: str
+    classification: Optional[str]
+    summary: Optional[str]
+    generated_response: Optional[str]
+    requires_review: bool
+    processing_error: Optional[str]
+    timestamp: str
+
+
+# ---------------------------------------------------------
+# Anti-prompt-injection helpers & limits
+# ---------------------------------------------------------
+MAX_EMAIL_BODY_CHARS = int(os.getenv("MAX_EMAIL_BODY_CHARS", "5000"))
+
+PROMPT_INJECTION_PATTERNS = [
+    r"ignore previous instructions",
+    r"you are now",
+    r"act as",
+    r"system:",
+    r"assistant:",
+    r"follow these instructions",
+    r"obey the following",
+]
+
+PROMPT_INJECTION_RE = re.compile("|".join(PROMPT_INJECTION_PATTERNS), re.IGNORECASE)
+
+
+def sanitize_user_text(text: str) -> str:
+    if not text:
+        return text
+    # remove suspicious phrases completely (replace with placeholder)
+    cleaned = PROMPT_INJECTION_RE.sub("[redacted_instruction]", text)
+    # remove any weird control characters and trim
+    cleaned = " ".join(cleaned.split())
+    return cleaned.strip()
+
+
+# ---------------------------------------------------------
+# Global exception handler (no stack traces leaked to clients)
+# ---------------------------------------------------------
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logger.error(f"[GLOBAL ERROR] {exc}", exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={"error": "Internal Server Error", "detail": "An unexpected error occurred."}
+    )
+
+
+# ---------------------------------------------------------
+# Startup check: ensure knowledge base available
+# ---------------------------------------------------------
+@app.on_event("startup")
+def startup_check():
+    try:
+        logger.info("[Startup] Validating knowledge base availability...")
+        # lightweight test query (should not be expensive)
+        ctx = query_knowledge_base("ShipCube overview")
+        logger.info("[Startup] Knowledge base check OK. Preview: %s", (ctx or "")[:200])
+    except Exception as e:
+        logger.error(f"[Startup] Knowledge base validation failed: {e}", exc_info=True)
+
+
+# ---------------------------------------------------------
+# Root & Dashboard
+# ---------------------------------------------------------
 @app.get("/", response_class=HTMLResponse)
-async def api_overview():
-    """Display API overview with useful links."""
+async def home():
     return """
-    <html>
-    <head><title>ShipCube AI Email API</title></head>
-    <body style="font-family:Arial, sans-serif; padding:20px; color:#333;">
-        <h2> ShipCube AI Email Automation API</h2>
-        <p>Welcome to the ShipCube AI automation system. Access the tools below:</p>
-        <ul>
-            <li><a href="/dashboard"> Dashboard (Processed Emails)</a></li>
-            <li><a href="/docs"> API Docs (Swagger UI)</a></li>
-            <li><a href="/redoc"> API Reference (ReDoc)</a></li>
-        </ul>
-        <hr>
-        <h3>Available Endpoints:</h3>
-        <ul>
-            <li>POST /process_email</li>
-            <li>GET /fetch_emails</li>
-            <li>GET /query_kb</li>
-            <li>GET /batch_run</li>
-        </ul>
-    </body>
-    </html>
+    <h2> ShipCube AI Email Automation API</h2>
+    <p>Use the dashboard and API docs below:</p>
+    <ul>
+        <li><a href='/dashboard'>Dashboard</a></li>
+        <li><a href='/docs'>Swagger Docs</a></li>
+        <li><a href='/redoc'>API Reference</a></li>
+        <li><a href='/health'>Health Check</a></li>
+    </ul>
     """
 
 
-# ------------------------------------------------------
-# Dashboard View
-# ------------------------------------------------------
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard(request: Request):
-    """
-    Render the ShipCube Dashboard with the latest 50 processed email records.
-    """
     records = []
-    if RECORDS_FILE.exists():
+    if RECORDS_CSV_PATH.exists():
         try:
-            with open(RECORDS_FILE, "r", encoding="utf-8") as f:
+            with open(RECORDS_CSV_PATH, "r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
                 records = sorted(reader, key=lambda r: r.get("Timestamp", ""), reverse=True)
         except Exception as e:
             logger.error(f"[Dashboard] Error reading records.csv: {e}")
-
-    return templates.TemplateResponse(
-        "dashboard.html",
-        {"request": request, "records": records[:50]},
-    )
+    return templates.TemplateResponse("dashboard.html", {"request": request, "records": records[:75]})
 
 
-# ------------------------------------------------------
-# Endpoint: Process a Single Email
-# ------------------------------------------------------
-@app.post("/process_email")
-async def process_email(request: EmailRequest):
-    """
-    Executes the full AI pipeline:
-    1. Filtering / Sentiment
-    2. Summarization
-    3. Knowledge Base Retrieval (RAG)
-    4. Response Generation
-    Logs the result into records.csv.
-    """
+# ---------------------------------------------------------
+# Health check (restricted to localhost by default)
+# ---------------------------------------------------------
+@app.get("/health")
+async def health_check(request: Request):
+    client_ip = request.client.host if request.client else None
+    allowed_ips = {"127.0.0.1", "localhost", "::1"}
+    # allow on server if running in docker or internal (you can extend via env)
+    extra_allowed = os.getenv("ALLOWED_HEALTH_IPS")
+    if extra_allowed:
+        allowed_ips.update(ip.strip() for ip in extra_allowed.split(",") if ip.strip())
+    if client_ip not in allowed_ips:
+        logger.warning(f"[Health] Access denied from IP: {client_ip}")
+        raise HTTPException(status_code=403, detail="Health endpoint restricted")
+    return {"status": "ok", "time": datetime.now().isoformat()}
+
+
+# ---------------------------------------------------------
+# Process Email Endpoint (safe & sanitized)
+# ---------------------------------------------------------
+@app.post("/process_email", response_model=ProcessEmailResponse)
+async def process_email_api(req: EmailRequest, request: Request):
+    start_time = time.time()
+
+    # Basic size limit
+    if len(req.body or "") > MAX_EMAIL_BODY_CHARS:
+        logger.warning("[ProcessEmail] Rejected email: body too large (%d chars)", len(req.body or ""))
+        raise HTTPException(status_code=400, detail=f"Email body too large (max {MAX_EMAIL_BODY_CHARS} chars)")
+
+    # Sanitize input to prevent prompt injection
+    sanitized_body = sanitize_user_text(req.body)
+    if sanitized_body != req.body:
+        logger.info("[ProcessEmail] Prompt-injection patterns removed from input.")
+
+    email_data = {
+        "from": req.sender_email,
+        "sender_name": req.sender_name,
+        "subject": req.subject,
+        # pass sanitized body into pipeline (keeps original in records)
+        "body": sanitized_body,
+    }
+
     try:
-        email_data = {
-            "from": request.sender_email,
-            "sender_name": request.sender_name,
-            "subject": request.subject,
-            "body": request.body,
-        }
-
-        final_state: EmailState = supervisor_langgraph(
+        # Run pipeline
+        state: EmailState = supervisor_langgraph(
             selected_email=email_data,
             your_name="ShipCube",
-            recipient_name=request.sender_name,
+            recipient_name=req.sender_name,
         )
 
-        # Log record in CSV
-        record = {
-            "Timestamp": datetime.now().isoformat(),
-            "Sender Email": request.sender_email,
-            "Sender Name": request.sender_name,
-            "Original Subject": request.subject,
-            "Original Content": request.body,
-            "Classification": final_state.classification,
-            "Summary": final_state.summary,
-            "Generated Response": final_state.generated_response_body,
-            "Requires Human Review": final_state.requires_human_review,
-            "Response Status": "Processed via API",
-            "Processing Error": final_state.processing_error,
-        }
-        log_email_record(record, RECORDS_CSV_PATH)
+        # Lightweight token/size logging (approx)
+        body_words = len((req.body or "").split())
+        summary_words = len((state.summary or "").split())
+        logger.info(
+            "[TokenStats] processed email | body_words=%d summary_words=%d elapsed=%.2fs",
+            body_words, summary_words, time.time() - start_time
+        )
 
-        return {
-            "status": "success",
-            "classification": final_state.classification,
-            "summary": final_state.summary,
-            "generated_response": final_state.generated_response_body[:500],
-            "requires_review": final_state.requires_human_review,
-            "message": "Email processed successfully.",
-        }
+        # Log result (we store the original body in records for auditing)
+        log_email_record(
+            {
+                "Timestamp": datetime.now().isoformat(),
+                "Sender Email": req.sender_email,
+                "Sender Name": req.sender_name,
+                "Original Subject": req.subject,
+                "Original Content": req.body,
+                "Classification": state.classification,
+                "Summary": state.summary,
+                "Generated Response": state.generated_response_body,
+                "Requires Human Review": state.requires_human_review,
+                "Response Status": "Processed via API",
+                "Processing Error": state.processing_error,
+            }
+        )
 
+        return ProcessEmailResponse(
+            status="success",
+            classification=state.classification,
+            summary=state.summary,
+            generated_response=(state.generated_response_body or "")[:400],
+            requires_review=state.requires_human_review,
+            processing_error=state.processing_error,
+            timestamp=datetime.now().isoformat(),
+        )
+
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"[Process Email] Pipeline error: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Pipeline Error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Pipeline failure")
 
 
-# ------------------------------------------------------
-# Endpoint: Fetch Emails
-# ------------------------------------------------------
-@app.get("/fetch_emails")
-async def fetch_emails(simulate: bool = True, limit: int = 3):
-    """Fetches emails either via IMAP or local simulation."""
+# ---------------------------------------------------------
+# Fetch latest processed records as JSON
+# ---------------------------------------------------------
+@app.get("/api/records")
+async def get_records(limit: int = 50):
+    if not RECORDS_CSV_PATH.exists():
+        return {"count": 0, "records": []}
     try:
-        emails = fetch_email(simulate=simulate, limit=limit)
-        if not emails:
-            return {"message": "No new emails found or IMAP unavailable."}
-        return {"emails_fetched": len(emails), "sample": emails[:2]}
+        with open(RECORDS_CSV_PATH, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            rows = sorted(reader, key=lambda r: r.get("Timestamp", ""), reverse=True)
     except Exception as e:
-        logger.error(f"[Fetch Emails] {e}")
-        raise HTTPException(status_code=500, detail=f"Email Fetch Error: {e}")
+        logger.error(f"[API Records] {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail="Could not read records file")
+    return {
+        "count": len(rows[:limit]),
+        "records": rows[:limit],
+        "stats": {
+            "positive": sum(1 for r in rows if r.get("Classification") == "positive"),
+            "negative": sum(1 for r in rows if r.get("Classification") == "negative"),
+            "neutral": sum(1 for r in rows if r.get("Classification") == "neutral"),
+            "needs_review": sum(1 for r in rows if str(r.get("Requires Human Review")).lower() == "true"),
+        },
+        "timestamp": datetime.now().isoformat(),
+    }
 
 
-# ------------------------------------------------------
-# Endpoint: Knowledge Base Query
-# ------------------------------------------------------
+# ---------------------------------------------------------
+# Query Knowledge Base (RAG)
+# ---------------------------------------------------------
 @app.get("/query_kb")
-async def query_kb(query: str):
-    """Query the Knowledge Base for contextual data (RAG component)."""
+async def query_kb_api(query: str):
     try:
-        result = query_knowledge_base(query)
-        return {"query": query, "kb_context": result}
+        context = query_knowledge_base(query)
+        return {"query": query, "result": context}
     except Exception as e:
-        logger.error(f"[KB Query] {e}")
-        raise HTTPException(status_code=500, detail=f"KB Query Error: {str(e)}")
+        logger.error(f"[KB Query] {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail="Knowledge base query failed")
 
 
-# ------------------------------------------------------
-# Endpoint: Batch Run
-# ------------------------------------------------------
+# ---------------------------------------------------------
+# Batch run (rate-limited)
+# ---------------------------------------------------------
 @app.get("/batch_run")
 async def batch_run(simulate: bool = True, limit: int = 3):
-    """Run AI pipeline on multiple emails sequentially with rate-limit delay."""
     try:
         emails = fetch_email(simulate=simulate, limit=limit)
         if not emails:
-            return {"message": "No emails found to process."}
-
-        processed = []
-        for i, email_data in enumerate(emails, 1):
-            final_state: EmailState = supervisor_langgraph(
+            return {"message": "No emails fetched"}
+        results = []
+        for email_data in emails:
+            # sanitize fetched content as well
+            email_data["body"] = sanitize_user_text(email_data.get("body", ""))
+            state = supervisor_langgraph(
                 selected_email=email_data,
                 your_name="ShipCube",
                 recipient_name=email_data.get("sender_name", "Customer"),
             )
-            processed.append({
-                "id": i,
+            results.append({
                 "subject": email_data.get("subject"),
-                "classification": final_state.classification,
-                "summary": final_state.summary,
-                "generated_response": final_state.generated_response_body[:300],
-                "requires_review": final_state.requires_human_review,
+                "classification": state.classification,
+                "requires_review": state.requires_human_review,
             })
-            time.sleep(6)  # Protect against Gemini API rate limits
-
+            time.sleep(6)  # avoid Gemini rate limit
         return {
-            "processed_count": len(processed),
-            "details": processed,
-            "status": "Batch run completed successfully.",
+            "count": len(results),
+            "results": results,
+            "timestamp": datetime.now().isoformat()
         }
-
     except Exception as e:
         logger.error(f"[Batch Run] {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=f"Batch Pipeline Error: {str(e)}")
-
-
-# ------------------------------------------------------
-# Endpoint: Serve Records as JSON (for live dashboard updates)
-# ------------------------------------------------------
-@app.get("/api/records")
-async def get_records(limit: int = 50):
-    """Returns the latest processed email records for dashboard live updates."""
-    try:
-        if not RECORDS_FILE.exists():
-            return {"records": [], "message": "No records file found."}
-
-        with open(RECORDS_FILE, "r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            records = sorted(reader, key=lambda r: r.get("Timestamp", ""), reverse=True)
-
-        return {
-            "records": records[:limit],
-            "count": len(records[:limit]),
-            "timestamp": datetime.now().isoformat(),
-            "status": "success",
-        }
-
-    except Exception as e:
-        logger.error(f"[API Records] {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to load records: {str(e)}")
-# --------------------------------------------------
+        raise HTTPException(status_code=500, detail="Batch run failed")

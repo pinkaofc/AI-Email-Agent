@@ -2,6 +2,8 @@ import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 from datetime import datetime
+import time
+
 
 def get_logger(
     name: str,
@@ -12,28 +14,27 @@ def get_logger(
     backup_count: int = 3,
 ) -> logging.Logger:
     """
-    Creates and returns a logger with console and optional rotating file output.
+    Creates and returns a robust logger with console output and optional
+    rotating log file support.
 
-    Args:
-        name (str): Name of the logger (usually __name__).
-        log_to_file (bool): Whether to also write logs to a file.
-        log_dir (str): Directory for log files if file logging is enabled.
-        log_level (int): Logging level (e.g., logging.INFO, logging.DEBUG).
-        max_file_size_mb (int): Maximum size per log file before rotation.
-        backup_count (int): Number of old log files to retain.
-
-    Returns:
-        logging.Logger: Configured logger instance.
+    Safe for production:
+    - Prevents duplicate handlers
+    - Rotates cleanly and keeps old logs
+    - Creates log dir automatically
+    - Stable timestamp formatting
     """
+
     logger = logging.getLogger(name)
     logger.setLevel(log_level)
-    logger.propagate = False  # Prevent duplicate log entries in root logger
+    logger.propagate = False  # Avoid double logging from root
 
-    # If logger already has handlers, return it directly to avoid duplication
-    if logger.handlers:
+    # If handlers already exist, return the same logger (prevents duplication)
+    if getattr(logger, "_initialized", False):
         return logger
 
-    # --- Console handler ---
+    # ------------------------------------------------------------
+    # Console Handler
+    # ------------------------------------------------------------
     console_handler = logging.StreamHandler()
     console_formatter = logging.Formatter(
         fmt="%(asctime)s | %(name)s | %(levelname)s | %(message)s",
@@ -42,16 +43,26 @@ def get_logger(
     console_handler.setFormatter(console_formatter)
     logger.addHandler(console_handler)
 
-    # --- Optional rotating file handler ---
+    # ------------------------------------------------------------
+    # File Handler (Optional)
+    # ------------------------------------------------------------
     if log_to_file:
         Path(log_dir).mkdir(parents=True, exist_ok=True)
-        log_file_path = Path(log_dir) / f"{name}.log"
+
+        # Use module name for log file; fallback to timestamp if unsafe
+        safe_name = name.replace(".", "_").replace("/", "_")
+        if not safe_name:
+            safe_name = f"log_{int(time.time())}"
+
+        log_file_path = Path(log_dir) / f"{safe_name}.log"
+
         file_handler = RotatingFileHandler(
             log_file_path,
             maxBytes=max_file_size_mb * 1024 * 1024,
             backupCount=backup_count,
             encoding="utf-8",
         )
+
         file_formatter = logging.Formatter(
             fmt="%(asctime)s | %(levelname)s | %(message)s",
             datefmt="%Y-%m-%d %H:%M:%S",
@@ -60,4 +71,8 @@ def get_logger(
         logger.addHandler(file_handler)
 
     logger.debug(f"Logger initialized for '{name}' (to_file={log_to_file}).")
+
+    # Mark as initialized to prevent re-attaching handlers later
+    logger._initialized = True
+
     return logger

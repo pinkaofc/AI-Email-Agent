@@ -35,49 +35,35 @@
       margin-left: 10px;
     }
 
-    .header-left {
-      display: flex;
-      align-items: center;
-    }
+    .header-left { display: flex; align-items: center; }
 
-    main {
-      padding: 25px 40px;
-    }
+    main { padding: 25px 40px; }
 
-    h2 {
-      font-size: 1.3rem;
-      color: #111827;
-      margin-bottom: 6px;
-    }
+    h2 { font-size: 1.3rem; color: #111827; margin-bottom: 6px; }
 
-    .header-info {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
       margin-bottom: 20px;
-      flex-wrap: wrap;
     }
 
-    .header-info p {
-      font-size: 0.95rem;
-      color: #6b7280;
-      margin: 4px 0;
+    .stat-box {
+      background: white;
+      padding: 12px 18px;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      text-align: center;
     }
 
-    #refresh-btn {
-      background-color: #2563eb;
-      color: white;
-      padding: 8px 14px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.2s ease;
+    .stat-box h3 {
+      margin: 0;
+      font-size: 1.6rem;
+      color: #111827;
+      font-weight: 700;
     }
 
-    #refresh-btn:hover {
-      background-color: #1e40af;
-    }
+    .stat-label { font-size: 0.85rem; color: #6b7280; }
 
     .table-container {
       overflow-x: auto;
@@ -86,33 +72,39 @@
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.95rem;
-    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 
-    th, td {
-      padding: 12px 16px;
-      border-bottom: 1px solid #e5e7eb;
-    }
+    th, td { padding: 12px 16px; border-bottom: 1px solid #e5e7eb; }
 
     th {
       background-color: #f3f4f6;
       color: #374151;
       text-transform: uppercase;
       font-size: 0.8rem;
-      letter-spacing: 0.05em;
     }
 
-    tr:hover {
-      background-color: #f9fafb;
+    tr:hover { background-color: #f9fafb; cursor: pointer; }
+
+    .expandable {
+      display: none;
+      background: #f3f4f6;
+      padding: 15px 20px;
+      border-left: 4px solid #2563eb;
     }
+
+    .badge {
+      padding: 3px 7px;
+      font-size: 0.75rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .high { background: #fee2e2; color: #dc2626; }
+    .normal { background: #d1fae5; color: #047857; }
 
     .positive { color: #16a34a; font-weight: 600; }
     .negative { color: #dc2626; font-weight: 600; }
-    .neutral { color: #ca8a04; font-weight: 600; }
+    .neutral  { color: #ca8a04; font-weight: 600; }
 
     footer {
       text-align: center;
@@ -123,106 +115,119 @@
       border-top: 1px solid #e5e7eb;
       background-color: #fff;
     }
-
-    @media (max-width: 768px) {
-      main { padding: 15px; }
-      header { flex-direction: column; align-items: flex-start; }
-      header h1 { margin-top: 10px; }
-    }
   </style>
 </head>
 
 <body>
-  <!-- Header -->
-  <header>
-    <div class="header-left">
-      <img src="{{ url_for('static', path='images/logo_shipcube.jpeg') }}" alt="ShipCube Logo">
-      <h1>ShipCube AI Email Dashboard</h1>
-    </div>
-    <span style="font-size: 0.9rem; color:#6b7280;">v1.0 Beta</span>
-  </header>
+<header>
+  <div class="header-left">
+    <img src="{{ url_for('static', path='images/logo_shipcube.jpeg') }}">
+    <h1>ShipCube AI Dashboard</h1>
+  </div>
+  <span style="font-size: 0.9rem; color:#6b7280;">v2.0 Production</span>
+</header>
 
-  <!-- Main Section -->
-  <main>
-    <section class="header-info">
-      <div>
-        <h2>Recent Processed Emails</h2>
-        <p class="auto-refresh">🔄 Live-updating dashboard (refreshes every 30 seconds)</p>
-      </div>
-      <button id="refresh-btn" onclick="refreshTable()">⟳ Refresh Now</button>
-    </section>
+<main>
 
-    <!-- Data Table -->
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>SR No</th>
-            <th>Timestamp</th>
-            <th>Sender Name</th>
-            <th>Subject</th>
-            <th>Classification</th>
-            <th>Response Status</th>
+  <!-- Stats Section -->
+  <div class="stats-grid" id="stats-grid">
+    <div class="stat-box"><h3 id="total">0</h3><div class="stat-label">Total Emails</div></div>
+    <div class="stat-box"><h3 id="pos">0</h3><div class="stat-label">Positive</div></div>
+    <div class="stat-box"><h3 id="neg">0</h3><div class="stat-label">Negative</div></div>
+    <div class="stat-box"><h3 id="neu">0</h3><div class="stat-label">Neutral</div></div>
+    <div class="stat-box"><h3 id="review">0</h3><div class="stat-label">Needs Review</div></div>
+  </div>
+
+  <section class="header-info">
+    <h2>Processed Emails</h2>
+    <p class="auto-refresh">🔄 Auto-refresh every 30 sec</p>
+    <button id="refresh-btn" onclick="refreshTable()">⟳ Refresh Now</button>
+  </section>
+
+  <!-- Table -->
+  <div class="table-container">
+    <table id="records-table">
+      <thead>
+        <tr>
+          <th>SR</th>
+          <th>Timestamp</th>
+          <th>Sender</th>
+          <th>Subject</th>
+          <th>Priority</th>
+          <th>Sentiment</th>
+          <th>Status</th>
+          <th>Confidence</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>
+  © 2025 ShipCube AI Automation • Powered by FastAPI
+</footer>
+
+<script>
+  async function refreshTable() {
+    try {
+      const res = await fetch('/api/records');
+      const data = await res.json();
+
+      // Update Stats
+      document.getElementById("total").textContent = data.count;
+      document.getElementById("pos").textContent = data.stats.positive;
+      document.getElementById("neg").textContent = data.stats.negative;
+      document.getElementById("neu").textContent = data.stats.neutral;
+      document.getElementById("review").textContent = data.stats.needs_review;
+
+      const tableBody = document.querySelector("#records-table tbody");
+      tableBody.innerHTML = "";
+
+      data.records.forEach((rec, idx) => {
+        const priority = rec["priority"] || "normal";
+        const confidence = rec["confidence_score"] || "N/A";
+
+        const row = `
+          <tr onclick="toggleExpand(${idx})">
+            <td>${idx + 1}</td>
+            <td>${rec["Timestamp"]}</td>
+            <td>${rec["Sender Name"]}</td>
+            <td title="${rec["Original Subject"]}">${rec["Original Subject"]}</td>
+            <td><span class="badge ${priority}">${priority}</span></td>
+            <td class="${rec["Classification"]?.toLowerCase() || ""}">
+                ${rec["Classification"]}</td>
+            <td>${rec["Response Status"]}</td>
+            <td>${confidence}</td>
           </tr>
-        </thead>
-        <tbody>
-          {% if records %}
-            {% for rec in records %}
-            <tr>
-              <td>{{ loop.index }}</td>
-              <td>{{ rec["Timestamp"] }}</td>
-              <td>{{ rec["Sender Name"] }}</td>
-              <td title="{{ rec["Original Subject"] }}">{{ rec["Original Subject"] }}</td>
-              <td class="{{ rec["Classification"]|lower }}">{{ rec["Classification"] }}</td>
-              <td>{{ rec["Response Status"] }}</td>
-            </tr>
-            {% endfor %}
-          {% else %}
-            <tr>
-              <td colspan="6" style="text-align:center;">No processed emails yet. Run the AI pipeline or API first.</td>
-            </tr>
-          {% endif %}
-        </tbody>
-      </table>
-    </div>
-  </main>
+          <tr class="expandable" id="expand-${idx}">
+            <td colspan="8">
+              <b>Summary:</b> ${rec["Summary"] || "N/A"}<br><br>
+              <b>Response:</b> ${rec["Generated Response"]?.slice(0,400) || "N/A"}...
+            </td>
+          </tr>
+        `;
+        tableBody.insertAdjacentHTML("beforeend", row);
+      });
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 ShipCube AI Automation | Powered by FastAPI
-  </footer>
+      // update refresh timestamp
+      document.querySelector('.auto-refresh').textContent =
+        " Last updated at " + new Date().toLocaleTimeString();
 
-  <script>
-    async function refreshTable() {
-      try {
-        const res = await fetch('/api/records');
-        const data = await res.json();
-        const tableBody = document.querySelector('tbody');
-        if (!tableBody || !data.records) return;
-
-        tableBody.innerHTML = '';
-        data.records.forEach((rec, idx) => {
-          const row = `
-            <tr>
-              <td>${idx + 1}</td>
-              <td>${rec["Timestamp"] || ""}</td>
-              <td>${rec["Sender Name"] || "Unknown"}</td>
-              <td title="${rec["Original Subject"] || ""}">${rec["Original Subject"] || ""}</td>
-              <td class="${(rec["Classification"] || "").toLowerCase()}">${rec["Classification"] || ""}</td>
-              <td>${rec["Response Status"] || ""}</td>
-            </tr>`;
-          tableBody.insertAdjacentHTML('beforeend', row);
-        });
-
-        const timeNow = new Date().toLocaleTimeString();
-        document.querySelector('.auto-refresh').textContent = `🔄 Last updated at ${timeNow}`;
-      } catch (error) {
-        console.error('Failed to refresh records:', error);
-      }
+    } catch (error) {
+      console.error("Refresh failed:", error);
     }
+  }
 
-    refreshTable();
-    setInterval(refreshTable, 30000);
-  </script>
+  function toggleExpand(idx) {
+    const row = document.getElementById("expand-" + idx);
+    row.style.display = row.style.display === "table-row" ? "none" : "table-row";
+  }
+
+  refreshTable();
+  setInterval(refreshTable, 30000);
+</script>
+
 </body>
 </html>

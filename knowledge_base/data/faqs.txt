@@ -1,17 +1,48 @@
-Q: How can I track my shipment?
-A: Use the chatbot or visit shipcube.com/track with your order ID.
+[
+  {
+    "Query": "How can I track my shipment?",
+    "Response": "You can track your shipment anytime at shipcube.com/track using your Order ID or AWB number.",
+    "Departments": "Customer Support"
+  },
+  {
+    "Query": "Can I change my delivery address after booking?",
+    "Response": "Yes, address changes are allowed before the shipment status becomes 'Out for Delivery'.",
+    "Departments": "Customer Support"
+  },
+  {
+    "Query": "What is the refund timeline?",
+    "Response": "Refunds are processed within 5–7 business days after verification.",
+    "Departments": "Billing"
+  },
+  {
+    "Query": "Do you support API integration?",
+    "Response": "Yes, API integration is available for Gold and Platinum tier clients.",
+    "Departments": "Technology"
+  },
+  {
+    "Query": "What are your delivery hours?",
+    "Response": "ShipCube delivers between 9 AM and 8 PM on working days (Mon–Sat).",
+    "Departments": "Operations"
+  },
+  {
+    "Query": "How can I contact support?",
+    "Response": "You can email support@shipcube.com, call +1 (559) 931-3893, or use the chatbot.",
+    "Departments": "Customer Support"
+  },
+  {
+    "Query": "What is the SOP for missing items?",
+    "Response": "Verify POD, dispatch logs, weight records, and carton count. Update the client and create an internal ticket.",
+    "Departments": "Operations"
+  },
+  {
+    "Query": "How do we handle wrong delivery complaints?",
+    "Response": "Contact the carrier within 2 hours, request GPS/photo proof, and initiate redelivery.",
+    "Departments": "Operations"
+  },
+  {
+    "Query": "What is the SLA for responding to customer complaints?",
+    "Response": "24 hours for standard clients and 12 hours for Gold/Platinum clients.",
+    "Departments": "Support"
+  }
+]
 
-Q: Can I change my address after booking?
-A: Yes, before status changes to “Out for Delivery.”
-
-Q: What is the refund timeline?
-A: 5–7 business days post-verification.
-
-Q: Do you support API integration?
-A: Yes, for Gold and Platinum clients.
-
-Q: What are your delivery hours?
-A: 9 AM – 8 PM on working days.
-
-Q: How can I contact support?
-A: Email support@shipcube.com or use chatbot.

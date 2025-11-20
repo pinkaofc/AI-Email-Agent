@@ -1,0 +1,81 @@
+────────────────────────────────────────────────────────
+                  INTERNAL SLA POLICIES (OFFICIAL)
+────────────────────────────────────────────────────────
+
+This file defines ALL SLA timelines used within ShipCube.
+The AI MUST use ONLY these timelines and MUST NOT invent new ones.
+
+────────────────────
+1. DELIVERY & TRANSIT SLA
+────────────────────
+
+Domestic Shipments:
+   • Standard delivery window: 2–7 business days.
+   • Maximum investigation window for delays: 24–48 hours.
+   • Redelivery attempt SLA: within 1–2 business days after confirmation.
+
+International Shipments:
+   • Standard delivery window: 6–14 business days.
+   • Customs hold verification SLA: 24–72 hours.
+   • Document resubmission SLA: within 12 hours of customer request.
+
+────────────────────
+2. ISSUE RESOLUTION SLA
+────────────────────
+
+Missing Items:
+   • Investigation Start: Immediate (within 4 hours).
+   • Warehouse verification: 24–48 hours.
+   • Final resolution target: 3–5 business days.
+
+Wrong Delivery:
+   • POD verification SLA: 12–24 hours.
+   • Courier escalation SLA: 24–48 hours.
+   • Redelivery/recovery timeline: 2–4 business days depending on courier.
+
+Damaged Goods:
+   • Photo verification: Same business day.
+   • Claim review: 1–3 business days.
+   • Replacement/next action: After Operations approval.
+
+Delayed Shipment:
+   • Movement verification SLA: 12–24 hours.
+   • Courier follow-up SLA: 24 hours.
+   • Customer update expectation: Every 24 hours until resolved.
+
+Customs Clearance Issue:
+   • Document recheck: 6–12 hours.
+   • Broker escalation SLA: 24 hours.
+   • Clearance timeline (approx): 1–3 working days depending on region.
+
+Billing Errors:
+   • Invoice verification SLA: 1–2 business days.
+   • Correction issuance: 24–48 hours.
+
+Return Label Request:
+   • Label issuance SLA: 24 hours.
+   • Pickup scheduling SLA: 24–48 hours.
+
+────────────────────
+3. CUSTOMER COMMUNICATION SLA
+────────────────────
+
+Email Response SLA:
+   • Standard: Within 6–12 hours.
+   • Priority / Negative sentiment: Within 2–4 hours.
+
+Follow-up Frequency:
+   • If investigation ongoing → update every 24 hours.
+   • If courier escalation → update every 48 hours or as courier reports.
+
+────────────────────
+4. AI COMMUNICATION BOUNDARIES
+────────────────────
+
+The AI MUST:
+   • Give SLA windows, not exact days.
+   • Say “our team is reviewing within the standard SLA of X–Y hours”.
+
+The AI MUST NOT:
+   • Promise fixed timelines like “we’ll fix it today”.
+   • State unavailableing internal numbers, IDs, or warehouse details.

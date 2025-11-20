@@ -6,54 +6,81 @@ from datetime import datetime
 @dataclass
 class EmailState:
     """
-    Represents the current working state of the email processing workflow.
-    Tracks the email being processed, metadata, agent outputs, and errors.
+    Global state object passed through every node of the LangGraph workflow.
 
-    This object passes through the LangGraph nodes:
-    filter → summarize → respond → (optional human review)
+    Tracks:
+      - Email input
+      - Agent outputs (classification, summary, response body)
+      - Metadata
+      - Errors
+      - Human-review flags
+      - RAG context
+      - Priority / confidence scores
+      - Final formatted email (ready to send)
     """
 
-    # All emails fetched or simulated
+    # ------------------------------
+    # Base email data
+    # ------------------------------
     emails: List[Dict[str, Any]] = field(default_factory=list)
-
-    # History of processed states or actions
-    history: List[Dict[str, Any]] = field(default_factory=list)
-
-    # Metadata per email (classification, summary, response, etc.)
-    metadata: Dict[str, Dict[str, Any]] = field(default_factory=dict)
-
-    # The current email under processing
     current_email: Dict[str, Any] = field(default_factory=dict)
     current_email_id: Optional[str] = None
 
-    # --- Agent outputs ---
-    classification: Optional[str] = None        # Result from filtering_agent (e.g., "positive", "spam", "promotional")
-    summary: Optional[str] = None               # Generated summary from summarization_agent
-    generated_response_body: Optional[str] = None  # Final Gemini-generated response body
+    # ------------------------------
+    # Metadata for analytics
+    # ------------------------------
+    metadata: Dict[str, Dict[str, Any]] = field(default_factory=dict)
+    history: List[Dict[str, Any]] = field(default_factory=list)
 
-    # --- Error tracking ---
-    processing_error: Optional[str] = None      # Any error encountered during workflow
+    # ------------------------------
+    # Pipeline outputs
+    # ------------------------------
+    classification: Optional[str] = None
+    summary: Optional[str] = None
+    generated_response_body: Optional[str] = None
+    formatted_email: Optional[str] = None  # final full email after formatting
 
-    # --- Review flags ---
-    requires_human_review: bool = False         # Flag for human intervention before sending
+    # ------------------------------
+    # Error & workflow control
+    # ------------------------------
+    processing_error: Optional[str] = None
+    requires_human_review: bool = False
 
-    # --- Utility fields (optional, for analytics or extended RAG tracking) ---
+    # ------------------------------
+    # RAG + Confidence + Priority
+    # ------------------------------
+    retrieved_context: Optional[str] = None
+    confidence_score: Optional[float] = None      # future scoring model
+    priority: Optional[str] = None                # “high”, “normal”, etc.
+
+    # ------------------------------
+    # Timestamps
+    # ------------------------------
     last_updated: str = field(default_factory=lambda: datetime.now().isoformat())
-    retrieved_context: Optional[str] = None     # Text retrieved from knowledge base (for debugging or fine-tuning)
 
+    # ------------------------------
+    # Methods
+    # ------------------------------
     def update_timestamp(self):
-        """Updates the state's last modified timestamp."""
+        """Refresh internal timestamp when state is modified."""
         self.last_updated = datetime.now().isoformat()
 
     def record_history(self, stage: str, note: str = ""):
-        """Helper to append state snapshot to history for debugging."""
+        """
+        Store a structured snapshot after each pipeline stage.
+        Useful for debugging, dashboards, audit logs, QA, etc.
+        """
         snapshot = {
             "stage": stage,
             "timestamp": datetime.now().isoformat(),
             "classification": self.classification,
             "summary": self.summary,
             "generated_response": self.generated_response_body,
+            "formatted_email": self.formatted_email,
             "error": self.processing_error,
-            "note": note
+            "requires_human_review": self.requires_human_review,
+            "priority": self.priority,
+            "confidence_score": self.confidence_score,
+            "note": note,
         }
         self.history.append(snapshot)
