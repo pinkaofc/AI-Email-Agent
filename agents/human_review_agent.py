@@ -1,90 +1,124 @@
+# utils/human_review.py
+
 import re
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-# Patterns that commonly indicate operational details or tracking IDs
+# ----------------------------------------------------------------------
+# Suspicious patterns for detecting fabricated or sensitive details
+# (same patterns used across response_agent, summarization_agent, supervisor)
+# ----------------------------------------------------------------------
 SUSPICIOUS_PATTERNS = [
-    r"\bSC-[A-Z0-9]{4,}\b",       # actual order IDs
-    r"\btracking number\b",       # avoid hallucinating a number
-    r"\bAWB\b",                   # airway bill numbers
-    r"\bETA\b",                   # exact ETA
-    r"\border id\b",              # specific identifiers
-    r"\bclient address\b",        # PII
-    r"\bphone\b",                 # PII
+    r"\bSC-[A-Z0-9]{4,}\b",       # fabricated order IDs
+    r"\btracking number\b",
+    r"\bAWB\b",
+    r"\bETA\b",
+    r"\border id\b",
+    r"\bclient address\b",
+    r"\bphone\b",
 ]
 
 
-
 def _find_suspicious_snippets(text: str):
+    """
+    Returns localized text snippets around suspicious operational patterns.
+    Helpful for human reviewers to see exactly what looks unsafe.
+    """
     snippets = []
-    for p in SUSPICIOUS_PATTERNS:
-        for m in re.finditer(p, text, re.IGNORECASE):
-            start = max(0, m.start() - 30)
-            end = min(len(text), m.end() + 30)
-            snippets.append(text[start:end].strip())
-    return list(dict.fromkeys(snippets))  # preserve order, unique
+    for pattern in SUSPICIOUS_PATTERNS:
+        for match in re.finditer(pattern, text, re.IGNORECASE):
+            start = max(0, match.start() - 30)
+            end = min(len(text), match.end() + 30)
+            snippet = text[start:end].strip()
+            snippets.append(snippet)
+
+    # Remove duplicates while preserving order
+    return list(dict.fromkeys(snippets))
 
 
+# ----------------------------------------------------------------------
+# Interactive review tool — for LOCAL USE ONLY (NOT API)
+# ----------------------------------------------------------------------
 def review_email(email: dict, response: str) -> str:
     """
-    Interactive human review helper.
+    CLI-based human review helper.
+    Displays the generated AI response in the terminal
+    and allows the reviewer to:
+        - ACCEPT
+        - EDIT
+        - REPLACE
 
-    Shows the generated response, highlights suspicious operational details,
-    and allows the human to accept, edit, or reject the response.
-
-    Returns the final response text to be sent (must be non-empty).
+    Returns a final safe response string.
     """
-    print("\n--- Generated Response ---\n")
+
+    print("\n\n=======================================")
+    print("           GENERATED RESPONSE          ")
+    print("=======================================\n")
     print(response)
-    print("\n---------------------------\n")
+    print("\n---------------------------------------\n")
 
     suspicious = _find_suspicious_snippets(response)
-    if suspicious:
-        print("WARNING: The AI output contains potential operational details or identifiers.")
-        print("Please review these carefully — they might be fabricated or sensitive.\n")
-        for i, s in enumerate(suspicious, start=1):
-            print(f"{i}. ...{s}...")
-        print("\nIf any snippet above looks incorrect or fabricated, choose to edit the response.\n")
 
+    # ------------------------------------------------------
+    # Highlight potential hallucinations / sensitive leaks
+    # ------------------------------------------------------
+    if suspicious:
+        print("  WARNING: Suspicious or sensitive details detected!\n")
+        for i, snippet in enumerate(suspicious, start=1):
+            print(f" {i}. ...{snippet}...")
+        print("\nReview is highly recommended before sending.\n")
+
+    # ------------------------------------------------------
+    # Interactive feedback loop (Accept/Edit/Reject)
+    # ------------------------------------------------------
     while True:
-        user_input = input("Options: (a)ccept / (e)dit / (r)eject and replace: ").strip().lower()
-        if user_input in ("a", "accept"):
-            logger.info("[HumanReview] Reviewer accepted the AI response.")
+        choice = input("(a)ccept / (e)dit / (r)eject → ").strip().lower()
+
+        # ACCEPT
+        if choice in ("a", "accept"):
             final = response.strip()
             if not final:
-                print("Error: final response is empty. Please edit the response.")
+                print("Cannot accept an empty response. Please edit instead.")
                 continue
+
+            logger.info("[HumanReview] Reviewer accepted the AI response.")
             return final
 
-        if user_input in ("e", "edit"):
-            print("\nEnter the corrected response. Finish by pressing Enter on a blank line.")
+        # EDIT
+        if choice in ("e", "edit"):
+            print("\nEnter your corrected response (blank line to finish):\n")
             lines = []
             while True:
                 line = input()
                 if line == "":
                     break
                 lines.append(line)
-            modified = "\n".join(lines).strip()
-            if not modified:
-                print("Edited response is empty — please re-edit or choose reject.")
-                continue
-            logger.info("[HumanReview] Reviewer edited the AI response.")
-            return modified
 
-        if user_input in ("r", "replace", "reject"):
-            print("\nEnter the replacement response. Finish by pressing Enter on a blank line.")
+            edited = "\n".join(lines).strip()
+            if not edited:
+                print("Edited response cannot be empty. Try again.")
+                continue
+
+            logger.info("[HumanReview] Reviewer edited the AI response.")
+            return edited
+
+        # REJECT / REPLACE
+        if choice in ("r", "reject", "replace"):
+            print("\nEnter replacement response (blank line to finish):\n")
             lines = []
             while True:
                 line = input()
                 if line == "":
                     break
                 lines.append(line)
+
             replacement = "\n".join(lines).strip()
             if not replacement:
-                print("Replacement response is empty — cannot accept. Try again.")
+                print("Replacement cannot be empty. Try again.")
                 continue
-            logger.info("[HumanReview] Reviewer replaced the AI response.")
+
+            logger.info("[HumanReview] Reviewer replaced the AI response entirely.")
             return replacement
 
-        print("Unrecognized option. Please type 'a' (accept), 'e' (edit), or 'r' (reject).")
+        print("Invalid choice. Please enter 'a', 'e', or 'r'.")

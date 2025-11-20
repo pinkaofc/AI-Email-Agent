@@ -1,0 +1,418 @@
+2025-11-19 17:04:06 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-19 17:04:06 | INFO | [Startup] Validating knowledge base availability...
+2025-11-19 17:04:14 | INFO | [Startup] Knowledge base check OK. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-20 15:11:31 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 15:11:31 | INFO | [Startup] Initializing Prometheus metrics…
+2025-11-20 15:11:31 | ERROR | [Startup] Prometheus initialization error: Cannot add middleware after an application has started
+2025-11-20 15:11:31 | INFO | [Startup] Validating KB…
+2025-11-20 15:11:35 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-20 17:51:25 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 17:51:25 | INFO | [Startup] Initializing Prometheus instrumentator and exposing /metrics …
+2025-11-20 17:51:25 | ERROR | [Startup] Prometheus initialization error: Cannot add middleware after an application has started
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 147, in startup_event
+    instrumentator.instrument(app)
+  File "C:\Users\itspr\OneDrive\Documents\Supply-Chain-Client-Management\Email-AI-Agent\venv\lib\site-packages\prometheus_fastapi_instrumentator\instrumentation.py", line 206, in instrument
+    app.add_middleware(
+  File "C:\Users\itspr\OneDrive\Documents\Supply-Chain-Client-Management\Email-AI-Agent\venv\lib\site-packages\starlette\applications.py", line 131, in add_middleware
+    raise RuntimeError("Cannot add middleware after an application has started")
+RuntimeError: Cannot add middleware after an application has started
+2025-11-20 17:51:25 | INFO | [Startup] Validating knowledge base availability…
+2025-11-20 17:51:32 | INFO | [Startup] KB Ready. Preview: 
+2025-11-20 17:57:08 | ERROR | [Dashboard] Cannot read records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 197, in dashboard
+    records = sorted(rows, key=_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 17:57:09 | ERROR | [API Records] Error reading/parsing records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 377, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:17:28 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 18:17:28 | INFO | [Startup] Prometheus instrumentator attached at module import time.
+2025-11-20 18:17:28 | INFO | [Startup] Validating knowledge base availability…
+2025-11-20 18:17:40 | INFO | [Startup] KB Ready. Preview: 
+2025-11-20 18:17:40 | ERROR | [Dashboard] Cannot read records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 201, in dashboard
+    records = sorted(rows, key=_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:17:40 | ERROR | [API Records] Error reading/parsing records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 365, in get_records
+    sorted_rows = sorted(rows, key=_safe_time_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:18:10 | ERROR | [API Records] Error reading/parsing records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 365, in get_records
+    sorted_rows = sorted(rows, key=_safe_time_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:18:40 | ERROR | [API Records] Error reading/parsing records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 365, in get_records
+    sorted_rows = sorted(rows, key=_safe_time_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:19:10 | ERROR | [API Records] Error reading/parsing records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 365, in get_records
+    sorted_rows = sorted(rows, key=_safe_time_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:19:40 | ERROR | [API Records] Error reading/parsing records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 365, in get_records
+    sorted_rows = sorted(rows, key=_safe_time_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:20:10 | ERROR | [API Records] Error reading/parsing records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 365, in get_records
+    sorted_rows = sorted(rows, key=_safe_time_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:20:40 | ERROR | [API Records] Error reading/parsing records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 365, in get_records
+    sorted_rows = sorted(rows, key=_safe_time_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:21:10 | ERROR | [API Records] Error reading/parsing records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 365, in get_records
+    sorted_rows = sorted(rows, key=_safe_time_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:22:07 | ERROR | [API Records] Error reading/parsing records.csv: can't compare offset-naive and offset-aware datetimes
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 365, in get_records
+    sorted_rows = sorted(rows, key=_safe_time_key, reverse=True)
+TypeError: can't compare offset-naive and offset-aware datetimes
+2025-11-20 18:23:38 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 18:23:39 | INFO | [Startup] Validating KB…
+2025-11-20 18:25:08 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 18:25:08 | INFO | [Startup] Validating KB…
+2025-11-20 18:25:21 | ERROR | [Dashboard] Cannot read records.csv: type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 210, in dashboard
+    records = sorted(rows, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:25:21 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:25:21 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:25:21 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:25:21 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:25:52 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:26:22 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:26:52 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:27:13 | ERROR | [Dashboard] Cannot read records.csv: type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 210, in dashboard
+    records = sorted(rows, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:27:13 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:27:43 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:27:59 | ERROR | [Dashboard] Cannot read records.csv: type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 210, in dashboard
+    records = sorted(rows, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:27:59 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:28:29 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:28:59 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:31:27 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 18:31:28 | INFO | [Startup] Validating KB…
+2025-11-20 18:35:25 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:35:29 | ERROR | [Dashboard] Cannot read records.csv: type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 210, in dashboard
+    records = sorted(rows, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:35:29 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:35:33 | ERROR | [Dashboard] Cannot read records.csv: type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 210, in dashboard
+    records = sorted(rows, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:35:33 | ERROR | [API Records] type object 'datetime.datetime' has no attribute 'timezone'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 191, in _safe_time_key
+    return dt.astimezone(datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 368, in get_records
+    normalized_sorted = sorted(normalized, key=_safe_time_key, reverse=True)
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 193, in _safe_time_key
+    return datetime.min.replace(tzinfo=datetime.timezone.utc)
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'. Did you mean: 'astimezone'?
+2025-11-20 18:38:00 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 18:38:01 | INFO | [Startup] Initializing Prometheus instrumentator and exposing /metrics …
+2025-11-20 18:38:01 | ERROR | [Startup] Prometheus initialization error: Cannot add middleware after an application has started
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 149, in startup_event
+    instrumentator.instrument(app)
+  File "C:\Users\itspr\OneDrive\Documents\Supply-Chain-Client-Management\Email-AI-Agent\venv\lib\site-packages\prometheus_fastapi_instrumentator\instrumentation.py", line 206, in instrument
+    app.add_middleware(
+  File "C:\Users\itspr\OneDrive\Documents\Supply-Chain-Client-Management\Email-AI-Agent\venv\lib\site-packages\starlette\applications.py", line 131, in add_middleware
+    raise RuntimeError("Cannot add middleware after an application has started")
+RuntimeError: Cannot add middleware after an application has started
+2025-11-20 18:38:01 | INFO | [Startup] Validating knowledge base availability…
+2025-11-20 18:38:09 | INFO | [Startup] KB Ready. Preview: 
+2025-11-20 19:13:08 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 19:13:08 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-20 19:13:08 | INFO | [Startup] Validating KB…
+2025-11-20 19:13:16 | INFO | [Startup] KB Ready. Preview: 
+2025-11-20 19:22:17 | ERROR | [Process Email] Pipeline error: supervisor_langgraph() missing 2 required positional arguments: 'your_name' and 'recipient_name'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 340, in process_email_api
+    state: EmailState = await asyncio.to_thread(
+  File "C:\Drivers\python10\lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+  File "C:\Drivers\python10\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+TypeError: supervisor_langgraph() missing 2 required positional arguments: 'your_name' and 'recipient_name'
+2025-11-20 19:22:17 | INFO | [ProcessEmail] finished | success=False elapsed=0.26s
+2025-11-20 23:08:09 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 23:08:09 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-20 23:08:09 | INFO | [Startup] Validating KB…
+2025-11-20 23:08:10 | INFO | [Startup] KB Ready. Preview: 
+2025-11-20 23:51:41 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 23:51:41 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-20 23:51:41 | INFO | [Startup] Validating KB…
+2025-11-20 23:51:41 | INFO | [Startup] KB Ready. Preview: 
+2025-11-20 23:55:26 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 23:55:26 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-20 23:55:26 | INFO | [Startup] Validating KB…
+2025-11-20 23:55:26 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-20 23:57:14 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-20 23:57:14 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-20 23:57:14 | INFO | [Startup] Validating KB…
+2025-11-20 23:57:14 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-21 00:22:23 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-21 00:22:23 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-21 00:22:23 | INFO | [Startup] Validating KB…
+2025-11-21 00:22:23 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio

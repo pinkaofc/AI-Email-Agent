@@ -1,31 +1,41 @@
 import time
 import logging
 
+from monitoring.metrics import (
+    record_gemini_failure,   # increments failure counters
+    GEMINI_CALLS,            # per-module call counter
+)
+
 logger = logging.getLogger("rate_limit_guard")
 
 
 def rate_limit_safe_call(
     func,
     *args,
+    module_name="unknown",        # filtering / summarization / response
     max_retries=3,
     cooldown=35,
     backoff_factor=1.4,
     **kwargs
 ):
     """
-    Executes an API call safely with:
-      - Built-in Gemini 429 / quota handling
-      - Gradual exponential backoff
-      - Clean error propagation for non-rate-limit errors
-      - Safe fallback after exhaustion
+    Unified safe executor for Gemini API calls.
+    Handles:
+        • 429 / quota / rate-limits
+        • Exponential backoff
+        • Module-level Prometheus metrics
+        • Clean propagation of non-rate-limit errors
 
-    Args:
-        func: Callable API function (Gemini or LangChain wrapped call)
-        *args, **kwargs: Passed to the function
-        max_retries: Total retry attempts
-        cooldown: Initial wait after 429 / quota
-        backoff_factor: Cooldown multiplier per retry (e.g., 35s → 49s → 68s)
+    Parameters:
+        func: The Gemini model.invoke function
+        module_name: classifier for Prometheus (filtering/summarization/response)
+        max_retries: attempts before failing
+        cooldown: initial wait time for a rate-limit
+        backoff_factor: multiplier for exponential backoff
     """
+
+    # Count every Gemini API call
+    GEMINI_CALLS.labels(module=module_name).inc()
 
     wait_time = cooldown
 
@@ -34,38 +44,50 @@ def rate_limit_safe_call(
             return func(*args, **kwargs)
 
         except Exception as e:
-            error_text = str(e).lower()
+            err = str(e).lower()
 
-            is_rate_limit = (
-                "429" in error_text
-                or "quota" in error_text
-                or "resourceexhausted" in error_text
-                or "rate limit" in error_text
-                or "exceeded" in error_text
+            # Detect all known rate-limit / quota signals
+            rate_limited = any(
+                token in err for token in [
+                    "429",
+                    "quota",
+                    "rate limit",
+                    "exceeded",
+                    "resourceexhausted",
+                    "too many requests",
+                    "exhausted",
+                ]
             )
 
             # ------------------------------------------------------------
-            # Handle rate-limit / quota errors (Gemini specific)
+            # RATE-LIMIT HANDLING
             # ------------------------------------------------------------
-            if is_rate_limit:
+            if rate_limited:
+                record_gemini_failure(module_name, reason="rate_limit")
+
                 if attempt < max_retries:
                     logger.warning(
-                        f"[RateLimitGuard] Gemini rate limit hit "
-                        f"(attempt {attempt}/{max_retries}). "
-                        f"Sleeping for {wait_time}s..."
+                        f"[RateLimitGuard] {module_name}: Rate limit hit "
+                        f"(attempt {attempt}/{max_retries}). Waiting {wait_time}s…"
                     )
                     time.sleep(wait_time)
                     wait_time = int(wait_time * backoff_factor)
                     continue
-                else:
-                    logger.error("[RateLimitGuard] Max retries exceeded due to quota/429.")
-                    raise RuntimeError("Gemini quota exceeded repeatedly") from e
+
+                logger.error(
+                    f"[RateLimitGuard] {module_name}: Max retries exceeded (quota)."
+                )
+                raise RuntimeError("Gemini quota exceeded repeatedly") from e
 
             # ------------------------------------------------------------
-            # Non-rate-limit errors → propagate immediately
+            # NON-RATE-LIMIT ERRORS — propagate immediately
             # ------------------------------------------------------------
-            logger.error(f"[RateLimitGuard] Non-rate-limit error: {e}")
+            logger.error(
+                f"[RateLimitGuard] {module_name}: Non-rate-limit Gemini error: {e}"
+            )
+
+            record_gemini_failure(module_name, reason="other_error")
             raise
 
-    # This line should almost never be reached; defensive fallback
-    raise RuntimeError("RateLimitGuard exhausted retries unexpectedly")
+    # If loop exits unexpectedly (should not happen)
+    raise RuntimeError("RateLimitGuard: Unexpected retry exhaustion")

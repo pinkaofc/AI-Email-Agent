@@ -1,0 +1,168 @@
+2025-11-06 14:33:39 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-06 14:46:22 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-06 15:10:54 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-06 15:11:07 | DEBUG | [Records] records.csv already exists.
+2025-11-06 15:13:05 | DEBUG | [Records] records.csv already exists.
+2025-11-06 15:13:05 | INFO | [Records] Logged email record: SR No 1 from unknown@example.com
+2025-11-06 15:13:49 | DEBUG | [Records] records.csv already exists.
+2025-11-06 15:13:49 | INFO | [Records] Logged email record: SR No 2 from unknown@example.com
+2025-11-06 15:15:36 | DEBUG | [Records] records.csv already exists.
+2025-11-06 15:15:36 | INFO | [Records] Logged email record: SR No 3 from unknown@example.com
+2025-11-06 15:16:31 | DEBUG | [Records] records.csv already exists.
+2025-11-06 15:16:31 | INFO | [Records] Logged email record: SR No 4 from unknown@example.com
+2025-11-06 15:34:49 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-06 15:35:03 | DEBUG | [Records] records.csv already exists.
+2025-11-06 15:35:46 | DEBUG | [Records] records.csv already exists.
+2025-11-06 15:35:46 | INFO | [Records] Logged email record: SR No 1 from unknown@example.com
+2025-11-06 15:37:02 | DEBUG | [Records] records.csv already exists.
+2025-11-06 15:37:02 | INFO | [Records] Logged email record: SR No 2 from unknown@example.com
+2025-11-06 15:37:45 | DEBUG | [Records] records.csv already exists.
+2025-11-06 15:37:45 | INFO | [Records] Logged email record: SR No 3 from unknown@example.com
+2025-11-06 16:07:04 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-06 16:09:17 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-06 16:09:30 | DEBUG | [Records] records.csv already exists.
+2025-11-06 16:10:13 | DEBUG | [Records] records.csv already exists.
+2025-11-06 16:10:13 | INFO | [Records] Logged email record: SR No 1 from sophia.gonzalez@globalimports.mx
+2025-11-06 16:11:29 | DEBUG | [Records] records.csv already exists.
+2025-11-06 16:11:29 | INFO | [Records] Logged email record: SR No 2 from raj.malhotra@malhotragoods.in
+2025-11-06 16:12:30 | DEBUG | [Records] records.csv already exists.
+2025-11-06 16:12:30 | INFO | [Records] Logged email record: SR No 3 from evelyn.harper@urbanthreads.com
+2025-11-06 16:13:16 | DEBUG | [Records] records.csv already exists.
+2025-11-06 16:13:16 | INFO | [Records] Logged email record: SR No 4 from alex.johnson@northtech.us
+2025-11-10 12:53:59 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 12:54:14 | DEBUG | [Records] records.csv already exists.
+2025-11-10 13:03:33 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 13:04:03 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 13:06:55 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 13:08:43 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 13:08:55 | DEBUG | [Records] records.csv already exists.
+2025-11-10 13:09:58 | DEBUG | [Records] records.csv already exists.
+2025-11-10 13:09:58 | INFO | [Records] Logged email record: SR No 1 from jobalerts-noreply@linkedin.com
+2025-11-10 13:19:51 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 13:20:04 | DEBUG | [Records] records.csv already exists.
+2025-11-10 13:21:53 | DEBUG | [Records] records.csv already exists.
+2025-11-10 13:21:53 | INFO | [Records] Logged email record: SR No 1 from priyanka9teen@gmail.com
+2025-11-10 13:39:49 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 13:39:59 | DEBUG | [Records] records.csv already exists.
+2025-11-10 13:41:49 | DEBUG | [Records] records.csv already exists.
+2025-11-10 13:41:49 | INFO | [Records] Logged email record: SR No 1 from priyanka9teen@gmail.com
+2025-11-10 13:52:38 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 13:52:48 | INFO | [Records] Initialized records.csv with headers.
+2025-11-10 13:53:25 | DEBUG | [Records] records.csv already exists.
+2025-11-10 13:53:25 | INFO | [Records] Logged email record: SR No 1 from sophia.gonzalez@globalimports.mx
+2025-11-10 14:12:08 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 14:49:38 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 14:49:50 | DEBUG | [Records] records.csv already exists.
+2025-11-10 14:53:29 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 14:53:38 | DEBUG | [Records] records.csv already exists.
+2025-11-10 14:54:15 | DEBUG | [Records] records.csv already exists.
+2025-11-10 14:54:15 | INFO | [Records] Logged email record — SR No: 1 | Sender: sophia.gonzalez@globalimports.mx | Status: Drafted
+2025-11-10 14:55:38 | DEBUG | [Records] records.csv already exists.
+2025-11-10 14:55:38 | INFO | [Records] Logged email record — SR No: 2 | Sender: raj.malhotra@malhotragoods.in | Status: Drafted
+2025-11-10 15:09:27 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 15:12:08 | DEBUG | [Records] records.csv already exists.
+2025-11-10 15:13:44 | DEBUG | [Records] records.csv already exists.
+2025-11-10 15:13:44 | INFO | [Records] Logged email record — SR No: 1 | Sender: sophia.gonzalez@globalimports.mx | Status: Drafted
+2025-11-10 15:19:24 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 15:20:47 | DEBUG | [Records] records.csv already exists.
+2025-11-10 15:22:44 | DEBUG | [Records] records.csv already exists.
+2025-11-10 15:22:44 | INFO | [Records] Logged email record — SR No: 1 | Sender: sophia.gonzalez@globalimports.mx | Status: Drafted
+2025-11-10 15:23:33 | DEBUG | [Records] records.csv already exists.
+2025-11-10 15:23:33 | INFO | [Records] Logged email record — SR No: 2 | Sender: raj.malhotra@malhotragoods.in | Status: Drafted
+2025-11-10 15:33:37 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 15:34:50 | DEBUG | [Records] records.csv already exists.
+2025-11-10 15:35:48 | DEBUG | [Records] records.csv already exists.
+2025-11-10 15:35:48 | INFO | [Records] Logged email record — SR No: 1 | Sender: sophia.gonzalez@globalimports.mx | Status: Drafted
+2025-11-10 16:03:30 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 16:04:55 | DEBUG | [Records] records.csv already exists.
+2025-11-10 16:06:59 | DEBUG | [Records] records.csv already exists.
+2025-11-10 16:06:59 | INFO | [Records] Logged email record — SR No: 1 | Sender: sophia.gonzalez@globalimports.mx | Status: Drafted
+2025-11-10 16:27:01 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 16:42:02 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-10 17:05:55 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 10:56:08 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 13:10:42 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 13:11:34 | DEBUG | [Records] records.csv already exists.
+2025-11-11 13:12:55 | DEBUG | [Records] records.csv already exists.
+2025-11-11 13:12:55 | INFO | [Records] Logged email record — SR No: 1 | Sender: sophia.gonzalez@globalimports.mx | Status: Sent Directly
+2025-11-11 13:33:18 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 13:34:05 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 13:35:01 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 13:35:39 | DEBUG | [Records] records.csv already exists.
+2025-11-11 13:59:57 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 14:01:51 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 14:04:39 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 14:07:06 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 14:09:31 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 14:11:27 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 14:22:42 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 14:23:44 | DEBUG | [Records] records.csv already exists.
+2025-11-11 14:27:14 | DEBUG | [Records] records.csv already exists.
+2025-11-11 14:27:14 | INFO | [Records] Logged email record — SR No: 1 | Sender: oye.its.pvt@gmail.com | Status: Drafted
+2025-11-11 14:29:10 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 14:30:06 | DEBUG | [Records] records.csv already exists.
+2025-11-11 14:36:25 | DEBUG | [Records] records.csv already exists.
+2025-11-11 14:36:25 | INFO | [Records] Logged email record — SR No: 1 | Sender: priyanka9teen@gmail.com | Status: Sent Directly
+2025-11-11 17:21:21 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 17:22:22 | DEBUG | [Records] records.csv already exists.
+2025-11-11 17:29:49 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 17:31:04 | DEBUG | [Records] records.csv already exists.
+2025-11-11 17:42:24 | DEBUG | [Records] records.csv already exists.
+2025-11-11 17:42:25 | INFO | [Records] Logged email record — SR No: 1 | Sender: rithikaprabakar@gmail.com | Status: Drafted
+2025-11-11 17:49:44 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 17:50:56 | DEBUG | [Records] records.csv already exists.
+2025-11-11 17:54:25 | DEBUG | [Records] records.csv already exists.
+2025-11-11 17:54:25 | INFO | [Records] Logged email record — SR No: 1 | Sender: oye.its.pvt@gmail.com | Status: Drafted
+2025-11-11 17:56:35 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 17:57:31 | DEBUG | [Records] records.csv already exists.
+2025-11-11 17:59:37 | DEBUG | [Records] records.csv already exists.
+2025-11-11 17:59:37 | INFO | [Records] Logged email record — SR No: 1 | Sender: rithikaprabakar@gmail.com | Status: Sent Directly
+2025-11-11 18:08:31 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-11 18:09:24 | DEBUG | [Records] records.csv already exists.
+2025-11-12 10:58:06 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-12 10:59:16 | DEBUG | [Records] records.csv already exists.
+2025-11-12 11:15:07 | DEBUG | [Records] records.csv already exists.
+2025-11-12 11:15:07 | INFO | [Records] Logged email record — SR No: 1 | Sender: rithikaprabakar@gmail.com | Status: Drafted
+2025-11-12 12:18:49 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-12 12:19:55 | DEBUG | [Records] records.csv already exists.
+2025-11-12 12:47:30 | DEBUG | [Records] records.csv already exists.
+2025-11-12 12:47:30 | INFO | [Records] Logged email record — SR No: 1 | Sender: bargawayyug@gmail.com | Status: Drafted
+2025-11-12 14:28:17 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-13 12:33:57 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-13 12:34:41 | DEBUG | [Records] records.csv already exists.
+2025-11-13 12:35:44 | DEBUG | [Records] records.csv already exists.
+2025-11-13 12:35:44 | INFO | [Records] Logged email record — SR No: 1 | Sender: bargawayyug@gmail.com | Status: Drafted
+2025-11-13 12:43:06 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-13 12:43:54 | DEBUG | [Records] records.csv already exists.
+2025-11-13 12:44:57 | DEBUG | [Records] records.csv already exists.
+2025-11-13 12:44:58 | INFO | [Records] Logged email record — SR No: 1 | Sender: bargawayyug@gmail.com | Status: Sent Directly
+2025-11-13 12:48:11 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-13 12:49:05 | DEBUG | [Records] records.csv already exists.
+2025-11-13 12:50:12 | DEBUG | [Records] records.csv already exists.
+2025-11-13 12:50:12 | INFO | [Records] Logged email record — SR No: 1 | Sender: bargawayyug@gmail.com | Status: Sent Directly
+2025-11-14 13:19:36 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-14 13:21:55 | DEBUG | [Records] records.csv already exists.
+2025-11-14 13:23:20 | DEBUG | [Records] records.csv already exists.
+2025-11-14 13:23:20 | ERROR | [Records] Permission denied for C:\Supply-Chain-Client-Management\Email-AI-Agent\records\records.csv
+2025-11-14 14:45:59 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-14 14:55:33 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-14 17:15:21 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-14 17:17:58 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-17 15:44:00 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-17 15:44:53 | DEBUG | [Records] records.csv already exists.
+2025-11-17 15:49:08 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-17 15:49:51 | DEBUG | [Records] records.csv already exists.
+2025-11-17 15:51:11 | DEBUG | [Records] records.csv already exists.
+2025-11-17 15:51:11 | INFO | [Records] Logged email record — SR No: 1 | Sender: hello@tryexponent.com | Status: Drafted
+2025-11-17 15:52:17 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-17 15:53:06 | DEBUG | [Records] records.csv already exists.
+2025-11-17 15:54:48 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-17 15:55:47 | DEBUG | [Records] records.csv already exists.
+2025-11-17 15:56:42 | DEBUG | [Records] records.csv already exists.
+2025-11-17 15:56:42 | INFO | [Records] Logged email record — SR No: 1 | Sender: sophia.gonzalez@globalimports.mx | Status: Drafted
+2025-11-17 15:58:04 | DEBUG | [Records] records.csv already exists.
+2025-11-17 15:58:05 | INFO | [Records] Logged email record — SR No: 2 | Sender: raj.malhotra@malhotragoods.in | Status: Drafted
+2025-11-17 16:18:06 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-17 16:20:54 | DEBUG | [Records] records.csv already exists.
+2025-11-17 16:21:51 | DEBUG | [Records] records.csv already exists.
+2025-11-17 16:21:52 | INFO | [Records] Logged email record — SR No: 1 | Sender: oye.its.pvt@gmail.com | Status: Drafted

@@ -1,0 +1,897 @@
+2025-11-06 15:11:07 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-06 15:11:07 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-06 15:11:15 | INFO | [Main] Using simulation mode: True
+2025-11-06 15:11:15 | INFO | [Main] Email limit set to 1
+2025-11-06 15:11:15 | INFO | [Main] Dry-run mode: True
+2025-11-06 15:11:15 | INFO | [Main] Fetching emails...
+2025-11-06 15:11:15 | INFO | [Main] Fetched 14 email(s). Beginning processing.
+2025-11-06 15:11:15 | INFO | [Main] Processing Email 1 (ID: 1)
+2025-11-06 15:11:15 | INFO | [Main] Subject: Invoice Request for Order #12345
+2025-11-06 15:11:15 | INFO | [Main] From: Unknown <unknown@example.com>
+2025-11-06 15:13:01 | DEBUG | [Main] Email ID 1 results: Classification='neutral', Summary length=168, Response length=336, Requires Review=False, Error='None'
+2025-11-06 15:13:01 | INFO | [Main] Email ID 1 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 15:13:15 | INFO | [Main] Processing Email 2 (ID: 2)
+2025-11-06 15:13:15 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-06 15:13:15 | INFO | [Main] From: Unknown <unknown@example.com>
+2025-11-06 15:13:45 | DEBUG | [Main] Email ID 2 results: Classification='negative', Summary length=172, Response length=589, Requires Review=False, Error='None'
+2025-11-06 15:13:45 | INFO | [Main] Email ID 2 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 15:13:59 | INFO | [Main] Processing Email 3 (ID: 3)
+2025-11-06 15:13:59 | INFO | [Main] Subject: Shipment SC-97694 Delivered to Wrong Address
+2025-11-06 15:13:59 | INFO | [Main] From: Unknown <unknown@example.com>
+2025-11-06 15:15:33 | DEBUG | [Main] Email ID 3 results: Classification='negative', Summary length=218, Response length=533, Requires Review=False, Error='None'
+2025-11-06 15:15:33 | INFO | [Main] Email ID 3 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 15:15:46 | INFO | [Main] Processing Email 4 (ID: 4)
+2025-11-06 15:15:46 | INFO | [Main] Subject: Shipment SC-67843 Marked Delivered but Not Received
+2025-11-06 15:15:46 | INFO | [Main] From: Unknown <unknown@example.com>
+2025-11-06 15:16:27 | DEBUG | [Main] Email ID 4 results: Classification='negative', Summary length=234, Response length=556, Requires Review=False, Error='None'
+2025-11-06 15:16:27 | INFO | [Main] Email ID 4 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 15:16:33 | WARNING | [Main] Process interrupted manually by user.
+2025-11-06 15:35:03 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-06 15:35:03 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-06 15:35:11 | INFO | [Main] Using simulation mode: True
+2025-11-06 15:35:11 | INFO | [Main] Email limit set to 1
+2025-11-06 15:35:11 | INFO | [Main] Dry-run mode: True
+2025-11-06 15:35:11 | INFO | [Main] Fetching emails...
+2025-11-06 15:35:11 | INFO | [Main] Fetched 14 email(s). Beginning processing.
+2025-11-06 15:35:11 | INFO | [Main] Processing Email 1 (ID: 1)
+2025-11-06 15:35:11 | INFO | [Main] Subject: Invoice Request for Order #12345
+2025-11-06 15:35:11 | INFO | [Main] From: Unknown <unknown@example.com>
+2025-11-06 15:35:42 | DEBUG | [Main] Email ID 1 results: Classification='neutral', Summary length=167, Response length=262, Requires Review=False, Error='None'
+2025-11-06 15:35:42 | INFO | [Main] Email ID 1 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 15:35:56 | INFO | [Main] Processing Email 2 (ID: 2)
+2025-11-06 15:35:56 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-06 15:35:56 | INFO | [Main] From: Unknown <unknown@example.com>
+2025-11-06 15:36:58 | DEBUG | [Main] Email ID 2 results: Classification='negative', Summary length=196, Response length=37, Requires Review=False, Error='None'
+2025-11-06 15:36:58 | INFO | [Main] Email ID 2 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 15:37:12 | INFO | [Main] Processing Email 3 (ID: 3)
+2025-11-06 15:37:12 | INFO | [Main] Subject: Shipment SC-97694 Delivered to Wrong Address
+2025-11-06 15:37:12 | INFO | [Main] From: Unknown <unknown@example.com>
+2025-11-06 15:37:40 | DEBUG | [Main] Email ID 3 results: Classification='negative', Summary length=208, Response length=417, Requires Review=False, Error='None'
+2025-11-06 15:37:40 | INFO | [Main] Email ID 3 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 15:37:55 | INFO | [Main] Processing Email 4 (ID: 4)
+2025-11-06 15:37:55 | INFO | [Main] Subject: Shipment SC-67843 Marked Delivered but Not Received
+2025-11-06 15:37:55 | INFO | [Main] From: Unknown <unknown@example.com>
+2025-11-06 15:39:15 | WARNING | [Main] Process interrupted manually by user.
+2025-11-06 16:09:30 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-06 16:09:30 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-06 16:09:41 | INFO | [Main] Using simulation mode: True
+2025-11-06 16:09:41 | INFO | [Main] Email limit set to 1
+2025-11-06 16:09:41 | INFO | [Main] Dry-run mode: True
+2025-11-06 16:09:41 | INFO | [Main] Fetching emails...
+2025-11-06 16:09:41 | INFO | [Main] Fetched 14 email(s). Beginning processing.
+2025-11-06 16:09:41 | INFO | [Main] Processing Email 1 (ID: 1)
+2025-11-06 16:09:41 | INFO | [Main] Subject: Invoice Request for Order #12345
+2025-11-06 16:09:41 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-06 16:10:08 | DEBUG | [Main] Email ID 1 results: Classification='neutral', Summary length=175, Response length=36, Requires Review=False, Error='None'
+2025-11-06 16:10:08 | INFO | [Main] Email ID 1 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 16:10:23 | INFO | [Main] Processing Email 2 (ID: 2)
+2025-11-06 16:10:23 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-06 16:10:23 | INFO | [Main] From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-06 16:11:25 | DEBUG | [Main] Email ID 2 results: Classification='negative', Summary length=166, Response length=33, Requires Review=False, Error='None'
+2025-11-06 16:11:25 | INFO | [Main] Email ID 2 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 16:11:39 | INFO | [Main] Processing Email 3 (ID: 3)
+2025-11-06 16:11:39 | INFO | [Main] Subject: Shipment SC-97694 Delivered to Wrong Address
+2025-11-06 16:11:39 | INFO | [Main] From: Evelyn Harper <evelyn.harper@urbanthreads.com>
+2025-11-06 16:12:26 | DEBUG | [Main] Email ID 3 results: Classification='negative', Summary length=230, Response length=486, Requires Review=False, Error='None'
+2025-11-06 16:12:26 | INFO | [Main] Email ID 3 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 16:12:40 | INFO | [Main] Processing Email 4 (ID: 4)
+2025-11-06 16:12:40 | INFO | [Main] Subject: Shipment SC-67843 Marked Delivered but Not Received
+2025-11-06 16:12:40 | INFO | [Main] From: Alex Johnson <alex.johnson@northtech.us>
+2025-11-06 16:13:12 | DEBUG | [Main] Email ID 4 results: Classification='negative', Summary length=255, Response length=34, Requires Review=False, Error='None'
+2025-11-06 16:13:12 | INFO | [Main] Email ID 4 flagged for human review or in dry-run mode. Sending draft to 'itspriyanka1230@gmail.com'.
+2025-11-06 16:13:26 | INFO | [Main] Processing Email 5 (ID: 5)
+2025-11-06 16:13:26 | INFO | [Main] Subject: Appreciation for Order SC-64665 Resolution
+2025-11-06 16:13:26 | INFO | [Main] From: Evelyn Harper <evelyn.harper@urbanthreads.com>
+2025-11-06 16:14:26 | WARNING | [Main] Process interrupted manually by user.
+2025-11-10 12:54:14 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 12:54:14 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-10 12:54:29 | INFO | [Main] Using simulation mode: False
+2025-11-10 12:54:29 | INFO | [Main] Email limit set to 1
+2025-11-10 12:54:29 | INFO | [Main] Dry-run mode: False
+2025-11-10 12:54:29 | INFO | [Main] Fetching emails...
+2025-11-10 12:54:29 | CRITICAL | [Main] Unhandled exception: name 'EMAIL_APP_PASSWORD' is not defined
+Traceback (most recent call last):
+  File "C:\Users\itspr\OneDrive\Documents\Supply-Chain-Client-Management\Email-AI-Agent\main.py", line 240, in <module>
+    main()
+  File "C:\Users\itspr\OneDrive\Documents\Supply-Chain-Client-Management\Email-AI-Agent\main.py", line 143, in main
+    emails_to_process = fetch_email(
+  File "C:\Users\itspr\OneDrive\Documents\Supply-Chain-Client-Management\Email-AI-Agent\core\email_ingestion.py", line 88, in fetch_email
+    if not EMAIL_USERNAME or not EMAIL_APP_PASSWORD:
+NameError: name 'EMAIL_APP_PASSWORD' is not defined
+2025-11-10 13:08:55 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 13:08:55 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-10 13:09:08 | INFO | [Main] Using simulation mode: False
+2025-11-10 13:09:08 | INFO | [Main] Email limit set to 1
+2025-11-10 13:09:08 | INFO | [Main] Dry-run mode: False
+2025-11-10 13:09:08 | INFO | [Main] Fetching emails...
+2025-11-10 13:09:12 | INFO | [Main] Fetched 1 email(s). Beginning processing.
+2025-11-10 13:09:12 | INFO | [Main] Processing Email 1 (ID: 24335)
+2025-11-10 13:09:12 | INFO | [Main] Subject: “software engineer”: micro1 - Machine Learning Engineer and more
+2025-11-10 13:09:12 | INFO | [Main] From: LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>
+2025-11-10 13:09:55 | DEBUG | [Main] Email ID 24335 results: Classification='neutral', Summary length=336, Response length=39, Requires Review=False, Error='None'
+2025-11-10 13:09:55 | INFO | [Main] Email ID 24335 ready for direct reply to 'jobalerts-noreply@linkedin.com'.
+2025-11-10 13:09:58 | INFO | [Main] All selected emails processed. Workflow finished successfully.
+2025-11-10 13:20:04 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 13:20:04 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-10 13:20:14 | INFO | [Main] Using simulation mode: False
+2025-11-10 13:20:14 | INFO | [Main] Email limit set to 1
+2025-11-10 13:20:14 | INFO | [Main] Dry-run mode: False
+2025-11-10 13:20:14 | INFO | [Main] Fetching emails...
+2025-11-10 13:20:17 | INFO | [Main] Fetched 1 email(s). Beginning processing.
+2025-11-10 13:20:17 | INFO | [Main] Processing Email 1 (ID: 745)
+2025-11-10 13:20:17 | INFO | [Main] Subject: Delayed Shipment for Order SC-21323
+2025-11-10 13:20:17 | INFO | [Main] From: Priyanka Kumari <priyanka9teen@gmail.com>
+2025-11-10 13:21:50 | DEBUG | [Main] Email ID 745 results: Classification='neutral', Summary length=146, Response length=43, Requires Review=False, Error='None'
+2025-11-10 13:21:50 | INFO | [Main] Email ID 745 ready for direct reply to 'priyanka9teen@gmail.com'.
+2025-11-10 13:21:53 | INFO | [Main] All selected emails processed. Workflow finished successfully.
+2025-11-10 13:39:59 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 13:39:59 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-10 13:40:08 | INFO | [Main] Using simulation mode: False
+2025-11-10 13:40:08 | INFO | [Main] Email limit set to 1
+2025-11-10 13:40:08 | INFO | [Main] Dry-run mode: True
+2025-11-10 13:40:08 | INFO | [Main] Fetching emails...
+2025-11-10 13:40:11 | INFO | [Main] Fetched 1 email(s). Beginning processing.
+2025-11-10 13:40:11 | INFO | [Main] Processing Email 1 (ID: 744)
+2025-11-10 13:40:11 | INFO | [Main] Subject: Missing Items in Shipment PO36712
+2025-11-10 13:40:11 | INFO | [Main] From: Priyanka Kumari <priyanka9teen@gmail.com>
+2025-11-10 13:41:45 | DEBUG | [Main] Email ID 744 results: Classification='negative', Summary length=209, Response length=43, Requires Review=False, Error='None'
+2025-11-10 13:41:45 | INFO | [Main] Email ID 744 flagged for human review or in dry-run mode. Sending draft to 'oye.its.pvt@gmail.com'.
+2025-11-10 13:41:49 | INFO | [Main] All selected emails processed. Workflow finished successfully.
+2025-11-10 13:52:48 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 13:52:48 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-10 13:52:55 | INFO | [Main] Using simulation mode: True
+2025-11-10 13:52:55 | INFO | [Main] Email limit set to 1
+2025-11-10 13:52:55 | INFO | [Main] Dry-run mode: True
+2025-11-10 13:52:55 | INFO | [Main] Fetching emails...
+2025-11-10 13:52:55 | INFO | [Main] Fetched 13 email(s). Beginning processing.
+2025-11-10 13:52:55 | INFO | [Main] Processing Email 1 (ID: 1)
+2025-11-10 13:52:55 | INFO | [Main] Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-10 13:52:55 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-10 13:53:21 | DEBUG | [Main] Email ID 1 results: Classification='positive', Summary length=183, Response length=36, Requires Review=False, Error='None'
+2025-11-10 13:53:21 | INFO | [Main] Email ID 1 flagged for human review or in dry-run mode. Sending draft to 'oye.its.pvt@gmail.com'.
+2025-11-10 13:53:35 | INFO | [Main] Processing Email 2 (ID: 2)
+2025-11-10 13:53:35 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-10 13:53:35 | INFO | [Main] From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-10 13:54:51 | WARNING | [Main] Process interrupted manually by user.
+2025-11-10 14:46:16 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 14:46:16 | DEBUG | [Records] records.csv already exists.
+2025-11-10 14:46:16 | INFO | [Records] Logged email record — SR No: 1 | Sender: riya.sharma@example.com | Status: Sent Directly
+2025-11-10 14:48:43 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 14:48:43 | DEBUG | [Records] records.csv already exists.
+2025-11-10 14:48:43 | INFO | [Records] Logged email record — SR No: 2 | Sender: riya.sharma@example.com | Status: Sent Directly
+2025-11-10 14:49:50 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 14:49:50 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-10 14:50:05 | INFO | [Main] Using simulation mode: False
+2025-11-10 14:50:05 | INFO | [Main] Email limit set to 1
+2025-11-10 14:50:05 | INFO | [Main] Dry-run mode: True
+2025-11-10 14:50:05 | INFO | [Main] Fetching emails...
+2025-11-10 14:50:08 | INFO | [Main] Fetched 1 email(s). Beginning processing.
+2025-11-10 14:50:08 | INFO | [Main] Processing Email 1 (ID: 748)
+2025-11-10 14:50:08 | INFO | [Main] Subject: Hi Priyanka, welcome to Google AI Studio
+2025-11-10 14:50:08 | INFO | [Main] From: Google AI Studio <googleaistudio-noreply@google.com>
+2025-11-10 14:51:35 | WARNING | [Main] Process interrupted manually by user.
+2025-11-10 14:53:38 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 14:53:38 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-10 14:53:46 | INFO | [Main] Using simulation mode: True
+2025-11-10 14:53:46 | INFO | [Main] Email limit set to 1
+2025-11-10 14:53:46 | INFO | [Main] Dry-run mode: True
+2025-11-10 14:53:46 | INFO | [Main] Fetching emails...
+2025-11-10 14:53:46 | INFO | [Main] Fetched 13 email(s). Beginning processing.
+2025-11-10 14:53:46 | INFO | [Main] Processing Email 1 (ID: 1)
+2025-11-10 14:53:46 | INFO | [Main] Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-10 14:53:46 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-10 14:54:11 | DEBUG | [Main] Email ID 1 results: Classification='positive', Summary length=183, Response length=36, Requires Review=False, Error='None'
+2025-11-10 14:54:11 | INFO | [Main] Email ID 1 flagged for human review or in dry-run mode. Sending draft to 'oye.its.pvt@gmail.com'.
+2025-11-10 14:54:25 | INFO | [Main] Processing Email 2 (ID: 2)
+2025-11-10 14:54:25 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-10 14:54:25 | INFO | [Main] From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-10 14:55:35 | DEBUG | [Main] Email ID 2 results: Classification='negative', Summary length=219, Response length=33, Requires Review=False, Error='None'
+2025-11-10 14:55:35 | INFO | [Main] Email ID 2 flagged for human review or in dry-run mode. Sending draft to 'oye.its.pvt@gmail.com'.
+2025-11-10 14:55:48 | INFO | [Main] Processing Email 3 (ID: 3)
+2025-11-10 14:55:48 | INFO | [Main] Subject: Shipment SC-97694 Delivered to Wrong Address
+2025-11-10 14:55:48 | INFO | [Main] From: Evelyn Harper <evelyn.harper@urbanthreads.com>
+2025-11-10 14:55:51 | WARNING | [Main] Process interrupted manually by user.
+2025-11-10 15:12:08 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 15:12:08 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-10 15:12:59 | INFO | [Main] Using simulation mode: True
+2025-11-10 15:12:59 | INFO | [Main] Email limit set to 1
+2025-11-10 15:12:59 | INFO | [Main] Dry-run mode: True
+2025-11-10 15:12:59 | INFO | [Main] Fetching emails...
+2025-11-10 15:12:59 | INFO | [Main] Fetched 13 email(s). Beginning processing.
+2025-11-10 15:12:59 | INFO | [Main] Processing Email 1 (ID: 1)
+2025-11-10 15:12:59 | INFO | [Main] Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-10 15:12:59 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-10 15:13:40 | DEBUG | [Main] Email ID 1 results: Classification='positive', Summary length=173, Response length=36, Requires Review=False, Error='None'
+2025-11-10 15:13:40 | INFO | [Main] Email ID 1 flagged for human review or in dry-run mode. Sending draft to 'oye.its.pvt@gmail.com'.
+2025-11-10 15:13:54 | INFO | [Main] Processing Email 2 (ID: 2)
+2025-11-10 15:13:54 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-10 15:13:54 | INFO | [Main] From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-10 15:14:39 | WARNING | [Main] Process interrupted manually by user.
+2025-11-10 15:20:47 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 15:20:47 | INFO | [Main] Starting AI email automation pipeline...
+2025-11-10 15:20:56 | INFO | [Main] Using simulation mode: True
+2025-11-10 15:20:56 | INFO | [Main] Email limit set to 1
+2025-11-10 15:20:56 | INFO | [Main] Dry-run mode: True
+2025-11-10 15:20:56 | INFO | [Main] Fetching emails...
+2025-11-10 15:20:57 | INFO | [Main] Fetched 13 email(s). Beginning processing.
+2025-11-10 15:20:57 | INFO | [Main] Processing Email 1 (ID: 1)
+2025-11-10 15:20:57 | INFO | [Main] Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-10 15:20:57 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-10 15:22:39 | DEBUG | [Main] Email ID 1 results: Classification='positive', Summary length=192, Response length=36, Requires Review=False, Error='None'
+2025-11-10 15:22:39 | INFO | [Main] Email ID 1 flagged for human review or in dry-run mode. Sending draft to 'oye.its.pvt@gmail.com'.
+2025-11-10 15:22:54 | INFO | [Main] Processing Email 2 (ID: 2)
+2025-11-10 15:22:54 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-10 15:22:54 | INFO | [Main] From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-10 15:23:30 | DEBUG | [Main] Email ID 2 results: Classification='negative', Summary length=179, Response length=33, Requires Review=False, Error='None'
+2025-11-10 15:23:30 | INFO | [Main] Email ID 2 flagged for human review or in dry-run mode. Sending draft to 'oye.its.pvt@gmail.com'.
+2025-11-10 15:23:43 | INFO | [Main] Processing Email 3 (ID: 3)
+2025-11-10 15:23:43 | INFO | [Main] Subject: Shipment SC-97694 Delivered to Wrong Address
+2025-11-10 15:23:43 | INFO | [Main] From: Evelyn Harper <evelyn.harper@urbanthreads.com>
+2025-11-10 15:24:23 | WARNING | [Main] Process interrupted manually by user.
+2025-11-10 15:34:50 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 15:34:50 | INFO | 
+=======================================================
+2025-11-10 15:34:50 | INFO | 🚀 [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-10 15:34:50 | INFO | =======================================================
+2025-11-10 15:35:05 | INFO | [Main] Simulation Mode: True
+2025-11-10 15:35:05 | INFO | [Main] Email Limit: 1
+2025-11-10 15:35:05 | INFO | [Main] Dry Run: True
+2025-11-10 15:35:05 | INFO | [Main] Fetching emails...
+2025-11-10 15:35:05 | INFO | [Main] 13 email(s) loaded for processing.
+2025-11-10 15:35:05 | INFO | 
+-------------------------------------------------------
+2025-11-10 15:35:05 | INFO | [Main] Processing Email 1/13 — ID: 1
+2025-11-10 15:35:05 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-10 15:35:05 | INFO | [Main] Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-10 15:35:44 | DEBUG | [Main] Results for 1 — Class: positive, Summary len=99, Response len=36, Review=False, Error=None
+2025-11-10 15:35:44 | INFO | [Main] ID 1 flagged for review or dry-run. Draft → oye.its.pvt@gmail.com
+2025-11-10 15:35:48 | INFO | [Main] Sleeping 10s before next email to avoid rate-limit...
+2025-11-10 15:35:58 | INFO | 
+-------------------------------------------------------
+2025-11-10 15:35:58 | INFO | [Main] Processing Email 2/13 — ID: 2
+2025-11-10 15:35:58 | INFO | [Main] From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-10 15:35:58 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-10 15:36:26 | WARNING | [Main] Interrupted manually by user.
+2025-11-10 16:04:55 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-10 16:04:55 | INFO | ============================================================
+2025-11-10 16:04:55 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-10 16:04:55 | INFO | ============================================================
+2025-11-10 16:05:06 | INFO | [Main] Simulation Mode: True
+2025-11-10 16:05:06 | INFO | [Main] Processing Limit: 1
+2025-11-10 16:05:06 | INFO | [Main] Dry Run: True
+2025-11-10 16:05:06 | INFO | [Main] Fetching emails...
+2025-11-10 16:05:08 | INFO | [Main] 13 emails ready for processing.
+2025-11-10 16:05:08 | INFO | ------------------------------------------------------------
+2025-11-10 16:05:08 | INFO | [Main] Processing Email 1/13 — ID: 1
+2025-11-10 16:05:08 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-10 16:05:08 | INFO | [Main] Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-10 16:05:08 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-10 16:06:53 | INFO | [Main] Processing completed in 104.87s for Email ID 1
+2025-11-10 16:06:53 | DEBUG | [Main] Results for 1 — Classification=positive, Summary length=178, Response length=36, Review=False, Error=None
+2025-11-10 16:06:53 | INFO | [Main] ID 1 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-10 16:06:59 | INFO | [Main] Cooling down for 12s before next email to avoid API rate limits...
+2025-11-10 16:07:11 | INFO | ------------------------------------------------------------
+2025-11-10 16:07:11 | INFO | [Main] Processing Email 2/13 — ID: 2
+2025-11-10 16:07:11 | INFO | [Main] From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-10 16:07:11 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-10 16:07:11 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-10 16:07:59 | WARNING | [Main] Process manually interrupted by user.
+2025-11-11 13:11:34 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-11 13:11:34 | INFO | ============================================================
+2025-11-11 13:11:34 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-11 13:11:34 | INFO | ============================================================
+2025-11-11 13:11:59 | INFO | [Main] Simulation Mode: True
+2025-11-11 13:11:59 | INFO | [Main] Processing Limit: 1
+2025-11-11 13:11:59 | INFO | [Main] Dry Run: False
+2025-11-11 13:11:59 | INFO | [Main] Fetching emails...
+2025-11-11 13:12:01 | INFO | [Main] 13 emails ready for processing.
+2025-11-11 13:12:01 | INFO | ------------------------------------------------------------
+2025-11-11 13:12:01 | INFO | [Main] Processing Email 1/13 — ID: 1
+2025-11-11 13:12:01 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-11 13:12:01 | INFO | [Main] Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-11 13:12:01 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-11 13:12:47 | INFO | [Main] Processing completed in 46.18s for Email ID 1
+2025-11-11 13:12:47 | DEBUG | [Main] Results for 1 — Classification=positive, Summary length=201, Response length=36, Review=False, Error=None
+2025-11-11 13:12:47 | INFO | [Main] ID 1 — sending reply to sophia.gonzalez@globalimports.mx
+2025-11-11 13:12:55 | INFO | [Main] Cooling down for 12s before next email to avoid API rate limits...
+2025-11-11 13:13:07 | INFO | ------------------------------------------------------------
+2025-11-11 13:13:07 | INFO | [Main] Processing Email 2/13 — ID: 2
+2025-11-11 13:13:07 | INFO | [Main] From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-11 13:13:07 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-11 13:13:07 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-11 13:13:55 | INFO | [Main] Processing completed in 48.45s for Email ID 2
+2025-11-11 13:13:55 | DEBUG | [Main] Results for 2 — Classification=negative, Summary length=179, Response length=33, Review=False, Error=None
+2025-11-11 13:13:55 | INFO | [Main] ID 2 — sending reply to raj.malhotra@malhotragoods.in
+2025-11-11 13:14:02 | WARNING | [Main] Process manually interrupted by user.
+2025-11-11 13:35:39 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-11 13:35:39 | INFO | ============================================================
+2025-11-11 13:35:39 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-11 13:35:39 | INFO | ============================================================
+2025-11-11 13:35:52 | INFO | [Main] Simulation Mode: True
+2025-11-11 13:35:52 | INFO | [Main] Processing Limit: 1
+2025-11-11 13:35:52 | INFO | [Main] Dry Run: False
+2025-11-11 13:35:52 | INFO | [Main] Fetching emails...
+2025-11-11 13:35:54 | INFO | [Main] 13 emails ready for processing.
+2025-11-11 13:35:54 | INFO | ------------------------------------------------------------
+2025-11-11 13:35:54 | INFO | [Main] Processing Email 1/13 — ID: 1
+2025-11-11 13:35:54 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-11 13:35:54 | INFO | [Main] Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-11 13:35:54 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-11 13:36:41 | WARNING | [Main] Process manually interrupted by user.
+2025-11-11 14:23:44 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-11 14:23:44 | INFO | ============================================================
+2025-11-11 14:23:44 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-11 14:23:44 | INFO | ============================================================
+2025-11-11 14:24:02 | INFO | [Main] Simulation Mode: False
+2025-11-11 14:24:02 | INFO | [Main] Processing Limit: 1
+2025-11-11 14:24:02 | INFO | [Main] Dry Run: True
+2025-11-11 14:24:02 | INFO | [Main] Fetching emails...
+2025-11-11 14:24:08 | INFO | [Main] 1 emails ready for processing.
+2025-11-11 14:24:08 | INFO | ------------------------------------------------------------
+2025-11-11 14:24:08 | INFO | [Main] Processing Email 1/1 — ID: 746
+2025-11-11 14:24:08 | INFO | [Main] From: Oye.Its.Pvt <oye.its.pvt@gmail.com>
+2025-11-11 14:24:08 | INFO | [Main] Subject: Draft: Re: Missing Items in Shipment PO36712
+2025-11-11 14:24:08 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-11 14:27:08 | INFO | [Main] Processing completed in 179.92s for Email ID 746
+2025-11-11 14:27:08 | DEBUG | [Main] Results for 746 — Classification=neutral, Summary length=180, Response length=435, Review=False, Error=None
+2025-11-11 14:27:08 | INFO | [Main] ID 746 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-11 14:27:14 | INFO | [Main] All emails processed successfully.
+2025-11-11 14:27:14 | INFO | ============================================================
+2025-11-11 14:30:06 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-11 14:30:06 | INFO | ============================================================
+2025-11-11 14:30:06 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-11 14:30:06 | INFO | ============================================================
+2025-11-11 14:30:18 | INFO | [Main] Simulation Mode: False
+2025-11-11 14:30:18 | INFO | [Main] Processing Limit: 1
+2025-11-11 14:30:18 | INFO | [Main] Dry Run: False
+2025-11-11 14:30:18 | INFO | [Main] Fetching emails...
+2025-11-11 14:30:24 | INFO | [Main] 1 emails ready for processing.
+2025-11-11 14:30:24 | INFO | ------------------------------------------------------------
+2025-11-11 14:30:24 | INFO | [Main] Processing Email 1/1 — ID: 743
+2025-11-11 14:30:24 | INFO | [Main] From: Priyanka Kumari <priyanka9teen@gmail.com>
+2025-11-11 14:30:24 | INFO | [Main] Subject: Shipment 19637 Marked Delivered But Not Received
+2025-11-11 14:30:24 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-11 14:36:15 | INFO | [Main] Processing completed in 351.12s for Email ID 743
+2025-11-11 14:36:15 | DEBUG | [Main] Results for 743 — Classification=negative, Summary length=167, Response length=569, Review=False, Error=None
+2025-11-11 14:36:15 | INFO | [Main] ID 743 — sending reply to priyanka9teen@gmail.com
+2025-11-11 14:36:25 | INFO | [Main] All emails processed successfully.
+2025-11-11 14:36:25 | INFO | ============================================================
+2025-11-11 17:22:22 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-11 17:22:22 | INFO | ============================================================
+2025-11-11 17:22:22 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-11 17:22:22 | INFO | ============================================================
+2025-11-11 17:22:35 | INFO | [Main] Simulation Mode: False
+2025-11-11 17:22:35 | INFO | [Main] Processing Limit: 1
+2025-11-11 17:22:35 | INFO | [Main] Dry Run: False
+2025-11-11 17:22:35 | INFO | [Main] Fetching emails...
+2025-11-11 17:22:41 | INFO | [Main] 1 emails ready for processing.
+2025-11-11 17:22:41 | INFO | ------------------------------------------------------------
+2025-11-11 17:22:41 | INFO | [Main] Processing Email 1/1 — ID: 773
+2025-11-11 17:22:41 | INFO | [Main] From: Rithika Prabakar <rithikaprabakar@gmail.com>
+2025-11-11 17:22:41 | INFO | [Main] Subject: Clarification on Tracking Portal Dear Support
+2025-11-11 17:22:41 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-11 17:27:20 | WARNING | [Main] Process manually interrupted by user.
+2025-11-11 17:31:04 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-11 17:31:04 | INFO | ============================================================
+2025-11-11 17:31:04 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-11 17:31:04 | INFO | ============================================================
+2025-11-11 17:31:37 | INFO | [Main] Simulation Mode: False
+2025-11-11 17:31:37 | INFO | [Main] Processing Limit: 1
+2025-11-11 17:31:37 | INFO | [Main] Dry Run: True
+2025-11-11 17:31:37 | INFO | [Main] Fetching emails...
+2025-11-11 17:31:43 | INFO | [Main] 1 emails ready for processing.
+2025-11-11 17:31:43 | INFO | ------------------------------------------------------------
+2025-11-11 17:31:43 | INFO | [Main] Processing Email 1/1 — ID: 772
+2025-11-11 17:31:43 | INFO | [Main] From: Rithika Prabakar <rithikaprabakar@gmail.com>
+2025-11-11 17:31:43 | INFO | [Main] Subject: Partnership Inquiry for Regular Bulk Orders
+2025-11-11 17:31:43 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-11 17:42:18 | INFO | [Main] Processing completed in 634.90s for Email ID 772
+2025-11-11 17:42:18 | DEBUG | [Main] Results for 772 — Classification=positive, Summary length=206, Response length=45, Review=False, Error=None
+2025-11-11 17:42:18 | INFO | [Main] ID 772 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-11 17:42:25 | INFO | [Main] All emails processed successfully.
+2025-11-11 17:42:25 | INFO | ============================================================
+2025-11-11 17:50:56 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-11 17:50:56 | INFO | ============================================================
+2025-11-11 17:50:56 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-11 17:50:56 | INFO | ============================================================
+2025-11-11 17:51:13 | INFO | [Main] Simulation Mode: False
+2025-11-11 17:51:13 | INFO | [Main] Processing Limit: 1
+2025-11-11 17:51:13 | INFO | [Main] Dry Run: True
+2025-11-11 17:51:13 | INFO | [Main] Fetching emails...
+2025-11-11 17:51:19 | INFO | [Main] 1 emails ready for processing.
+2025-11-11 17:51:19 | INFO | ------------------------------------------------------------
+2025-11-11 17:51:19 | INFO | [Main] Processing Email 1/1 — ID: 774
+2025-11-11 17:51:19 | INFO | [Main] From: Oye.Its.Pvt <oye.its.pvt@gmail.com>
+2025-11-11 17:51:19 | INFO | [Main] Subject: Draft: Re: Partnership Inquiry for Regular Bulk Orders
+2025-11-11 17:51:19 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-11 17:54:19 | INFO | [Main] Processing completed in 180.46s for Email ID 774
+2025-11-11 17:54:19 | DEBUG | [Main] Results for 774 — Classification=neutral, Summary length=216, Response length=33, Review=False, Error=None
+2025-11-11 17:54:19 | INFO | [Main] ID 774 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-11 17:54:25 | INFO | [Main] All emails processed successfully.
+2025-11-11 17:54:25 | INFO | ============================================================
+2025-11-11 17:57:31 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-11 17:57:31 | INFO | ============================================================
+2025-11-11 17:57:31 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-11 17:57:31 | INFO | ============================================================
+2025-11-11 17:57:44 | INFO | [Main] Simulation Mode: False
+2025-11-11 17:57:44 | INFO | [Main] Processing Limit: 1
+2025-11-11 17:57:44 | INFO | [Main] Dry Run: False
+2025-11-11 17:57:44 | INFO | [Main] Fetching emails...
+2025-11-11 17:57:49 | INFO | [Main] 1 emails ready for processing.
+2025-11-11 17:57:49 | INFO | ------------------------------------------------------------
+2025-11-11 17:57:49 | INFO | [Main] Processing Email 1/1 — ID: 771
+2025-11-11 17:57:49 | INFO | [Main] From: Rithika Prabakar <rithikaprabakar@gmail.com>
+2025-11-11 17:57:49 | INFO | [Main] Subject: Product Quality Concern - PO76518
+2025-11-11 17:57:49 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-11 17:59:28 | INFO | [Main] Processing completed in 98.79s for Email ID 771
+2025-11-11 17:59:28 | DEBUG | [Main] Results for 771 — Classification=negative, Summary length=226, Response length=45, Review=False, Error=None
+2025-11-11 17:59:28 | INFO | [Main] ID 771 — sending reply to rithikaprabakar@gmail.com
+2025-11-11 17:59:37 | INFO | [Main] All emails processed successfully.
+2025-11-11 17:59:37 | INFO | ============================================================
+2025-11-11 18:09:24 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-11 18:09:24 | INFO | ============================================================
+2025-11-11 18:09:24 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-11 18:09:24 | INFO | ============================================================
+2025-11-11 18:09:31 | INFO | [Main] Simulation Mode: False
+2025-11-11 18:09:31 | INFO | [Main] Processing Limit: 1
+2025-11-11 18:09:31 | INFO | [Main] Dry Run: False
+2025-11-11 18:09:31 | INFO | [Main] Fetching emails...
+2025-11-11 18:09:37 | INFO | [Main] 1 emails ready for processing.
+2025-11-11 18:09:37 | INFO | ------------------------------------------------------------
+2025-11-11 18:09:37 | INFO | [Main] Processing Email 1/1 — ID: 770
+2025-11-11 18:09:37 | INFO | [Main] From: Rithika Prabakar <rithikaprabakar@gmail.com>
+2025-11-11 18:09:37 | INFO | [Main] Subject: Confirmation Required for New Order PO99833
+2025-11-11 18:09:37 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-11 18:15:06 | WARNING | [Main] Process manually interrupted by user.
+2025-11-12 10:59:16 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-12 10:59:16 | INFO | ============================================================
+2025-11-12 10:59:16 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-12 10:59:16 | INFO | ============================================================
+2025-11-12 10:59:27 | INFO | [Main] Simulation Mode: False
+2025-11-12 10:59:27 | INFO | [Main] Processing Limit: 1
+2025-11-12 10:59:27 | INFO | [Main] Dry Run: True
+2025-11-12 10:59:27 | INFO | [Main] Fetching emails...
+2025-11-12 10:59:34 | INFO | [Main] 1 emails ready for processing.
+2025-11-12 10:59:34 | INFO | ------------------------------------------------------------
+2025-11-12 10:59:34 | INFO | [Main] Processing Email 1/1 — ID: 769
+2025-11-12 10:59:34 | INFO | [Main] From: Rithika Prabakar <rithikaprabakar@gmail.com>
+2025-11-12 10:59:34 | INFO | [Main] Subject: Reschedule Delivery for SC-78311
+2025-11-12 10:59:34 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-12 11:15:01 | INFO | [Main] Processing completed in 927.48s for Email ID 769
+2025-11-12 11:15:01 | DEBUG | [Main] Results for 769 — Classification=neutral, Summary length=185, Response length=143, Review=False, Error=None
+2025-11-12 11:15:01 | INFO | [Main] ID 769 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-12 11:15:07 | INFO | [Main] All emails processed successfully.
+2025-11-12 11:15:07 | INFO | ============================================================
+2025-11-12 12:19:55 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-12 12:19:55 | INFO | ============================================================
+2025-11-12 12:19:55 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-12 12:19:55 | INFO | ============================================================
+2025-11-12 12:20:12 | INFO | [Main] Simulation Mode: False
+2025-11-12 12:20:12 | INFO | [Main] Processing Limit: 1
+2025-11-12 12:20:12 | INFO | [Main] Dry Run: True
+2025-11-12 12:20:12 | INFO | [Main] Fetching emails...
+2025-11-12 12:20:17 | INFO | [Main] 1 emails ready for processing.
+2025-11-12 12:20:17 | INFO | ------------------------------------------------------------
+2025-11-12 12:20:17 | INFO | [Main] Processing Email 1/1 — ID: 768
+2025-11-12 12:20:17 | INFO | [Main] From: Yug Bargaway <bargawayyug@gmail.com>
+2025-11-12 12:20:17 | INFO | [Main] Subject: Request for Tax Invoice - Order SC-99029
+2025-11-12 12:20:17 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-12 12:47:23 | INFO | [Main] Processing completed in 1626.09s for Email ID 768
+2025-11-12 12:47:23 | DEBUG | [Main] Results for 768 — Classification=neutral, Summary length=135, Response length=139, Review=False, Error=None
+2025-11-12 12:47:23 | INFO | [Main] ID 768 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-12 12:47:30 | INFO | [Main] All emails processed successfully.
+2025-11-12 12:47:30 | INFO | ============================================================
+2025-11-13 12:34:41 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-13 12:34:41 | INFO | ============================================================
+2025-11-13 12:34:41 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-13 12:34:41 | INFO | ============================================================
+2025-11-13 12:34:56 | INFO | [Main] Simulation Mode: False
+2025-11-13 12:34:56 | INFO | [Main] Processing Limit: 1
+2025-11-13 12:34:56 | INFO | [Main] Dry Run: False
+2025-11-13 12:34:56 | INFO | [Main] Fetching emails...
+2025-11-13 12:35:02 | INFO | [Main] 1 emails ready for processing.
+2025-11-13 12:35:02 | INFO | ------------------------------------------------------------
+2025-11-13 12:35:02 | INFO | [Main] Processing Email 1/1 — ID: 767
+2025-11-13 12:35:02 | INFO | [Main] From: Yug Bargaway <bargawayyug@gmail.com>
+2025-11-13 12:35:02 | INFO | [Main] Subject: Damaged Packages Received - Order SC-84588
+2025-11-13 12:35:02 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-13 12:35:38 | INFO | [Main] Processing completed in 36.14s for Email ID 767
+2025-11-13 12:35:38 | DEBUG | [Main] Results for 767 — Classification=negative, Summary length=176, Response length=768, Review=True, Error=None
+2025-11-13 12:35:38 | INFO | [Main] ID 767 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-13 12:35:44 | INFO | [Main] All emails processed successfully.
+2025-11-13 12:35:44 | INFO | ============================================================
+2025-11-13 12:43:54 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-13 12:43:54 | INFO | ============================================================
+2025-11-13 12:43:54 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-13 12:43:54 | INFO | ============================================================
+2025-11-13 12:44:06 | INFO | [Main] Simulation Mode: False
+2025-11-13 12:44:06 | INFO | [Main] Processing Limit: 1
+2025-11-13 12:44:06 | INFO | [Main] Dry Run: False
+2025-11-13 12:44:06 | INFO | [Main] Fetching emails...
+2025-11-13 12:44:12 | INFO | [Main] 1 emails ready for processing.
+2025-11-13 12:44:12 | INFO | ------------------------------------------------------------
+2025-11-13 12:44:12 | INFO | [Main] Processing Email 1/1 — ID: 766
+2025-11-13 12:44:12 | INFO | [Main] From: Yug Bargaway <bargawayyug@gmail.com>
+2025-11-13 12:44:12 | INFO | [Main] Subject: Reschedule Delivery for SC-78321
+2025-11-13 12:44:12 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-13 12:44:48 | INFO | [Main] Processing completed in 35.88s for Email ID 766
+2025-11-13 12:44:48 | DEBUG | [Main] Results for 766 — Classification=neutral, Summary length=185, Response length=139, Review=False, Error=None
+2025-11-13 12:44:48 | INFO | [Main] ID 766 — sending reply to bargawayyug@gmail.com
+2025-11-13 12:44:58 | INFO | [Main] All emails processed successfully.
+2025-11-13 12:44:58 | INFO | ============================================================
+2025-11-13 12:49:05 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-13 12:49:05 | INFO | ============================================================
+2025-11-13 12:49:05 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-13 12:49:05 | INFO | ============================================================
+2025-11-13 12:49:24 | INFO | [Main] Simulation Mode: False
+2025-11-13 12:49:24 | INFO | [Main] Processing Limit: 1
+2025-11-13 12:49:24 | INFO | [Main] Dry Run: False
+2025-11-13 12:49:24 | INFO | [Main] Fetching emails...
+2025-11-13 12:49:30 | INFO | [Main] 1 emails ready for processing.
+2025-11-13 12:49:30 | INFO | ------------------------------------------------------------
+2025-11-13 12:49:30 | INFO | [Main] Processing Email 1/1 — ID: 765
+2025-11-13 12:49:30 | INFO | [Main] From: Yug Bargaway <bargawayyug@gmail.com>
+2025-11-13 12:49:30 | INFO | [Main] Subject: Product Quality Concern - PO76528
+2025-11-13 12:49:30 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-13 12:50:03 | INFO | [Main] Processing completed in 32.91s for Email ID 765
+2025-11-13 12:50:03 | DEBUG | [Main] Results for 765 — Classification=negative, Summary length=221, Response length=139, Review=False, Error=None
+2025-11-13 12:50:03 | INFO | [Main] ID 765 — sending reply to bargawayyug@gmail.com
+2025-11-13 12:50:12 | INFO | [Main] All emails processed successfully.
+2025-11-13 12:50:12 | INFO | ============================================================
+2025-11-14 13:21:55 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-14 13:21:55 | INFO | ============================================================
+2025-11-14 13:21:55 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-14 13:21:55 | INFO | ============================================================
+2025-11-14 13:22:10 | INFO | [Main] Simulation Mode: False
+2025-11-14 13:22:10 | INFO | [Main] Processing Limit: 1
+2025-11-14 13:22:10 | INFO | [Main] Dry Run: False
+2025-11-14 13:22:10 | INFO | [Main] Fetching emails...
+2025-11-14 13:22:16 | INFO | [Main] 1 emails ready for processing.
+2025-11-14 13:22:16 | INFO | ------------------------------------------------------------
+2025-11-14 13:22:16 | INFO | [Main] Processing Email 1/1 — ID: 764
+2025-11-14 13:22:16 | INFO | [Main] From: Yug Bargaway <bargawayyug@gmail.com>
+2025-11-14 13:22:16 | INFO | [Main] Subject: Clarification on Tracking Portal
+2025-11-14 13:22:16 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-14 13:23:10 | INFO | [Main] Processing completed in 53.72s for Email ID 764
+2025-11-14 13:23:10 | DEBUG | [Main] Results for 764 — Classification=neutral, Summary length=158, Response length=139, Review=False, Error=None
+2025-11-14 13:23:10 | INFO | [Main] ID 764 — sending reply to bargawayyug@gmail.com
+2025-11-14 13:23:20 | INFO | [Main] All emails processed successfully.
+2025-11-14 13:23:20 | INFO | ============================================================
+2025-11-17 15:44:53 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-17 15:44:53 | INFO | ============================================================
+2025-11-17 15:44:53 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-17 15:44:53 | INFO | ============================================================
+2025-11-17 15:45:07 | INFO | [Main] Simulation Mode: True
+2025-11-17 15:45:07 | INFO | [Main] Processing Limit: 1
+2025-11-17 15:45:07 | INFO | [Main] Dry Run: True
+2025-11-17 15:45:07 | INFO | [Main] Fetching emails...
+2025-11-17 15:45:09 | INFO | [Main] 13 emails ready for processing.
+2025-11-17 15:45:09 | INFO | ------------------------------------------------------------
+2025-11-17 15:45:09 | INFO | [Main] Processing Email 1/13 — ID: 1
+2025-11-17 15:45:09 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-17 15:45:09 | INFO | [Main] Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-17 15:45:09 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-17 15:45:35 | WARNING | [Main] Process manually interrupted by user.
+2025-11-17 15:49:51 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-17 15:49:51 | INFO | ============================================================
+2025-11-17 15:49:51 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-17 15:49:51 | INFO | ============================================================
+2025-11-17 15:50:02 | INFO | [Main] Simulation Mode: False
+2025-11-17 15:50:02 | INFO | [Main] Processing Limit: 1
+2025-11-17 15:50:02 | INFO | [Main] Dry Run: True
+2025-11-17 15:50:02 | INFO | [Main] Fetching emails...
+2025-11-17 15:50:09 | INFO | [Main] 1 emails ready for processing.
+2025-11-17 15:50:09 | INFO | ------------------------------------------------------------
+2025-11-17 15:50:09 | INFO | [Main] Processing Email 1/1 — ID: 783
+2025-11-17 15:50:09 | INFO | [Main] From: Stephen from Exponent <hello@tryexponent.com>
+2025-11-17 15:50:09 | INFO | [Main] Subject: 🔁 The data science interview loop explained.
+2025-11-17 15:50:09 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-17 15:51:05 | INFO | [Main] Processing completed in 55.71s for Email ID 783
+2025-11-17 15:51:05 | DEBUG | [Main] Results for 783 — Classification=neutral, Summary length=269, Response length=133, Review=False, Error=None
+2025-11-17 15:51:05 | INFO | [Main] ID 783 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-17 15:51:11 | INFO | [Main] All emails processed successfully.
+2025-11-17 15:51:11 | INFO | ============================================================
+2025-11-17 15:53:06 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-17 15:53:06 | INFO | ============================================================
+2025-11-17 15:53:06 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-17 15:53:06 | INFO | ============================================================
+2025-11-17 15:53:20 | INFO | [Main] Simulation Mode: False
+2025-11-17 15:53:20 | INFO | [Main] Processing Limit: 1
+2025-11-17 15:53:20 | INFO | [Main] Dry Run: True
+2025-11-17 15:53:20 | INFO | [Main] Fetching emails...
+2025-11-17 15:53:27 | INFO | [Main] 1 emails ready for processing.
+2025-11-17 15:53:27 | INFO | ------------------------------------------------------------
+2025-11-17 15:53:27 | INFO | [Main] Processing Email 1/1 — ID: 778
+2025-11-17 15:53:27 | INFO | [Main] From: Stephen from Exponent <hello@tryexponent.com>
+2025-11-17 15:53:27 | INFO | [Main] Subject: Ready to ace your data interviews?
+2025-11-17 15:53:27 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-17 15:54:29 | WARNING | [Main] Process manually interrupted by user.
+2025-11-17 15:55:47 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-17 15:55:47 | INFO | ============================================================
+2025-11-17 15:55:47 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-17 15:55:47 | INFO | ============================================================
+2025-11-17 15:55:54 | INFO | [Main] Simulation Mode: True
+2025-11-17 15:55:54 | INFO | [Main] Processing Limit: 1
+2025-11-17 15:55:54 | INFO | [Main] Dry Run: True
+2025-11-17 15:55:54 | INFO | [Main] Fetching emails...
+2025-11-17 15:55:56 | INFO | [Main] 13 emails ready for processing.
+2025-11-17 15:55:56 | INFO | ------------------------------------------------------------
+2025-11-17 15:55:56 | INFO | [Main] Processing Email 1/13 — ID: 1
+2025-11-17 15:55:56 | INFO | [Main] From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-17 15:55:56 | INFO | [Main] Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-17 15:55:56 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-17 15:56:36 | INFO | [Main] Processing completed in 39.12s for Email ID 1
+2025-11-17 15:56:36 | DEBUG | [Main] Results for 1 — Classification=positive, Summary length=209, Response length=134, Review=False, Error=None
+2025-11-17 15:56:36 | INFO | [Main] ID 1 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-17 15:56:42 | INFO | [Main] Cooling down for 40s before next email to respect Gemini API limits...
+2025-11-17 15:57:22 | INFO | ------------------------------------------------------------
+2025-11-17 15:57:22 | INFO | [Main] Processing Email 2/13 — ID: 2
+2025-11-17 15:57:22 | INFO | [Main] From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-17 15:57:22 | INFO | [Main] Subject: Missing Items in Shipment SC-PO53804
+2025-11-17 15:57:22 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-17 15:57:59 | INFO | [Main] Processing completed in 36.64s for Email ID 2
+2025-11-17 15:57:59 | DEBUG | [Main] Results for 2 — Classification=negative, Summary length=168, Response length=131, Review=False, Error=None
+2025-11-17 15:57:59 | INFO | [Main] ID 2 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-17 15:58:05 | INFO | [Main] Cooling down for 40s before next email to respect Gemini API limits...
+2025-11-17 15:58:07 | WARNING | [Main] Process manually interrupted by user.
+2025-11-17 16:20:53 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-17 16:20:54 | INFO | ============================================================
+2025-11-17 16:20:54 | INFO | [Main] Starting ShipCube AI Email Automation Pipeline...
+2025-11-17 16:20:54 | INFO | ============================================================
+2025-11-17 16:21:06 | INFO | [Main] Simulation Mode: False
+2025-11-17 16:21:06 | INFO | [Main] Processing Limit: 1
+2025-11-17 16:21:06 | INFO | [Main] Dry Run: True
+2025-11-17 16:21:06 | INFO | [Main] Fetching emails...
+2025-11-17 16:21:12 | INFO | [Main] 1 emails ready for processing.
+2025-11-17 16:21:12 | INFO | ------------------------------------------------------------
+2025-11-17 16:21:12 | INFO | [Main] Processing Email 1/1 — ID: 781
+2025-11-17 16:21:12 | INFO | [Main] From: Oye.Its.Pvt <oye.its.pvt@gmail.com>
+2025-11-17 16:21:12 | INFO | [Main] Subject: Draft: Re: Missing Items in Shipment SC-PO53804
+2025-11-17 16:21:12 | INFO | [Main] Running email through AI pipeline (Filter → Summarize → Respond)...
+2025-11-17 16:21:46 | INFO | [Main] Processing completed in 33.72s for Email ID 781
+2025-11-17 16:21:46 | DEBUG | [Main] Results for 781 — Classification=neutral, Summary length=133, Response length=719, Review=False, Error=None
+2025-11-17 16:21:46 | INFO | [Main] ID 781 flagged for review/dry-run. Sending draft to oye.its.pvt@gmail.com.
+2025-11-17 16:21:52 | INFO | [Main] All emails processed successfully.
+2025-11-17 16:21:52 | INFO | ============================================================
+2025-11-18 17:02:51 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-18 17:02:51 | INFO | ============================================================
+2025-11-18 17:02:51 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-18 17:02:51 | INFO | ============================================================
+2025-11-18 17:03:20 | INFO | [Main] Simulate: True
+2025-11-18 17:03:20 | INFO | [Main] Processing Limit: 1
+2025-11-18 17:03:20 | INFO | [Main] Dry Run Mode: True
+2025-11-18 17:03:20 | INFO | [Main] Fetching emails...
+2025-11-18 17:03:21 | INFO | [Main] No emails to process. Exiting.
+2025-11-18 17:07:40 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-18 17:07:40 | INFO | ============================================================
+2025-11-18 17:07:40 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-18 17:07:40 | INFO | ============================================================
+2025-11-18 17:10:03 | INFO | [Main] Simulate: True
+2025-11-18 17:10:03 | INFO | [Main] Processing Limit: 1
+2025-11-18 17:10:03 | INFO | [Main] Dry Run Mode: True
+2025-11-18 17:10:03 | INFO | [Main] Fetching emails...
+2025-11-18 17:10:05 | INFO | [Main] Retrieved 30 email(s)
+2025-11-18 17:10:05 | INFO | ------------------------------------------------------------
+2025-11-18 17:10:05 | INFO | [Main] Processing Email 1/30
+2025-11-18 17:10:05 | INFO |        ID: 1
+2025-11-18 17:10:05 | INFO |        From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-18 17:10:05 | INFO |        Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-18 17:10:05 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-18 17:13:18 | INFO | [Main] Pipeline finished in 193.40s
+2025-11-18 17:13:18 | INFO | [Main] ID 1 → Draft Mode → oye.its.pvt@gmail.com
+2025-11-18 17:13:23 | INFO | [Main] Cooling down 40s (Gemini API limits)...
+2025-11-18 17:14:03 | INFO | ------------------------------------------------------------
+2025-11-18 17:14:03 | INFO | [Main] Processing Email 2/30
+2025-11-18 17:14:03 | INFO |        ID: 2
+2025-11-18 17:14:03 | INFO |        From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-18 17:14:03 | INFO |        Subject: Missing Items in Shipment SC-PO53804
+2025-11-18 17:14:03 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-18 17:14:14 | WARNING | [Main] Interrupted by user.
+2025-11-18 17:57:19 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-18 17:57:19 | INFO | ============================================================
+2025-11-18 17:57:19 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-18 17:57:19 | INFO | ============================================================
+2025-11-18 17:57:28 | INFO | [Main] Simulate: True
+2025-11-18 17:57:28 | INFO | [Main] Processing Limit: 1
+2025-11-18 17:57:28 | INFO | [Main] Dry Run Mode: True
+2025-11-18 17:57:28 | INFO | [Main] Fetching emails...
+2025-11-18 17:57:30 | INFO | [Main] Retrieved 30 email(s)
+2025-11-18 17:57:30 | INFO | ------------------------------------------------------------
+2025-11-18 17:57:30 | INFO | [Main] Processing Email 1/30
+2025-11-18 17:57:30 | INFO |        ID: 1
+2025-11-18 17:57:30 | INFO |        From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-18 17:57:30 | INFO |        Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-18 17:57:30 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-18 17:58:16 | INFO | [Main] Pipeline finished in 46.10s
+2025-11-18 17:58:16 | INFO | [Main] ID 1 → Draft Mode → oye.its.pvt@gmail.com
+2025-11-18 17:58:20 | INFO | [Main] Cooling down 40s (Gemini API limits)...
+2025-11-18 17:59:00 | INFO | ------------------------------------------------------------
+2025-11-18 17:59:00 | INFO | [Main] Processing Email 2/30
+2025-11-18 17:59:00 | INFO |        ID: 2
+2025-11-18 17:59:00 | INFO |        From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-18 17:59:00 | INFO |        Subject: Missing Items in Shipment SC-PO53804
+2025-11-18 17:59:00 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-18 18:00:23 | INFO | [Main] Pipeline finished in 83.49s
+2025-11-18 18:00:23 | INFO | [Main] ID 2 → Draft Mode → oye.its.pvt@gmail.com
+2025-11-18 18:00:28 | INFO | [Main] Cooling down 40s (Gemini API limits)...
+2025-11-18 18:01:08 | INFO | ------------------------------------------------------------
+2025-11-18 18:01:08 | INFO | [Main] Processing Email 3/30
+2025-11-18 18:01:08 | INFO |        ID: 3
+2025-11-18 18:01:08 | INFO |        From: Evelyn Harper <evelyn.harper@urbanthreads.com>
+2025-11-18 18:01:08 | INFO |        Subject: Shipment SC-97694 Delivered to Wrong Address
+2025-11-18 18:01:08 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-18 18:02:29 | INFO | [Main] Pipeline finished in 81.92s
+2025-11-18 18:02:29 | INFO | [Main] ID 3 → Draft Mode → oye.its.pvt@gmail.com
+2025-11-18 18:02:33 | INFO | [Main] Cooling down 40s (Gemini API limits)...
+2025-11-18 18:03:13 | INFO | ------------------------------------------------------------
+2025-11-18 18:03:13 | INFO | [Main] Processing Email 4/30
+2025-11-18 18:03:13 | INFO |        ID: 4
+2025-11-18 18:03:13 | INFO |        From: Alex Johnson <alex.johnson@northtech.us>
+2025-11-18 18:03:13 | INFO |        Subject: Shipment SC-67843 Marked Delivered but Not Received
+2025-11-18 18:03:13 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-18 18:05:20 | INFO | [Main] Pipeline finished in 126.74s
+2025-11-18 18:05:20 | INFO | [Main] ID 4 → Draft Mode → oye.its.pvt@gmail.com
+2025-11-18 18:05:26 | INFO | [Main] Cooling down 40s (Gemini API limits)...
+2025-11-18 18:06:06 | INFO | ------------------------------------------------------------
+2025-11-18 18:06:06 | INFO | [Main] Processing Email 5/30
+2025-11-18 18:06:06 | INFO |        ID: 5
+2025-11-18 18:06:06 | INFO |        From: Evelyn Harper <evelyn.harper@urbanthreads.com>
+2025-11-18 18:06:06 | INFO |        Subject: Appreciation for Order SC-64665 Resolution
+2025-11-18 18:06:06 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-18 18:07:21 | WARNING | [Main] Interrupted by user.
+2025-11-19 16:27:46 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-19 16:27:46 | INFO | ============================================================
+2025-11-19 16:27:46 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-19 16:27:46 | INFO | ============================================================
+2025-11-19 16:27:56 | INFO | [Main] Simulate: False
+2025-11-19 16:27:56 | INFO | [Main] Processing Limit: 1
+2025-11-19 16:27:56 | INFO | [Main] Dry Run Mode: True
+2025-11-19 16:27:56 | INFO | [Main] Fetching emails...
+2025-11-19 16:28:03 | INFO | [Main] Retrieved 1 email(s)
+2025-11-19 16:28:03 | INFO | ------------------------------------------------------------
+2025-11-19 16:28:03 | INFO | [Main] Processing Email 1/1
+2025-11-19 16:28:03 | INFO |        ID: 789
+2025-11-19 16:28:03 | INFO |        From: Google AI Studio <googleaistudio-noreply@google.com>
+2025-11-19 16:28:03 | INFO |        Subject: Gemini 3 is here!
+2025-11-19 16:28:03 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-19 16:28:03 | INFO | [Main] Pipeline finished in 0.14s
+2025-11-19 16:28:03 | INFO | [Main] All emails processed successfully.
+2025-11-19 16:28:03 | INFO | ============================================================
+2025-11-19 16:30:03 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-19 16:30:03 | INFO | ============================================================
+2025-11-19 16:30:03 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-19 16:30:03 | INFO | ============================================================
+2025-11-19 16:30:14 | INFO | [Main] Simulate: False
+2025-11-19 16:30:14 | INFO | [Main] Processing Limit: 1
+2025-11-19 16:30:14 | INFO | [Main] Dry Run Mode: True
+2025-11-19 16:30:14 | INFO | [Main] Fetching emails...
+2025-11-19 16:30:21 | INFO | [Main] Retrieved 1 email(s)
+2025-11-19 16:30:21 | INFO | ------------------------------------------------------------
+2025-11-19 16:30:21 | INFO | [Main] Processing Email 1/1
+2025-11-19 16:30:21 | INFO |        ID: 783
+2025-11-19 16:30:21 | INFO |        From: Stephen from Exponent <hello@tryexponent.com>
+2025-11-19 16:30:21 | INFO |        Subject: ⚙️ How to answer SQL interview questions
+2025-11-19 16:30:21 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-19 16:30:21 | INFO | [Main] Pipeline finished in 0.20s
+2025-11-19 16:30:21 | INFO | [Main] All emails processed successfully.
+2025-11-19 16:30:21 | INFO | ============================================================
+2025-11-19 16:31:25 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-19 16:31:25 | INFO | ============================================================
+2025-11-19 16:31:25 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-19 16:31:25 | INFO | ============================================================
+2025-11-19 16:48:28 | INFO | [Main] Simulate: False
+2025-11-19 16:48:28 | INFO | [Main] Processing Limit: 1
+2025-11-19 16:48:28 | INFO | [Main] Dry Run Mode: True
+2025-11-19 16:48:28 | INFO | [Main] Fetching emails...
+2025-11-19 16:48:35 | INFO | [Main] Retrieved 1 email(s)
+2025-11-19 16:48:35 | INFO | ------------------------------------------------------------
+2025-11-19 16:48:35 | INFO | [Main] Processing Email 1/1
+2025-11-19 16:48:35 | INFO |        ID: 762
+2025-11-19 16:48:35 | INFO |        From: Aayush Tyagi <aayushtyagi301@gmail.com>
+2025-11-19 16:48:35 | INFO |        Subject: Partnership Inquiry for Regular Bulk Orders
+2025-11-19 16:48:35 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-19 16:49:13 | INFO | [Main] Pipeline finished in 38.35s
+2025-11-19 16:49:13 | INFO | [Main] ID 762 → Draft Mode → oye.its.pvt@gmail.com
+2025-11-19 16:49:17 | INFO | [Main] All emails processed successfully.
+2025-11-19 16:49:17 | INFO | ============================================================
+2025-11-19 16:50:25 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-19 16:50:25 | INFO | ============================================================
+2025-11-19 16:50:25 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-19 16:50:25 | INFO | ============================================================
+2025-11-19 16:50:40 | INFO | [Main] Simulate: True
+2025-11-19 16:50:40 | INFO | [Main] Processing Limit: 1
+2025-11-19 16:50:40 | INFO | [Main] Dry Run Mode: True
+2025-11-19 16:50:40 | INFO | [Main] Fetching emails...
+2025-11-19 16:50:42 | INFO | [Main] Retrieved 30 email(s)
+2025-11-19 16:50:42 | INFO | ------------------------------------------------------------
+2025-11-19 16:50:42 | INFO | [Main] Processing Email 1/30
+2025-11-19 16:50:42 | INFO |        ID: 1
+2025-11-19 16:50:42 | INFO |        From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-19 16:50:42 | INFO |        Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-19 16:50:42 | INFO | [Main] Executing AI Pipeline (Filter → Summarize → Respond)...
+2025-11-19 16:51:12 | INFO | [Main] Pipeline finished in 29.78s
+2025-11-19 16:51:12 | INFO | [Main] ID 1 → Draft Mode → oye.its.pvt@gmail.com
+2025-11-19 16:51:16 | INFO | [Main] Cooling down 40s (Gemini API limits)...
+2025-11-19 16:51:34 | WARNING | [Main] Interrupted by user.
+2025-11-20 22:45:18 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-20 22:45:18 | INFO | ============================================================
+2025-11-20 22:45:18 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-20 22:45:18 | INFO | ============================================================
+2025-11-20 22:46:04 | INFO | [Main] Fetching emails…
+2025-11-20 22:46:11 | INFO | [Main] Processing 1 email(s)
+2025-11-20 22:46:11 | INFO | ------------------------------------------------------------
+2025-11-20 22:46:11 | INFO | [Main] Processing 1/1
+2025-11-20 22:46:11 | INFO |        ID: 792
+2025-11-20 22:46:11 | INFO |        From: Stephen from Exponent <hello@tryexponent.com>
+2025-11-20 22:46:11 | INFO |        Subject: 🧠 Top questions: SQL, Python, stats, and more
+2025-11-20 22:46:11 | INFO | [Main] All emails processed.
+2025-11-20 22:46:11 | INFO | ============================================================
+2025-11-20 22:46:57 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-20 22:46:57 | INFO | ============================================================
+2025-11-20 22:46:57 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-20 22:46:57 | INFO | ============================================================
+2025-11-20 22:47:15 | INFO | [Main] Fetching emails…
+2025-11-20 22:47:21 | INFO | [Main] Processing 1 email(s)
+2025-11-20 22:47:21 | INFO | ------------------------------------------------------------
+2025-11-20 22:47:21 | INFO | [Main] Processing 1/1
+2025-11-20 22:47:21 | INFO |        ID: 791
+2025-11-20 22:47:21 | INFO |        From: Google tips and updates <googlecommunityteam-noreply@google.com>
+2025-11-20 22:47:21 | INFO |        Subject: Priyanka, find the perfect gift faster
+2025-11-20 22:47:21 | INFO | [Main] All emails processed.
+2025-11-20 22:47:21 | INFO | ============================================================
+2025-11-20 22:48:19 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-20 22:48:19 | INFO | ============================================================
+2025-11-20 22:48:19 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-20 22:48:19 | INFO | ============================================================
+2025-11-20 22:48:32 | INFO | [Main] Fetching emails…
+2025-11-20 22:48:38 | INFO | [Main] Processing 1 email(s)
+2025-11-20 22:48:38 | INFO | ------------------------------------------------------------
+2025-11-20 22:48:38 | INFO | [Main] Processing 1/1
+2025-11-20 22:48:38 | INFO |        ID: 760
+2025-11-20 22:48:38 | INFO |        From: Aayush Tyagi <aayushtyagi301@gmail.com>
+2025-11-20 22:48:38 | INFO |        Subject: Missing Cartons in Shipment PO40323
+2025-11-20 22:49:20 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-20 22:49:24 | INFO | [Main] All emails processed.
+2025-11-20 22:49:24 | INFO | ============================================================
+2025-11-20 22:59:08 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-20 22:59:08 | INFO | ============================================================
+2025-11-20 22:59:08 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-20 22:59:08 | INFO | ============================================================
+2025-11-20 22:59:28 | INFO | [Main] Fetching emails…
+2025-11-20 22:59:30 | INFO | [Main] Processing 30 email(s)
+2025-11-20 22:59:30 | INFO | ------------------------------------------------------------
+2025-11-20 22:59:30 | INFO | [Main] Processing 1/30
+2025-11-20 22:59:30 | INFO |        ID: 1
+2025-11-20 22:59:30 | INFO |        From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-20 22:59:30 | INFO |        Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-20 22:59:57 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-20 23:00:01 | INFO | [Main] Cooling down 40s (Gemini API limit)…
+2025-11-20 23:00:41 | INFO | ------------------------------------------------------------
+2025-11-20 23:00:41 | INFO | [Main] Processing 2/30
+2025-11-20 23:00:41 | INFO |        ID: 2
+2025-11-20 23:00:41 | INFO |        From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-20 23:00:41 | INFO |        Subject: Missing Items in Shipment SC-PO53804
+2025-11-20 23:01:11 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-20 23:01:16 | INFO | [Main] Cooling down 40s (Gemini API limit)…
+2025-11-20 23:01:56 | INFO | ------------------------------------------------------------
+2025-11-20 23:01:56 | INFO | [Main] Processing 3/30
+2025-11-20 23:01:56 | INFO |        ID: 3
+2025-11-20 23:01:56 | INFO |        From: Evelyn Harper <evelyn.harper@urbanthreads.com>
+2025-11-20 23:01:56 | INFO |        Subject: Shipment SC-97694 Delivered to Wrong Address
+2025-11-20 23:02:34 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-20 23:02:38 | INFO | [Main] Cooling down 40s (Gemini API limit)…
+2025-11-20 23:02:54 | WARNING | [Main] Interrupted by user.
+2025-11-21 00:31:23 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-21 00:31:23 | INFO | ============================================================
+2025-11-21 00:31:23 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-21 00:31:23 | INFO | ============================================================
+2025-11-21 00:31:35 | INFO | [Main] Fetching emails…
+2025-11-21 00:31:41 | INFO | [Main] Processing 1 email(s)
+2025-11-21 00:31:41 | INFO | ------------------------------------------------------------
+2025-11-21 00:31:41 | INFO | [Main] Processing 1/1
+2025-11-21 00:31:41 | INFO |        ID: 796
+2025-11-21 00:31:41 | INFO |        From: Oye.Its.Pvt <oye.its.pvt@gmail.com>
+2025-11-21 00:31:41 | INFO |        Subject: Draft: Re: Shipment SC-97694 Delivered to Wrong Address
+2025-11-21 00:32:15 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-21 00:32:19 | INFO | [Main] All emails processed.
+2025-11-21 00:32:19 | INFO | ============================================================

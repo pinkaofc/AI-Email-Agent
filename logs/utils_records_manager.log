@@ -1,0 +1,62 @@
+2025-11-18 17:02:07 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-18 17:02:51 | DEBUG | [Records] records.csv already exists.
+2025-11-18 17:06:54 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-18 17:07:40 | DEBUG | [Records] records.csv already exists.
+2025-11-18 17:13:22 | DEBUG | [Records] records.csv already exists.
+2025-11-18 17:13:23 | INFO | [Records] Logged record #1 | Sender=sophia.gonzalez@globalimports.mx | Status=Drafted
+2025-11-18 17:56:26 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-18 17:57:19 | DEBUG | [Records] records.csv already exists.
+2025-11-18 17:58:20 | DEBUG | [Records] records.csv already exists.
+2025-11-18 17:58:20 | INFO | [Records] Logged record #1 | Sender=sophia.gonzalez@globalimports.mx | Status=Drafted
+2025-11-18 18:00:27 | DEBUG | [Records] records.csv already exists.
+2025-11-18 18:00:28 | INFO | [Records] Logged record #2 | Sender=raj.malhotra@malhotragoods.in | Status=Drafted
+2025-11-18 18:02:33 | DEBUG | [Records] records.csv already exists.
+2025-11-18 18:02:33 | INFO | [Records] Logged record #3 | Sender=evelyn.harper@urbanthreads.com | Status=Drafted
+2025-11-18 18:05:26 | DEBUG | [Records] records.csv already exists.
+2025-11-18 18:05:26 | INFO | [Records] Logged record #4 | Sender=alex.johnson@northtech.us | Status=Drafted
+2025-11-19 16:26:54 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-19 16:27:46 | DEBUG | [Records] records.csv already exists.
+2025-11-19 16:28:03 | DEBUG | [Records] records.csv already exists.
+2025-11-19 16:28:03 | INFO | [Records] Logged record #1 | Sender=googleaistudio-noreply@google.com | Status=Skipped (Promotional)
+2025-11-19 16:29:24 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-19 16:30:03 | DEBUG | [Records] records.csv already exists.
+2025-11-19 16:30:21 | DEBUG | [Records] records.csv already exists.
+2025-11-19 16:30:21 | INFO | [Records] Logged record #1 | Sender=hello@tryexponent.com | Status=Skipped (Promotional)
+2025-11-19 16:30:47 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-19 16:31:25 | DEBUG | [Records] records.csv already exists.
+2025-11-19 16:49:17 | DEBUG | [Records] records.csv already exists.
+2025-11-19 16:49:17 | INFO | [Records] Logged record #1 | Sender=aayushtyagi301@gmail.com | Status=Drafted
+2025-11-19 16:49:46 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-19 16:50:25 | DEBUG | [Records] records.csv already exists.
+2025-11-19 16:51:16 | DEBUG | [Records] records.csv already exists.
+2025-11-19 16:51:16 | INFO | [Records] Logged record #1 | Sender=sophia.gonzalez@globalimports.mx | Status=Drafted
+2025-11-19 16:57:16 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-19 17:04:06 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 15:11:31 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 17:51:25 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 18:17:28 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 18:23:38 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 18:25:08 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 18:31:27 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 18:38:00 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 19:13:08 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 19:56:29 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 19:58:33 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 20:00:54 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 22:43:56 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 22:46:11 | INFO | [Records] Saved record #1 | Sender=hello@tryexponent.com | Classification=promotional | Status=Skipped (promotional)
+2025-11-20 22:46:26 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 22:47:21 | INFO | [Records] Saved record #1 | Sender=googlecommunityteam-noreply@google.com | Classification=promotional | Status=Skipped (promotional)
+2025-11-20 22:47:51 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 22:49:24 | INFO | [Records] Saved record #1 | Sender=aayushtyagi301@gmail.com | Classification=negative | Status=Drafted
+2025-11-20 22:58:18 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 23:00:01 | INFO | [Records] Saved record #1 | Sender=sophia.gonzalez@globalimports.mx | Classification=positive | Status=Drafted
+2025-11-20 23:01:16 | INFO | [Records] Saved record #2 | Sender=raj.malhotra@malhotragoods.in | Classification=negative | Status=Drafted
+2025-11-20 23:02:38 | INFO | [Records] Saved record #3 | Sender=evelyn.harper@urbanthreads.com | Classification=negative | Status=Drafted
+2025-11-20 23:08:09 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 23:51:41 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 23:55:26 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-20 23:57:14 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-21 00:22:23 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-21 00:30:58 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-21 00:32:19 | INFO | [Records] Saved record #1 | Sender=oye.its.pvt@gmail.com | Classification=neutral | Status=Drafted

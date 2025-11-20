@@ -1,144 +1,154 @@
+# agents/summarization_agent.py
+
 import time
-import random
-import warnings
 import re
+import warnings
 from langchain_core.prompts import PromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from transformers import pipeline
+
 from utils.formatter import clean_text
 from config import get_gemini_api_key
 from utils.logger import get_logger
-from utils.rate_limit_guard import rate_limit_safe_call  # Added for rate-limit handling
+from utils.rate_limit_guard import rate_limit_safe_call
+
+# Proper monitoring imports
+from monitoring.metrics import (
+    GEMINI_CALLS,
+    GEMINI_FAILURES,
+    GEMINI_FALLBACK_USED,
+    SANITIZATION_TRIGGERED,
+)
 
 warnings.filterwarnings("ignore")
 logger = get_logger(__name__)
 
 # ============================================================
-#                  FALLBACK HF MODEL (PINNED)
+#        HuggingFace FALLBACK Summarizer
 # ============================================================
 try:
     hf_summarizer = pipeline(
         "summarization",
-        model="facebook/bart-large-cnn",
-        revision="7b5b4db",   # pinned for reproducibility
+        model="facebook/bart-large-cnn"
     )
-    logger.info("[Summarization] HuggingFace fallback model loaded successfully (pinned).")
+    logger.info("[Summarization] HF fallback model loaded.")
 except Exception as e:
     hf_summarizer = None
-    logger.error(f"[Summarization] Failed to initialize fallback summarizer: {e}")
-
+    logger.error(f"[Summarization] HF summarizer failed: {e}")
 
 # ============================================================
-#           SUSPICIOUS PATTERNS TO BLOCK IN SUMMARIES
+#      Block hallucinated operational info
 # ============================================================
 SUSPICIOUS_PATTERNS = [
-    r"\bSC-[A-Z0-9]{4,}\b",       # actual order IDs
-    r"\btracking number\b",       # avoid hallucinating a number
-    r"\bAWB\b",                   # airway bill numbers
-    r"\bETA\b",                   # exact ETA
-    r"\border id\b",              # specific identifiers
-    r"\bclient address\b",        # PII
-    r"\bphone\b",                 # PII
+    r"\bSC-[A-Z0-9]{4,}\b",
+    r"\btracking number\b",
+    r"\bETA\b",
+    r"\border id\b",
+    r"\bclient address\b",
+    r"\bphone\b",
+    r"\bAWB\b",
 ]
 
 
-
 def _sanitize_summary(summary: str) -> str:
-    """
-    Removes any hallucinated operational details from LLM summaries.
-    Ensures only **intent-level** summary remains.
-    """
-    for pattern in SUSPICIOUS_PATTERNS:
-        if re.search(pattern, summary, re.IGNORECASE):
-            logger.warning("[Summarization] Suspicious details detected in Gemini summary — sanitizing.")
-            return "The customer has raised a query and is seeking help. They need support or clarification regarding their issue."
-
+    """Remove any hallucinated operational details."""
+    for pat in SUSPICIOUS_PATTERNS:
+        if re.search(pat, summary, re.IGNORECASE):
+            logger.warning("[Summarization] Suspicious text found → sanitizing")
+            try:
+                SANITIZATION_TRIGGERED.labels(stage="summarization").inc()
+            except Exception:
+                pass
+            return (
+                "The customer has raised a query and is seeking assistance. "
+                "They need support or clarification regarding their issue."
+            )
     return summary
 
 
 # ============================================================
-#                 GEMINI SUMMARIZER (SAFE)
+#        Gemini Summarizer (safe & monitored)
 # ============================================================
 def _use_gemini(prompt: str, retry_attempts: int = 3) -> str:
-    """Gemini summarizer with:
-    - Rate limit guard
-    - Key rotation
-    - Retry logic
-    """
+    last_exception = None
+
     for attempt in range(1, retry_attempts + 1):
+
         api_key = get_gemini_api_key()
-        logger.info(f"[Summarization] Attempt {attempt}/{retry_attempts} using Gemini key: {api_key[:6]}...")
+
+        try:
+            GEMINI_CALLS.labels(module="summarization").inc()
+        except Exception:
+            pass
+
+        logger.info(
+            f"[Summarization] Gemini attempt {attempt}/{retry_attempts} using key {api_key[:6]}..."
+        )
 
         try:
             model = ChatGoogleGenerativeAI(
                 model="gemini-2.5-pro",
-                temperature=0.2,  # low temp → safer, fewer hallucinations
+                temperature=0.2,
                 google_api_key=api_key,
             )
 
-            # Auto-paused safe call
+            # IMPORTANT — do NOT pass module_name into model.invoke()
             result = rate_limit_safe_call(model.invoke, prompt)
-            summary = clean_text(result.content).strip()
 
+            summary = clean_text(result.content).strip()
             if not summary:
-                raise ValueError("Empty summary from Gemini")
+                raise ValueError("Gemini produced empty summary")
 
             return summary
 
         except Exception as e:
-            error = str(e).lower()
+            last_exception = e
+            err = str(e).lower()
+            reason = err[:50]
 
-            if "quota" in error or "429" in error:
-                logger.warning(f"[Summarization] Quota exceeded for key {api_key[:6]} — rotating key.")
+            try:
+                GEMINI_FAILURES.labels(module="summarization", reason=reason).inc()
+            except Exception:
+                pass
+
+            logger.warning(f"[Summarization] Attempt {attempt} failed: {e}")
+
+            # Retry: quota / 429
+            if "429" in err or "quota" in err:
+                try:
+                    GEMINI_FALLBACK_USED.labels(module="summarization").inc()
+                except Exception:
+                    pass
+                time.sleep(3)
                 continue
 
-            if "timeout" in error or "network" in error:
-                logger.warning("[Summarization] Temporary network issue — retrying in 5 seconds.")
-                time.sleep(5)
+            # Retry: network / timeout
+            if "timeout" in err or "network" in err:
+                time.sleep(2)
                 continue
 
-            logger.error(f"[Summarization] Gemini API error: {e}")
-            raise e
+            # Other fatal errors → break
+            break
 
-    raise RuntimeError("Gemini summarization failed after all retries.")
+    raise RuntimeError(f"Gemini summarization failed: {last_exception}")
 
 
 # ============================================================
-#             PUBLIC SUMMARIZATION ENTRY POINT
+#             MAIN PUBLIC SUMMARIZATION FUNCTION
 # ============================================================
 def summarize_email(email: dict) -> str:
-    """
-    Generates a **safe, intent-only** summary of the user's message.
-    Strict rules:
-      - No tracking numbers
-      - No delivery dates
-      - No investigation results
-      - No operational claims
-      - No commitments or invented details
-    """
-
     content = (email.get("body") or "").strip()
-
     if not content:
-        logger.warning("[Summarization] Empty email content detected.")
         return "No content to summarize."
 
-    # ============================================================
-    # SAFE PROMPT (PREVENTS HALLUCINATION)
-    # ============================================================
     prompt_template = PromptTemplate(
         input_variables=["content"],
         template=(
             "Summarize the following customer email in 2–3 sentences.\n"
-            "The summary must ONLY describe the customer's intent or concern.\n\n"
-
             "STRICT RULES:\n"
-            "- Do NOT invent any details.\n"
-            "- Do NOT generate tracking numbers.\n"
-            "- Do NOT guess delivery dates, refunds, or resolutions.\n"
-            "- Do NOT describe internal processes (investigations, warehouse checks).\n"
-            "- Only restate what the customer is asking, reporting, or requesting.\n\n"
-
+            "- Do NOT guess tracking numbers or ETAs.\n"
+            "- Do NOT invent refunds, investigations, or internal processes.\n"
+            "- ONLY explain the customer's intent.\n\n"
             "Email:\n{content}\n\n"
             "Provide ONLY the intent-level summary:\n"
         ),
@@ -147,41 +157,42 @@ def summarize_email(email: dict) -> str:
     prompt = prompt_template.format(content=content)
 
     # ============================================================
-    # Try Gemini First
+    # Try Gemini first
     # ============================================================
     try:
         summary = _use_gemini(prompt)
-        summary = _sanitize_summary(summary)  # remove hallucinated details
-        logger.debug(f"[Summarization] Safe Gemini summary: {summary!r}")
-        return summary
+        return _sanitize_summary(summary)
 
     except Exception as e:
-        logger.warning(f"[Summarization] Gemini summarization failed: {e}")
+        logger.warning(f"[Summarization] Gemini failed → HF fallback used: {e}")
+        try:
+            GEMINI_FALLBACK_USED.labels(module="summarization").inc()
+        except Exception:
+            pass
 
     # ============================================================
-    # Fallback to HuggingFace
+    # HF fallback
     # ============================================================
     if hf_summarizer:
         try:
             result = hf_summarizer(
-                content[:1000],
-                max_length=80,
+                content[:800],
+                max_length=70,
                 min_length=25,
                 do_sample=False
             )
-            summary = result[0].get("summary_text", "").strip()
-
-            if not summary:
-                raise ValueError("Empty HF summary")
-
-            summary = _sanitize_summary(summary)
-            logger.info("[Summarization] Summary generated via HuggingFace fallback.")
-            return summary
+            summary = result[0].get("summary_text", "")
+            return _sanitize_summary(summary)
 
         except Exception as e:
-            logger.error(f"[Summarization] HuggingFace fallback failed: {e}")
-            return "The customer has shared a message and is requesting assistance."
+            logger.error(f"[Summarization] HF fallback failed: {e}")
 
-    # Last fallback
-    logger.warning("[Summarization] No summarizer available — returning minimal default summary.")
+    # ============================================================
+    # Final fallback (guaranteed)
+    # ============================================================
+    try:
+        GEMINI_FALLBACK_USED.labels(module="summarization").inc()
+    except Exception:
+        pass
+
     return "The customer has shared a message and needs assistance."

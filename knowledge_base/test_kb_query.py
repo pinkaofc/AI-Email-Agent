@@ -1,43 +1,62 @@
 import os
 from dotenv import load_dotenv
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_chroma import Chroma
+from chromadb import PersistentClient
+from chromadb.utils import embedding_functions
 
 
 def main():
     load_dotenv()
+
     hf_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
     if not hf_token:
-        raise ValueError("HUGGINGFACEHUB_API_TOKEN not found. Please add it to .env")
+        raise ValueError("HUGGINGFACEHUB_API_TOKEN not found. Add it to .env first.")
 
-    # Use the same model you used in ingest.py
-    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-
-    db = Chroma(
-        persist_directory="knowledge_base/vector_store",
-        embedding_function=embeddings
+    # Exact same embedding model used in ingest.py
+    embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
 
-    print("\nShipCube Knowledge Base Query Tool (Hugging Face Edition)")
+    VECTOR_PATH = "knowledge_base/vector_store"
+
+    print(f"\nLoading persistent vector store from: {VECTOR_PATH}")
+
+    client = PersistentClient(path=VECTOR_PATH)
+
+    # MUST match ingest.py:
+    collection = client.get_or_create_collection(
+        name="email_kb",
+        embedding_function=embedding_fn
+    )
+
+    print("\nShipCube Knowledge Base Query Tool (Corrected Chroma Edition)")
     print("Type your question below (or 'exit' to quit):\n")
 
     while True:
-        query = input("Query: ")
-        if query.lower() in ["exit", "quit"]:
+        query = input("Query: ").strip()
+        if query.lower() in ("exit", "quit"):
             print("Exiting Query Tool.")
             break
 
         try:
-            results = db.similarity_search(query, k=3)
-            if not results:
+            results = collection.query(
+                query_texts=[query],
+                n_results=5,
+                include=["documents", "distances", "metadatas"]
+            )
+
+            docs = results.get("documents", [[]])[0]
+
+            if not docs:
                 print("No matching documents found.\n")
                 continue
 
             print("\nTop Matches:\n")
-            for i, doc in enumerate(results, 1):
+
+            for i, chunk in enumerate(docs, 1):
                 print(f"Result {i}:")
-                print(doc.page_content[:500])
+                print(chunk[:600])  # preview first 600 chars
                 print("-" * 60)
+
             print()
 
         except Exception as e:

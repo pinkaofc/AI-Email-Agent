@@ -1,0 +1,213 @@
+2025-10-31 19:18:35,100 - INFO - Logger initialized successfully.
+2025-10-31 19:36:56,757 - INFO - Logger initialized successfully.
+2025-10-31 19:44:05,277 - INFO - Logger initialized successfully.
+2025-10-31 19:49:58,531 - INFO - Logger initialized successfully.
+2025-10-31 19:50:25,504 - INFO - Logger initialized successfully.
+2025-10-31 19:54:51,188 - INFO - Logger initialized successfully.
+2025-10-31 19:56:59,084 - INFO - Logger initialized successfully.
+2025-10-31 19:57:15,606 - DEBUG - Marked email ID 23833 as seen.
+2025-10-31 20:04:27,005 - INFO - Logger initialized successfully.
+2025-10-31 20:04:49,241 - DEBUG - Marked email ID 23832 as seen.
+2025-11-01 10:41:35,729 - INFO - Logger initialized successfully.
+2025-11-01 20:28:59,217 - INFO - Logger initialized successfully.
+2025-11-01 20:32:05,576 - INFO - Logger initialized successfully.
+2025-11-01 20:35:00,324 - INFO - Logger initialized successfully.
+2025-11-01 20:35:28,027 - DEBUG - Marked email ID 23876 as seen.
+2025-11-01 20:37:01,377 - INFO - Logger initialized successfully.
+2025-11-01 20:41:15,072 - INFO - Logger initialized successfully.
+2025-11-05 17:33:33,221 - INFO - Logger initialized successfully.
+2025-11-05 17:51:40,285 - INFO - Logger initialized successfully.
+2025-11-05 17:54:38,544 - INFO - Logger initialized successfully.
+2025-11-05 17:59:08,593 - INFO - Logger initialized successfully.
+2025-11-06 14:33:39 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-06 14:33:39 | INFO | [IMAP] Logger initialized successfully.
+2025-11-06 14:46:23 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-06 14:46:23 | INFO | [IMAP] Logger initialized successfully.
+2025-11-06 15:10:54 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-06 15:10:54 | INFO | [IMAP] Logger initialized successfully.
+2025-11-06 15:34:49 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-06 15:34:49 | INFO | [IMAP] Logger initialized successfully.
+2025-11-06 16:09:17 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-06 16:09:17 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 12:53:59 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 12:53:59 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 13:08:44 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 13:08:44 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 13:09:08 | INFO | [IMAP] Connecting to imap.gmail.com:993 as itspriyanka1230@gmail.com...
+2025-11-10 13:09:11 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-10 13:09:12 | DEBUG | [IMAP] Logged out successfully.
+2025-11-10 13:09:12 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-10 13:19:51 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 13:19:51 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 13:20:14 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-10 13:20:16 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-10 13:20:17 | DEBUG | [IMAP] Marked email ID 745 as seen.
+2025-11-10 13:20:17 | DEBUG | [IMAP] Logged out successfully.
+2025-11-10 13:20:17 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-10 13:39:49 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 13:39:49 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 13:40:08 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-10 13:40:10 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-10 13:40:11 | DEBUG | [IMAP] Logged out successfully.
+2025-11-10 13:40:11 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-10 13:52:38 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 13:52:38 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 14:12:08 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 14:12:08 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 14:49:38 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 14:49:38 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 14:50:05 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-10 14:50:07 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-10 14:50:08 | DEBUG | [IMAP] Logged out successfully.
+2025-11-10 14:50:08 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-10 14:53:29 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 14:53:29 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 15:09:27 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 15:09:27 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 15:19:24 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 15:19:24 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 15:33:37 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 15:33:37 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 16:03:30 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 16:03:30 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 16:27:01 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 16:27:01 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 16:42:02 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 16:42:02 | INFO | [IMAP] Logger initialized successfully.
+2025-11-10 17:05:55 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-10 17:05:55 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 10:56:08 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 10:56:08 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 13:10:42 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 13:10:42 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 13:33:18 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 13:33:18 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 13:34:06 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 13:34:06 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 13:35:01 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 13:35:01 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 13:59:57 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 13:59:57 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 14:01:51 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 14:01:51 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 14:04:39 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 14:04:39 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 14:07:06 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 14:07:06 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 14:09:31 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 14:09:31 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 14:11:27 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 14:11:27 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 14:22:42 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 14:22:42 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 14:24:02 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-11 14:24:04 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-11 14:24:05 | DEBUG | [IMAP] Logged out successfully.
+2025-11-11 14:24:05 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-11 14:29:10 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 14:29:10 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 14:30:18 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-11 14:30:20 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-11 14:30:21 | DEBUG | [IMAP] Logged out successfully.
+2025-11-11 14:30:21 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-11 17:21:21 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 17:21:21 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 17:22:35 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-11 17:22:37 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-11 17:22:38 | DEBUG | [IMAP] Logged out successfully.
+2025-11-11 17:22:38 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-11 17:29:49 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 17:29:49 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 17:31:37 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-11 17:31:39 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-11 17:31:40 | DEBUG | [IMAP] Logged out successfully.
+2025-11-11 17:31:40 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-11 17:49:44 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 17:49:44 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 17:51:13 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-11 17:51:15 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-11 17:51:16 | DEBUG | [IMAP] Logged out successfully.
+2025-11-11 17:51:16 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-11 17:56:36 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 17:56:36 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 17:57:44 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-11 17:57:45 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-11 17:57:46 | DEBUG | [IMAP] Logged out successfully.
+2025-11-11 17:57:46 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-11 18:08:31 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-11 18:08:31 | INFO | [IMAP] Logger initialized successfully.
+2025-11-11 18:09:31 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-11 18:09:33 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-11 18:09:34 | DEBUG | [IMAP] Logged out successfully.
+2025-11-11 18:09:34 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-12 10:58:06 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-12 10:58:06 | INFO | [IMAP] Logger initialized successfully.
+2025-11-12 10:59:27 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-12 10:59:29 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-12 10:59:30 | DEBUG | [IMAP] Marked email ID 769 as seen.
+2025-11-12 10:59:31 | DEBUG | [IMAP] Logged out successfully.
+2025-11-12 10:59:31 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-12 12:18:50 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-12 12:18:50 | INFO | [IMAP] Logger initialized successfully.
+2025-11-12 12:20:12 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-12 12:20:13 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-12 12:20:14 | DEBUG | [IMAP] Logged out successfully.
+2025-11-12 12:20:14 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-12 14:28:17 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-12 14:28:17 | INFO | [IMAP] Logger initialized successfully.
+2025-11-13 12:33:57 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-13 12:33:57 | INFO | [IMAP] Logger initialized successfully.
+2025-11-13 12:34:56 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-13 12:34:58 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-13 12:34:59 | DEBUG | [IMAP] Logged out successfully.
+2025-11-13 12:34:59 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-13 12:43:06 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-13 12:43:06 | INFO | [IMAP] Logger initialized successfully.
+2025-11-13 12:44:06 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-13 12:44:08 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-13 12:44:09 | DEBUG | [IMAP] Logged out successfully.
+2025-11-13 12:44:09 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-13 12:48:12 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-13 12:48:12 | INFO | [IMAP] Logger initialized successfully.
+2025-11-13 12:49:24 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-13 12:49:26 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-13 12:49:27 | DEBUG | [IMAP] Logged out successfully.
+2025-11-13 12:49:27 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-14 13:19:37 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-14 13:19:37 | INFO | [IMAP] Logger initialized successfully.
+2025-11-14 13:22:10 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-14 13:22:12 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-14 13:22:13 | DEBUG | [IMAP] Logged out successfully.
+2025-11-14 13:22:13 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-14 14:45:59 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-14 14:45:59 | INFO | [IMAP] Logger initialized successfully.
+2025-11-14 14:55:33 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-14 14:55:33 | INFO | [IMAP] Logger initialized successfully.
+2025-11-14 17:15:21 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-14 17:15:21 | INFO | [IMAP] Logger initialized successfully.
+2025-11-14 17:17:58 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-14 17:17:58 | INFO | [IMAP] Logger initialized successfully.
+2025-11-17 15:44:00 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-17 15:44:00 | INFO | [IMAP] Logger initialized successfully.
+2025-11-17 15:49:08 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-17 15:49:08 | INFO | [IMAP] Logger initialized successfully.
+2025-11-17 15:50:02 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-17 15:50:04 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-17 15:50:05 | DEBUG | [IMAP] Marked email ID 783 as seen.
+2025-11-17 15:50:06 | DEBUG | [IMAP] Logged out successfully.
+2025-11-17 15:50:06 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-17 15:52:17 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-17 15:52:17 | INFO | [IMAP] Logger initialized successfully.
+2025-11-17 15:53:20 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-17 15:53:23 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-17 15:53:24 | DEBUG | [IMAP] Marked email ID 778 as seen.
+2025-11-17 15:53:24 | DEBUG | [IMAP] Logged out successfully.
+2025-11-17 15:53:24 | INFO | [IMAP] Finished fetching 1 email(s).
+2025-11-17 15:54:49 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-17 15:54:49 | INFO | [IMAP] Logger initialized successfully.
+2025-11-17 16:18:06 | DEBUG | Logger initialized for 'core.email_imap' (to_file=True).
+2025-11-17 16:18:06 | INFO | [IMAP] Logger initialized successfully.
+2025-11-17 16:21:06 | INFO | [IMAP] Connecting to imap.gmail.com:993 as oye.its.pvt@gmail.com...
+2025-11-17 16:21:08 | INFO | [IMAP] Found 1 unread email(s). Fetching...
+2025-11-17 16:21:09 | DEBUG | [IMAP] Logged out successfully.
+2025-11-17 16:21:09 | INFO | [IMAP] Finished fetching 1 email(s).

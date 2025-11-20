@@ -6,81 +6,103 @@ from datetime import datetime
 @dataclass
 class EmailState:
     """
-    Global state object passed through every node of the LangGraph workflow.
+    Central state object passed across the LangGraph workflow.
 
     Tracks:
-      - Email input
-      - Agent outputs (classification, summary, response body)
-      - Metadata
-      - Errors
-      - Human-review flags
-      - RAG context
-      - Priority / confidence scores
-      - Final formatted email (ready to send)
+      • Raw email
+      • Classification / summarization / response
+      • RAG (knowledge base) results
+      • Fallback usage & reasons
+      • Safety flags (hallucinations, sanitization)
+      • Confidence scores
+      • Metrics-friendly metadata
+      • Stage-by-stage history for full auditability
     """
 
-    # ------------------------------
-    # Base email data
-    # ------------------------------
+    # ----------------------------------------------------
+    # Base email payload
+    # ----------------------------------------------------
     emails: List[Dict[str, Any]] = field(default_factory=list)
     current_email: Dict[str, Any] = field(default_factory=dict)
     current_email_id: Optional[str] = None
 
-    # ------------------------------
-    # Metadata for analytics
-    # ------------------------------
+    # ----------------------------------------------------
+    # Metadata and pipeline history
+    # ----------------------------------------------------
     metadata: Dict[str, Dict[str, Any]] = field(default_factory=dict)
     history: List[Dict[str, Any]] = field(default_factory=list)
 
-    # ------------------------------
-    # Pipeline outputs
-    # ------------------------------
+    # ----------------------------------------------------
+    # Agent outputs
+    # ----------------------------------------------------
     classification: Optional[str] = None
     summary: Optional[str] = None
     generated_response_body: Optional[str] = None
-    formatted_email: Optional[str] = None  # final full email after formatting
+    formatted_email: Optional[str] = None
 
-    # ------------------------------
-    # Error & workflow control
-    # ------------------------------
+    # ----------------------------------------------------
+    # Error / safety / review flags
+    # ----------------------------------------------------
     processing_error: Optional[str] = None
     requires_human_review: bool = False
+    hallucination_detected: bool = False
+    sanitization_reason: Optional[str] = None  # <– NEW: supervisor uses this
 
-    # ------------------------------
-    # RAG + Confidence + Priority
-    # ------------------------------
+    # ----------------------------------------------------
+    # RAG (Knowledge Base)
+    # ----------------------------------------------------
     retrieved_context: Optional[str] = None
-    confidence_score: Optional[float] = None      # future scoring model
-    priority: Optional[str] = None                # “high”, “normal”, etc.
+    context_quality: Optional[float] = None
 
-    # ------------------------------
-    # Timestamps
-    # ------------------------------
+    # ----------------------------------------------------
+    # Confidence + priority
+    # ----------------------------------------------------
+    confidence_score: Optional[float] = None
+    priority: Optional[str] = "normal"
+
+    # ----------------------------------------------------
+    # Fallback tracking
+    # ----------------------------------------------------
+    used_fallback: bool = False
+    fallback_reason: Optional[str] = None
+
+    # ----------------------------------------------------
+    # Timestamp
+    # ----------------------------------------------------
     last_updated: str = field(default_factory=lambda: datetime.now().isoformat())
 
-    # ------------------------------
-    # Methods
-    # ------------------------------
+    # ====================================================
+    # METHODS
+    # ====================================================
     def update_timestamp(self):
-        """Refresh internal timestamp when state is modified."""
+        """Refresh last_modified timestamp."""
         self.last_updated = datetime.now().isoformat()
 
     def record_history(self, stage: str, note: str = ""):
         """
-        Store a structured snapshot after each pipeline stage.
-        Useful for debugging, dashboards, audit logs, QA, etc.
+        Detailed audit trace of each stage.
+        Supervisor calls this:
+            - filter
+            - summarize
+            - respond
+            - formatter
+            - sanitize
         """
-        snapshot = {
+        self.history.append({
             "stage": stage,
             "timestamp": datetime.now().isoformat(),
             "classification": self.classification,
             "summary": self.summary,
-            "generated_response": self.generated_response_body,
+            "generated_response_body": self.generated_response_body,
             "formatted_email": self.formatted_email,
-            "error": self.processing_error,
-            "requires_human_review": self.requires_human_review,
+            "retrieved_context": (self.retrieved_context or "")[:200],
             "priority": self.priority,
             "confidence_score": self.confidence_score,
+            "requires_human_review": self.requires_human_review,
+            "used_fallback": self.used_fallback,
+            "fallback_reason": self.fallback_reason,
+            "hallucination_detected": self.hallucination_detected,
+            "sanitization_reason": self.sanitization_reason,
+            "error": self.processing_error,
             "note": note,
-        }
-        self.history.append(snapshot)
+        })

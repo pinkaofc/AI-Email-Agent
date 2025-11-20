@@ -3,6 +3,9 @@ import warnings
 from jinja2 import Template
 from utils.logger import get_logger
 
+# Prometheus safety metric
+from monitoring.metrics import SANITIZATION_TRIGGERED
+
 warnings.filterwarnings("ignore")
 logger = get_logger(__name__)
 
@@ -28,7 +31,9 @@ SUSPICIOUS_PATTERNS = [
     r"\bexpected delivery\b",
 ]
 
+
 def _contains_sensitive(text: str) -> bool:
+    """Detect fabricated or operational hallucinations."""
     if not text:
         return False
     for p in SUSPICIOUS_PATTERNS:
@@ -38,7 +43,7 @@ def _contains_sensitive(text: str) -> bool:
 
 
 # ------------------------------------------------------------
-# Basic Text Cleaner
+# Basic cleaner
 # ------------------------------------------------------------
 def clean_text(text: str) -> str:
     if not text:
@@ -47,28 +52,34 @@ def clean_text(text: str) -> str:
 
 
 # ------------------------------------------------------------
-# Friendly Name Constructor
+# Friendly name builder
 # ------------------------------------------------------------
 def _derive_friendly_name(recipient_name: str) -> str:
     if not recipient_name:
         return "Customer"
 
-    recipient_name = recipient_name.strip()
+    name = recipient_name.strip()
 
-    if "@" in recipient_name:
-        local = recipient_name.split("@")[0]
+    # Email address → extract readable name
+    if "@" in name:
+        local = name.split("@")[0]
         parts = re.split(r"[._-]+", local)
         friendly = " ".join(p.capitalize() for p in parts if p)
         return friendly or "Customer"
 
-    parts = recipient_name.split()
+    # Normal name
+    parts = name.split()
     return parts[0].capitalize() if parts else "Customer"
 
 
 # ------------------------------------------------------------
-# Email Formatter (Final Output Builder)
+# FINAL EMAIL FORMATTER
 # ------------------------------------------------------------
 def format_email(subject: str, recipient_name: str, body: str, user_name: str) -> str:
+    """
+    Build the final email with greeting + signature.
+    Cleans hallucinated details + accidental LLM formatting problems.
+    """
     cleaned_subject = clean_text(subject)
     cleaned_user = clean_text(user_name)
     cleaned_body = (body or "").strip()
@@ -76,20 +87,30 @@ def format_email(subject: str, recipient_name: str, body: str, user_name: str) -
     friendly_name = _derive_friendly_name(recipient_name)
 
     # ------------------------------------------------------------
-    # Sanitize dangerous LLM hallucinations
+    # 1. FIREWALL: Sanitize hallucinated operational content
     # ------------------------------------------------------------
     if _contains_sensitive(cleaned_body):
-        logger.warning("[Formatter] Sanitizing suspicious operational details from body.")
+        logger.warning("[Formatter] Sensitive/hallucinated details detected → sanitizing.")
+        try:
+            SANITIZATION_TRIGGERED.labels(stage="formatter").inc()
+        except Exception:
+            pass
+
         cleaned_body = (
             "Thank you for your message. We have forwarded the details to our operations team. "
             "They will review the request and update you shortly."
         )
 
     # ------------------------------------------------------------
-    # Remove greeting lines accidentally included in body
+    # 2. Remove accidental greetings added by Gemini
     # ------------------------------------------------------------
     greeting_starters = [
-        "hi", "hello", "dear", "good morning", "good afternoon", "good evening",
+        "hi",
+        "hello",
+        "dear",
+        "good morning",
+        "good afternoon",
+        "good evening",
     ]
 
     lines = cleaned_body.splitlines()
@@ -97,12 +118,13 @@ def format_email(subject: str, recipient_name: str, body: str, user_name: str) -
         first = lines[0].strip().lower()
         if any(first.startswith(g) for g in greeting_starters):
             lines = lines[1:]
+            # Remove blank lines after greeting
             while lines and not lines[0].strip():
                 lines.pop(0)
             cleaned_body = "\n".join(lines).strip()
 
     # ------------------------------------------------------------
-    # Remove signatures inserted by Gemini anywhere (not only at end)
+    # 3. Remove AI-generated signatures
     # ------------------------------------------------------------
     signature_patterns = [
         r"^best regards[:,]?$",
@@ -112,31 +134,31 @@ def format_email(subject: str, recipient_name: str, body: str, user_name: str) -
         r"^thanks[:,]?$",
     ]
 
-    filtered_lines = []
+    filtered = []
     for line in cleaned_body.splitlines():
         stripped = line.strip().lower()
         if any(re.match(p, stripped) for p in signature_patterns):
             continue
         if cleaned_user.lower() in stripped:
             continue
-        filtered_lines.append(line)
+        filtered.append(line)
 
-    cleaned_body = "\n".join(filtered_lines).strip()
+    cleaned_body = "\n".join(filtered).strip()
 
     # ------------------------------------------------------------
-    # Normalize blank spacing
+    # 4. Normalize extra spacing
     # ------------------------------------------------------------
     cleaned_body = re.sub(r"\n\s*\n\s*\n+", "\n\n", cleaned_body)
 
     # ------------------------------------------------------------
-    # Guarantee a non-empty body
+    # 5. Guarantee non-empty output
     # ------------------------------------------------------------
     if not cleaned_body.strip():
         logger.warning("[Formatter] Cleaned body empty — inserting fallback.")
         cleaned_body = FALLBACK_RESPONSE
 
     # ------------------------------------------------------------
-    # Final Email Template
+    # 6. Final Jinja2 Template
     # ------------------------------------------------------------
     template = Template(
         """Hi {{ recipient_name }},
@@ -154,8 +176,8 @@ Best regards,
     )
 
     logger.info(
-        f"[Formatter] Created formatted email for '{friendly_name}' with subject '{cleaned_subject}'."
+        f"[Formatter] Final email ready for '{friendly_name}' with subject '{cleaned_subject}'."
     )
-    logger.debug(f"[Formatter] Final formatted email preview:\n{formatted_email}")
+    logger.debug(f"[Formatter] Preview:\n{formatted_email}")
 
     return formatted_email.strip()
