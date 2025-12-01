@@ -110,7 +110,10 @@ Create a `.env` file:
 
 ```dotenv
 # Gemini API
-GEMINI_API_KEY=your_key
+
+HUGGINGFACEHUB_API_TOKEN=your_key
+GEMINI_API_KEY1=your_key
+GEMINI_API_KEY2=your_key
 
 # SMTP
 EMAIL_SERVER=smtp.gmail.com
@@ -281,3 +284,4 @@ python -m unittest discover
 ShipCube's AI Email Agent uses contributions from the open-source community and incorporates technologies such as Google Gemini, LangGraph, LangChain, Hugging Face embeddings, ChromaDB, Prometheus, and Grafana.
 
 ---
+
