@@ -308,17 +308,18 @@ async def health_check(request: Request):
 async def process_email_api(req: EmailRequest):
     start = time.time()
 
+    # ---------- input size check ----------
     if len(req.body or "") > MAX_EMAIL_BODY_CHARS:
         logger.warning("[ProcessEmail] Rejected email: body too large (%d chars)", len(req.body or ""))
         raise HTTPException(status_code=400, detail=f"Email body too large (max {MAX_EMAIL_BODY_CHARS} chars)")
 
+    # ---------- sanitize user text ----------
     sanitized_body = sanitize_user_text(req.body)
     if sanitized_body != req.body:
-        logger.info("[ProcessEmail] Prompt-injection patterns removed from input.")
         try:
             PROMPT_INJECTION_DETECTED.inc()
         except Exception:
-            logger.debug("[Metrics] PROMPT_INJECTION_DETECTED inc failed (ignored).")
+            pass
 
     email_data = {
         "from": req.sender_email,
@@ -327,42 +328,37 @@ async def process_email_api(req: EmailRequest):
         "body": sanitized_body,
     }
 
+    # ---------- increment pipeline counter ----------
     pipeline_inc_done = False
     try:
         PIPELINE_ACTIVE.inc()
         pipeline_inc_done = True
-    except Exception:
+    except:
         pipeline_inc_done = False
 
-    success = False
     try:
-        # Supervisor may be blocking; run in thread if necessary
+        # ---------- run supervisor in thread ----------
         state: EmailState = await asyncio.to_thread(
             supervisor_langgraph,
-            dict(selected_email=email_data, your_name="ShipCube", recipient_name=req.sender_name)
-        ) if not asyncio.iscoroutinefunction(supervisor_langgraph) else await supervisor_langgraph(
             selected_email=email_data,
             your_name="ShipCube",
             recipient_name=req.sender_name,
         )
 
-        # metrics: classification
+        # ---------- classification metric ----------
         try:
             EMAIL_CLASSIFICATION_COUNTER.labels(classification=(state.classification or "unknown")).inc()
-        except Exception:
-            try:
-                EMAIL_CLASSIFICATION_COUNTER.labels(classification="unknown").inc()
-            except Exception:
-                logger.debug("[Metrics] EMAIL_CLASSIFICATION_COUNTER inc failed (ignored).")
+        except:
+            pass
 
-        # sanitization triggered metric
+        # ---------- sanitization metric ----------
         try:
             if state.metadata.get(state.current_email_id, {}).get("sanitization_reason"):
-                SANITIZATION_TRIGGERED.labels(stage="response_generator").inc()
-        except Exception:
-            logger.debug("[Metrics] SANITIZATION_TRIGGERED inc failed (ignored).")
+                SANITIZATION_TRIGGERED.labels(stage="response").inc()
+        except:
+            pass
 
-        # persist original body for auditing (log_email_record may be blocking - run in thread)
+        # ---------- CSV record ----------
         record_payload = {
             "Timestamp": datetime.now(timezone.utc).isoformat(),
             "Sender Email": req.sender_email,
@@ -380,7 +376,7 @@ async def process_email_api(req: EmailRequest):
         }
         await asyncio.to_thread(log_email_record, record_payload, RECORDS_CSV_PATH)
 
-        # success / failure counts
+        # ---------- success or failure metrics ----------
         if state.processing_error:
             EMAILS_PROCESSED.labels(status="failed").inc()
             mark_email_processed(False)
@@ -388,8 +384,7 @@ async def process_email_api(req: EmailRequest):
             EMAILS_PROCESSED.labels(status="success").inc()
             mark_email_processed(True)
 
-        success = True
-
+        # ---------- API response ----------
         return ProcessEmailResponse(
             status="success" if not state.processing_error else "error",
             classification=state.classification,
@@ -400,23 +395,20 @@ async def process_email_api(req: EmailRequest):
             timestamp=datetime.now(timezone.utc).isoformat(),
         )
 
-    except HTTPException:
-        raise
     except Exception as e:
         logger.error(f"[Process Email] Pipeline error: {e}", exc_info=True)
-        try:
-            EMAILS_PROCESSED.labels(status="failed").inc()
-        except Exception:
-            logger.debug("[Metrics] EMAILS_PROCESSED inc failed (ignored).")
+        EMAILS_PROCESSED.labels(status="failed").inc()
         mark_email_processed(False)
         raise HTTPException(status_code=500, detail="Pipeline failure")
+
     finally:
         if pipeline_inc_done:
             try:
                 PIPELINE_ACTIVE.dec()
-            except Exception:
-                logger.debug("[ProcessEmail] Failed to decrement PIPELINE_ACTIVE (ignored).")
-        logger.info(f"[ProcessEmail] finished | success={success} elapsed={time.time() - start:.2f}s")
+            except:
+                pass
+
+        logger.info(f"[ProcessEmail] finished | elapsed={time.time() - start:.2f}s")
 
 
 # ---------------------------

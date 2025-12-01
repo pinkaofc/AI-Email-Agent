@@ -1,11 +1,14 @@
 # utils/custom_fallbacks.py
 import re
-from typing import Optional
+from typing import Optional, List
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-# Minimal set of intent patterns → expand as you like
+
+# ============================================================
+# INTENT PATTERNS (kept same as provided)
+# ============================================================
 INTENT_PATTERNS = {
     "appreciation": [r"\bthank(s| you)\b", r"\bappreciat", r"\bexcellent\b", r"\bdelight(ed)?\b"],
     "missing_items": [r"\bmissing\b", r"\bshortage\b", r"\bnot received\b", r"\bmissing items\b"],
@@ -17,7 +20,25 @@ INTENT_PATTERNS = {
     "security": [r"\bclick the link\b", r"\bprovide your card\b", r"\blogin\b", r"\bphish\b", r"\bcard details\b"],
 }
 
-# Templates keyed by intent. Keep these safe — no operational promises.
+
+# ============================================================
+# INTENT PRIORITY (strongest → weakest)
+# ============================================================
+INTENT_PRIORITY = [
+    "damaged",
+    "missing_items",
+    "wrong_address",
+    "delayed",
+    "billing",
+    "customs",
+    "security",
+    "appreciation",
+]
+
+
+# ============================================================
+# RESPONSE TEMPLATES
+# ============================================================
 TEMPLATES = {
     "appreciation": (
         "Thank you for your kind message. We're delighted your order arrived ahead of schedule — "
@@ -49,50 +70,73 @@ TEMPLATES = {
         "This message looks suspicious. For your safety, do not share login or card details via email. "
         "Please confirm the sender's email and we will investigate further."
     ),
-    # generic fallback if nothing matches
     "default": (
         "Thank you for reaching out. We’ve received your message and our team will get back to you shortly."
     ),
 }
 
-def _match_intent(text: str) -> Optional[str]:
+
+# ============================================================
+# HELPER — collect *all* matched intents
+# ============================================================
+def _collect_intents(text: str) -> List[str]:
+    matches = []
     if not text:
-        return None
+        return matches
+
     text = text.lower()
+
     for intent, patterns in INTENT_PATTERNS.items():
         for p in patterns:
             if re.search(p, text):
-                return intent
-    return None
+                matches.append(intent)
+                break
 
+    return matches
+
+
+# ============================================================
+# MAIN FALLBACK SELECTOR (Weighted)
+# ============================================================
 def get_custom_fallback(summary: str, original_body: str) -> str:
     """
-    Return a safe fallback template chosen by matching the summary or original email body.
-    - summary: the sanitized summary string (may include intent clues)
-    - original_body: the raw email body (used when summary is generic)
+    Returns the strongest intent fallback using weighted priority.
+    Example:
+      damaged + delayed → damaged
+      missing_items + delayed → missing_items
     """
+
     try:
         combined = " ".join([s for s in (summary or "", original_body or "") if s]).lower()
 
-        intent = _match_intent(combined)
-        if intent and intent in TEMPLATES:
-            logger.info(f"[CustomFallbacks] Matched intent '{intent}' → returning template.")
-            return TEMPLATES[intent]
+        # gather all matching intents
+        matched_intents = _collect_intents(combined)
 
-        # second pass: less strict heuristics (keywords)
+        if matched_intents:
+            # pick the strongest based on INTENT_PRIORITY
+            for strong_intent in INTENT_PRIORITY:
+                if strong_intent in matched_intents:
+                    logger.info(
+                        f"[CustomFallbacks] Weighted intent '{strong_intent}' selected from matches: {matched_intents}"
+                    )
+                    return TEMPLATES.get(strong_intent, TEMPLATES["default"])
+
+        # keyword fallback (secondary)
         keywords = {
-            "appreciation": ["thank", "appreciate", "excellent", "delighted"],
-            "delayed": ["delay", "delayed", "late"],
-            "missing_items": ["missing", "short", "not received"],
             "damaged": ["damag", "broken", "crush"],
-            "billing": ["invoice", "billing", "duplicate"]
+            "missing_items": ["missing", "short", "not received"],
+            "wrong_address": ["wrong address", "another address"],
+            "delayed": ["delay", "late", "waiting"],
+            "billing": ["invoice", "billing", "duplicate"],
         }
-        for k, kws in keywords.items():
-            if any(kw in combined for kw in kws):
-                logger.info(f"[CustomFallbacks] Keyword match '{k}' → returning template.")
-                return TEMPLATES.get(k, TEMPLATES["default"])
 
-        logger.info("[CustomFallbacks] No strong match found → returning default fallback.")
+        for intent, kws in keywords.items():
+            if any(k in combined for k in kws):
+                logger.info(f"[CustomFallbacks] Keyword match → '{intent}'")
+                return TEMPLATES.get(intent, TEMPLATES["default"])
+
+        # no match
+        logger.info("[CustomFallbacks] No intent matched → returning default fallback.")
         return TEMPLATES["default"]
 
     except Exception as e:

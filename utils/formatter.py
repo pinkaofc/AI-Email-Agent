@@ -14,36 +14,35 @@ FALLBACK_RESPONSE = (
 )
 
 # ------------------------------------------------------------
-# Sensitive / Operational Leak Patterns (LLM hallucination firewall)
+# Minimal Firewall
+# Only block CLEARLY fabricated operational details:
+# - Fake AWB numbers
+# - Fake ETAs
+# - Fake long phone numbers
 # ------------------------------------------------------------
-SUSPICIOUS_PATTERNS = [
-    r"\bSC-[A-Z0-9]{4,}\b",
-    r"\btracking\b",
-    r"\btracking number\b",
-    r"\brefund\b",
-    r"\bdispatch(?:ed)?\b",
-    r"\binvestigation\b",
-    r"\bwarehouse\b",
-    r"\bfulfillment\b",
-    r"\border id\b",
-    r"\bawb\b",
-    r"\bdelivery date\b",
-    r"\bexpected delivery\b",
+
+STRICT_PATTERNS = [
+    r"\bAWB\s*\d{5,}\b",     # Fake AWB numbers
+    r"\bETA\s*\d",          # Unverified ETAs
+    r"\bETA[:\- ]+\d",
+    r"\b\d{10,}\b",         # Fabricated 10+ digit numbers
 ]
 
 
-def _contains_sensitive(text: str) -> bool:
-    """Detect fabricated or operational hallucinations."""
+def _contains_fabrication(text: str) -> bool:
+    """Return True only if text contains clearly fabricated operational info."""
     if not text:
         return False
-    for p in SUSPICIOUS_PATTERNS:
-        if re.search(p, text, re.IGNORECASE):
+
+    for pat in STRICT_PATTERNS:
+        if re.search(pat, text, re.IGNORECASE):
             return True
+
     return False
 
 
 # ------------------------------------------------------------
-# Basic cleaner
+# Clean text helper
 # ------------------------------------------------------------
 def clean_text(text: str) -> str:
     if not text:
@@ -52,7 +51,7 @@ def clean_text(text: str) -> str:
 
 
 # ------------------------------------------------------------
-# Friendly name builder
+# Friendly name extraction
 # ------------------------------------------------------------
 def _derive_friendly_name(recipient_name: str) -> str:
     if not recipient_name:
@@ -60,11 +59,11 @@ def _derive_friendly_name(recipient_name: str) -> str:
 
     name = recipient_name.strip()
 
-    # Email address → extract readable name
+    # Handle email address → extract readable name
     if "@" in name:
         local = name.split("@")[0]
         parts = re.split(r"[._-]+", local)
-        friendly = " ".join(p.capitalize() for p in parts if p)
+        friendly = " ".join(part.capitalize() for part in parts if part)
         return friendly or "Customer"
 
     # Normal name
@@ -73,13 +72,9 @@ def _derive_friendly_name(recipient_name: str) -> str:
 
 
 # ------------------------------------------------------------
-# FINAL EMAIL FORMATTER
+# FINAL EMAIL FORMATTER (Option-C)
 # ------------------------------------------------------------
 def format_email(subject: str, recipient_name: str, body: str, user_name: str) -> str:
-    """
-    Build the final email with greeting + signature.
-    Cleans hallucinated details + accidental LLM formatting problems.
-    """
     cleaned_subject = clean_text(subject)
     cleaned_user = clean_text(user_name)
     cleaned_body = (body or "").strip()
@@ -87,10 +82,11 @@ def format_email(subject: str, recipient_name: str, body: str, user_name: str) -
     friendly_name = _derive_friendly_name(recipient_name)
 
     # ------------------------------------------------------------
-    # 1. FIREWALL: Sanitize hallucinated operational content
+    # 1. Minimal hallucination firewall — Option-C
+    # Only sanitizes when fabricated numbers/ETAs/AWB found.
     # ------------------------------------------------------------
-    if _contains_sensitive(cleaned_body):
-        logger.warning("[Formatter] Sensitive/hallucinated details detected → sanitizing.")
+    if _contains_fabrication(cleaned_body):
+        logger.warning("[Formatter] Fabricated operational details detected → sanitizing.")
         try:
             SANITIZATION_TRIGGERED.labels(stage="formatter").inc()
         except Exception:
@@ -102,29 +98,22 @@ def format_email(subject: str, recipient_name: str, body: str, user_name: str) -
         )
 
     # ------------------------------------------------------------
-    # 2. Remove accidental greetings added by Gemini
+    # 2. Remove accidental AI-generated greetings
+    # (Gemini may add 'Hi,' or 'Hello,' even though we tell it not to)
     # ------------------------------------------------------------
-    greeting_starters = [
-        "hi",
-        "hello",
-        "dear",
-        "good morning",
-        "good afternoon",
-        "good evening",
-    ]
+    greeting_starters = ["hi", "hello", "dear", "good morning", "good afternoon", "good evening"]
 
     lines = cleaned_body.splitlines()
     if lines:
         first = lines[0].strip().lower()
         if any(first.startswith(g) for g in greeting_starters):
             lines = lines[1:]
-            # Remove blank lines after greeting
             while lines and not lines[0].strip():
                 lines.pop(0)
             cleaned_body = "\n".join(lines).strip()
 
     # ------------------------------------------------------------
-    # 3. Remove AI-generated signatures
+    # 3. Remove AI-generated signatures from Gemini
     # ------------------------------------------------------------
     signature_patterns = [
         r"^best regards[:,]?$",
@@ -139,45 +128,37 @@ def format_email(subject: str, recipient_name: str, body: str, user_name: str) -
         stripped = line.strip().lower()
         if any(re.match(p, stripped) for p in signature_patterns):
             continue
-        if cleaned_user.lower() in stripped:
+        if cleaned_user.lower() in stripped:  # avoid duplicates
             continue
         filtered.append(line)
 
     cleaned_body = "\n".join(filtered).strip()
 
-    # ------------------------------------------------------------
-    # 4. Normalize extra spacing
-    # ------------------------------------------------------------
-    cleaned_body = re.sub(r"\n\s*\n\s*\n+", "\n\n", cleaned_body)
-
-    # ------------------------------------------------------------
-    # 5. Guarantee non-empty output
-    # ------------------------------------------------------------
-    if not cleaned_body.strip():
-        logger.warning("[Formatter] Cleaned body empty — inserting fallback.")
+    # Guarantee non-empty
+    if not cleaned_body:
         cleaned_body = FALLBACK_RESPONSE
 
     # ------------------------------------------------------------
-    # 6. Final Jinja2 Template
+    # 4. Final Jinja template
     # ------------------------------------------------------------
     template = Template(
         """Hi {{ recipient_name }},
 
+
 {{ body }}
+
 
 Best regards,
 {{ user_name }}"""
     )
 
-    formatted_email = template.render(
+    formatted = template.render(
         recipient_name=friendly_name,
         body=cleaned_body,
         user_name=cleaned_user,
     )
 
-    logger.info(
-        f"[Formatter] Final email ready for '{friendly_name}' with subject '{cleaned_subject}'."
-    )
-    logger.debug(f"[Formatter] Preview:\n{formatted_email}")
+    logger.info(f"[Formatter] Final email ready for '{friendly_name}' with subject '{cleaned_subject}'.")
+    logger.debug(f"[Formatter] Preview:\n{formatted}")
 
-    return formatted_email.strip()
+    return formatted.strip()
