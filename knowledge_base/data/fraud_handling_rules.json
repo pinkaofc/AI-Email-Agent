@@ -1,0 +1,15 @@
+{
+  "fraud_rules": {
+    "suspicious_email_signs": [
+      "unknown sender domain",
+      "links requesting login or payment",
+      "threatening tone"
+    ],
+    "ai_actions": [
+      "do not click or reference external links",
+      "advise customer to verify via official ShipCube dashboard",
+      "never confirm shipment status unless system verified"
+    ],
+    "safe_response": "For your security, please verify this through your official ShipCube dashboard or by contacting support@shipcube.com."
+  }
+}

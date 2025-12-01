@@ -60,3 +60,39 @@
 2025-11-21 00:22:23 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
 2025-11-21 00:30:58 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
 2025-11-21 00:32:19 | INFO | [Records] Saved record #1 | Sender=oye.its.pvt@gmail.com | Classification=neutral | Status=Drafted
+2025-11-21 11:17:34 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-21 15:39:57 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-21 17:59:11 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-21 18:09:30 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-24 15:09:52 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-24 15:11:13 | INFO | [Records] Saved record #1 | Sender=hello@tryexponent.com | Classification=promotional | Status=Skipped (promotional)
+2025-11-24 15:58:01 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-24 15:58:47 | INFO | [Records] Saved record #1 | Sender=hello@tryexponent.com | Classification=promotional | Status=Skipped (promotional)
+2025-11-24 15:59:00 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-24 16:30:35 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-24 16:31:59 | INFO | [Records] Saved record #1 | Sender=sophia.gonzalez@globalimports.mx | Classification=positive | Status=Drafted
+2025-11-24 17:29:50 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-24 20:14:26 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-25 13:34:50 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-25 13:46:48 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-25 13:49:10 | INFO | [Records] Saved record #1 | Sender=no-reply@flashdelivery.net | Classification=negative | Status=Drafted
+2025-11-25 14:12:00 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-25 14:13:10 | INFO | [Records] Saved record #1 | Sender=oye.its.pvt@gmail.com | Classification=positive | Status=Drafted
+2025-11-25 14:29:47 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-25 15:00:49 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-25 15:02:15 | INFO | [Records] Saved record #1 | Sender=aayushtyagi301@gmail.com | Classification=positive | Status=Drafted
+2025-11-25 15:11:57 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-25 15:14:33 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-25 15:24:15 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-25 15:25:12 | INFO | [Records] Saved record #1 | Sender=aayushtyagi301@gmail.com | Classification=negative | Status=Drafted
+2025-11-25 16:07:20 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-25 16:13:08 | INFO | [Records] Saved record #2 | Sender=customer@example.com | Classification=negative | Status=processed
+2025-11-26 11:11:40 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-26 14:18:19 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-26 14:19:47 | INFO | [Records] Saved record #1 | Sender=hello@tryexponent.com | Classification=promotional | Status=Skipped (promotional)
+2025-11-26 14:21:11 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-26 14:21:57 | INFO | [Records] Saved record #1 | Sender=no-reply@flashdelivery.net | Classification=negative | Status=Drafted
+2025-11-26 16:05:24 | INFO | [Records] Saved record #2 | Sender=customer@test.com | Classification=negative | Status=processed
+2025-11-26 17:06:21 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-11-26 17:07:21 | INFO | [Records] Saved record #1 | Sender=no-reply@flashdelivery.net | Classification=negative | Status=Sent Directly
+2025-11-26 17:08:20 | INFO | [Records] Saved record #2 | Sender=raj.malhotra@malhotragoods.in | Classification=negative | Status=Sent Directly

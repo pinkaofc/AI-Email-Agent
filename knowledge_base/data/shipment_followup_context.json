@@ -1,0 +1,240 @@
+{
+  "followup_threads": [
+    {
+      "thread_id": "1",
+      "internal_context": {
+        "issue_type": "address_update_required",
+        "current_status": "shipment_on_hold",
+        "note": "Customer has not updated delivery details. No action has been taken yet. AI must remind customer politely without making threats or confirming cancellation.",
+        "allowed_response": "Request customer to update address. Use safe wording like 'shipment is currently on hold until verification is completed'."
+      }
+    },
+
+    {
+      "thread_id": "2",
+      "internal_context": {
+        "issue_type": "missing_items",
+        "current_status": "warehouse_audit_in_progress",
+        "sla": "warehouse verification 24–48 hours",
+        "note": "Customer asking when replacement will be shipped. AI must NOT confirm replacement. Investigation is ongoing.",
+        "allowed_response": "Say audit is ongoing and team will update once verification completes."
+      }
+    },
+
+    {
+      "thread_id": "3",
+      "internal_context": {
+        "issue_type": "wrong_delivery",
+        "current_status": "courier_pod_verification",
+        "sla": "POD verification 12–24 hours",
+        "note": "Customer asking if shipment retrieved and ETA. AI cannot give ETA or confirm recovery.",
+        "allowed_response": "Say courier partner verification is ongoing and update will follow."
+      }
+    },
+
+    {
+      "thread_id": "4",
+      "internal_context": {
+        "issue_type": "marked_delivered_but_not_received",
+        "current_status": "investigation_started",
+        "sla": "courier escalation 24–48 hours",
+        "note": "Temporary ID provided earlier, but not yet confirmed. AI must avoid giving tracking updates.",
+        "allowed_response": "Say team is verifying with courier and will update once confirmation is received."
+      }
+    },
+
+    {
+      "thread_id": "6",
+      "internal_context": {
+        "issue_type": "delivery_eta_request",
+        "current_status": "dispatch_stage_validation",
+        "note": "Customer wants to know if shipment moved to outbound scanning. AI cannot confirm operational scan unless verified.",
+        "allowed_response": "Say team is validating scan movement under standard SLA."
+      }
+    },
+
+    {
+      "thread_id": "7",
+      "internal_context": {
+        "issue_type": "delay_update_request",
+        "current_status": "reroute_in_progress",
+        "sla": "movement verification 12–24 hours",
+        "allowed_response": "Say operations team reviewing hub status."
+      }
+    },
+
+    {
+      "thread_id": "8",
+      "internal_context": {
+        "issue_type": "damaged_goods",
+        "current_status": "images_received_under_review",
+        "sla": "claim review 1–3 business days",
+        "note": "Customer asked for replacement confirmation. AI cannot approve replacement.",
+        "allowed_response": "Say review is in progress."
+      }
+    },
+
+    {
+      "thread_id": "10",
+      "internal_context": {
+        "issue_type": "customs_clearance_issue",
+        "current_status": "documentation_under_review",
+        "sla": "document recheck 6–12 hours",
+        "allowed_response": "Say team is validating updated documents."
+      }
+    },
+
+    {
+      "thread_id": "11",
+      "internal_context": {
+        "issue_type": "delivery_status_inquiry",
+        "current_status": "tracking_review_in_progress",
+        "sla": "movement verification 12–24 hours",
+        "allowed_response": "Say courier scan is being reviewed."
+      }
+    },
+
+    {
+      "thread_id": "12",
+      "internal_context": {
+        "issue_type": "billing_clarification",
+        "current_status": "invoice_review_ongoing",
+        "sla": "invoice verification 1–2 business days",
+        "allowed_response": "Say finance team is reviewing the line item."
+      }
+    },
+
+    {
+      "thread_id": "13",
+      "internal_context": {
+        "issue_type": "return_pickup_pending",
+        "current_status": "pickup_scheduling_pending",
+        "sla": "pickup scheduling 24–48 hours",
+        "allowed_response": "Say pickup partner confirmation is in progress."
+      }
+    },
+
+    {
+      "thread_id": "14",
+      "internal_context": {
+        "issue_type": "incorrect_tracking_id",
+        "current_status": "tracking_id_verification",
+        "sla": "ID verification 12–24 hours",
+        "allowed_response": "Say tracking verification is under review."
+      }
+    },
+
+    {
+      "thread_id": "15",
+      "internal_context": {
+        "issue_type": "wrong_invoice",
+        "current_status": "final_invoice_correction",
+        "sla": "invoice verification 1–2 business days",
+        "allowed_response": "Say finance team is rechecking line items."
+      }
+    },
+
+    {
+      "thread_id": "17",
+      "internal_context": {
+        "issue_type": "replacement_followup",
+        "current_status": "pending_dispatch_confirmation",
+        "ai_restriction": "AI cannot confirm dispatch or give tracking number",
+        "allowed_response": "Say team will share details after courier confirmation."
+      }
+    },
+
+    {
+      "thread_id": "18",
+      "internal_context": {
+        "issue_type": "bulk_shipment_eta",
+        "current_status": "departure_validation_in_progress",
+        "allowed_response": "Say operations is verifying departure status."
+      }
+    },
+
+    {
+      "thread_id": "20",
+      "internal_context": {
+        "issue_type": "stock_discrepancy",
+        "current_status": "dispatch_slip_reaudit",
+        "sla": "warehouse verification 24–48 hours",
+        "allowed_response": "Say team is reconciling the dispatch slip."
+      }
+    },
+
+    {
+      "thread_id": "21",
+      "internal_context": {
+        "issue_type": "of_delivery_delay",
+        "current_status": "courier_movement_check",
+        "sla": "movement verification 12–24 hours",
+        "allowed_response": "Say courier acknowledgement being checked."
+      }
+    },
+
+    {
+      "thread_id": "22",
+      "internal_context": {
+        "issue_type": "packaging_quality_feedback",
+        "current_status": "feedback_forwarded",
+        "allowed_response": "Say packaging improvements apply across future shipments but avoid operational promise."
+      }
+    },
+
+    {
+      "thread_id": "23",
+      "internal_context": {
+        "issue_type": "customs_document_request",
+        "current_status": "packing_list_preparation",
+        "allowed_response": "Say team is preparing the requested document."
+      }
+    },
+
+    {
+      "thread_id": "24",
+      "internal_context": {
+        "issue_type": "duplicate_invoice",
+        "current_status": "invoice_selection_review",
+        "allowed_response": "Say finance is verifying the correct invoice."
+      }
+    },
+
+    {
+      "thread_id": "26",
+      "internal_context": {
+        "issue_type": "partial_delivery",
+        "current_status": "batch_two_validation",
+        "ai_restriction": "AI cannot provide tracking ID",
+        "allowed_response": "Say operations will share second batch status after verification."
+      }
+    },
+
+    {
+      "thread_id": "27",
+      "internal_context": {
+        "issue_type": "repeated_delay_escalation",
+        "current_status": "senior_team_review",
+        "allowed_response": "Say issue is under senior-level review."
+      }
+    },
+
+    {
+      "thread_id": "28",
+      "internal_context": {
+        "issue_type": "dispatch_slip_incorrect",
+        "current_status": "slip_reverification",
+        "allowed_response": "Say operations is revalidating product codes."
+      }
+    },
+
+    {
+      "thread_id": "29",
+      "internal_context": {
+        "issue_type": "return_pickup_followup",
+        "current_status": "awaiting_partner_confirmation",
+        "allowed_response": "Say pickup confirmation is awaited from partner."
+      }
+    }
+  ]
+}

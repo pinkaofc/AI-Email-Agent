@@ -1,0 +1,22 @@
+{
+  "ticketing_flow": {
+    "workflow": [
+      "Customer email received",
+      "Internal ticket created",
+      "Assigned to relevant team (Operations, Finance, Warehouse, Compliance)",
+      "Team reviews within SLA windows",
+      "AI provides safe status updates without ticket IDs"
+    ],
+    "restricted": [
+      "AI must not reveal ticket IDs",
+      "AI must not assign specific employees",
+      "AI must not provide internal logs"
+    ],
+    "allowed_phrases": [
+      "We've forwarded this to our operations team",
+      "Our finance team is reviewing this",
+      "Our warehouse team is checking the records"
+    ]
+  }
+}
+

@@ -76,3 +76,83 @@
 2025-11-21 00:30:58 | INFO | [Email Ingestion] Logger initialized successfully.
 2025-11-21 00:31:35 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as oye.its.pvt@gmail.com
 2025-11-21 00:31:38 | INFO | [Email Ingestion] Successfully fetched 1 emails via IMAP.
+2025-11-21 11:17:34 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-21 11:17:34 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-21 15:39:56 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-21 15:39:56 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-21 17:59:11 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-21 17:59:11 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-21 17:59:46 | INFO | [Email Ingestion] Simulation mode enabled — using local email dataset.
+2025-11-21 17:59:46 | INFO | [Email Ingestion] Loaded 30 emails from sample_emails.json
+2025-11-21 18:09:30 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-21 18:09:30 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-21 18:10:06 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as teamai@shipcube.com
+2025-11-21 18:10:07 | WARNING | [Email Ingestion] No unread emails found.
+2025-11-24 15:09:52 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-24 15:09:52 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-24 15:11:06 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as oye.its.pvt@gmail.com
+2025-11-24 15:11:10 | INFO | [Email Ingestion] Successfully fetched 1 emails via IMAP.
+2025-11-24 15:58:01 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-24 15:58:01 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-24 15:58:40 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as oye.its.pvt@gmail.com
+2025-11-24 15:58:44 | INFO | [Email Ingestion] Successfully fetched 1 emails via IMAP.
+2025-11-24 15:59:00 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-24 15:59:00 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-24 15:59:34 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as oye.its.pvt@gmail.com
+2025-11-24 15:59:38 | INFO | [Email Ingestion] Successfully fetched 1 emails via IMAP.
+2025-11-24 16:30:36 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-24 16:30:36 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-24 16:31:29 | INFO | [Email Ingestion] Simulation mode enabled — using local email dataset.
+2025-11-24 16:31:29 | INFO | [Email Ingestion] Loaded 30 emails from sample_emails.json
+2025-11-24 17:29:50 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-24 17:29:50 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-24 20:14:26 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-24 20:14:26 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-25 13:34:50 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-25 13:34:50 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-25 13:37:45 | INFO | [Email Ingestion] Simulation mode enabled — using local email dataset.
+2025-11-25 13:37:45 | INFO | [Email Ingestion] Loaded 29 emails from sample_emails.json
+2025-11-25 13:46:48 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-25 13:46:48 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-25 13:48:43 | INFO | [Email Ingestion] Simulation mode enabled — using local email dataset.
+2025-11-25 13:48:43 | INFO | [Email Ingestion] Loaded 29 emails from sample_emails.json
+2025-11-25 14:12:00 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-25 14:12:00 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-25 14:12:42 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as oye.its.pvt@gmail.com
+2025-11-25 14:12:46 | INFO | [Email Ingestion] Successfully fetched 1 emails via IMAP.
+2025-11-25 14:29:47 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-25 14:29:47 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-25 14:30:44 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as oye.its.pvt@gmail.com
+2025-11-25 14:30:48 | INFO | [Email Ingestion] Successfully fetched 1 emails via IMAP.
+2025-11-25 15:00:49 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-25 15:00:49 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-25 15:01:49 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as oye.its.pvt@gmail.com
+2025-11-25 15:01:53 | INFO | [Email Ingestion] Successfully fetched 1 emails via IMAP.
+2025-11-25 15:11:57 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-25 15:11:57 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-25 15:12:30 | INFO | [Email Ingestion] Simulation mode enabled — using local email dataset.
+2025-11-25 15:12:30 | INFO | [Email Ingestion] Loaded 29 emails from sample_emails.json
+2025-11-25 15:14:33 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-25 15:14:33 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-25 15:15:07 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as oye.its.pvt@gmail.com
+2025-11-25 15:15:12 | INFO | [Email Ingestion] Successfully fetched 1 emails via IMAP.
+2025-11-25 15:24:15 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-25 15:24:15 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-25 15:24:48 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as oye.its.pvt@gmail.com
+2025-11-25 15:24:53 | INFO | [Email Ingestion] Successfully fetched 1 emails via IMAP.
+2025-11-25 16:07:20 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-25 16:07:20 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-26 11:11:39 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-26 11:11:39 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-26 14:18:19 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-26 14:18:19 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-26 14:19:39 | INFO | [Email Ingestion] Connecting to IMAP server imap.gmail.com:993 as oye.its.pvt@gmail.com
+2025-11-26 14:19:44 | INFO | [Email Ingestion] Successfully fetched 1 emails via IMAP.
+2025-11-26 14:21:11 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-26 14:21:11 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-26 14:21:36 | INFO | [Email Ingestion] Simulation mode enabled — using local email dataset.
+2025-11-26 14:21:36 | INFO | [Email Ingestion] Loaded 24 emails from sample_emails.json
+2025-11-26 17:06:21 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-11-26 17:06:21 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-11-26 17:06:56 | INFO | [Email Ingestion] Simulation mode enabled — using local email dataset.
+2025-11-26 17:06:56 | INFO | [Email Ingestion] Loaded 24 emails from sample_emails.json

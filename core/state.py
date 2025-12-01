@@ -7,16 +7,8 @@ from datetime import datetime
 class EmailState:
     """
     Central state object passed across the LangGraph workflow.
-
-    Tracks:
-      • Raw email
-      • Classification / summarization / response
-      • RAG (knowledge base) results
-      • Fallback usage & reasons
-      • Safety flags (hallucinations, sanitization)
-      • Confidence scores
-      • Metrics-friendly metadata
-      • Stage-by-stage history for full auditability
+    Tracks everything about classification, summary, RAG, response,
+    safety, fallback, confidence, and metadata for full auditability.
     """
 
     # ----------------------------------------------------
@@ -27,7 +19,7 @@ class EmailState:
     current_email_id: Optional[str] = None
 
     # ----------------------------------------------------
-    # Metadata and pipeline history
+    # Metadata & history
     # ----------------------------------------------------
     metadata: Dict[str, Dict[str, Any]] = field(default_factory=dict)
     history: List[Dict[str, Any]] = field(default_factory=list)
@@ -41,27 +33,28 @@ class EmailState:
     formatted_email: Optional[str] = None
 
     # ----------------------------------------------------
-    # Error / safety / review flags
+    # Safety / errors / hallucination tracking
     # ----------------------------------------------------
     processing_error: Optional[str] = None
     requires_human_review: bool = False
     hallucination_detected: bool = False
-    sanitization_reason: Optional[str] = None  # <– NEW: supervisor uses this
+    sanitization_reason: Optional[str] = None
+    fabricated_ids: List[str] = field(default_factory=list)  # <-- NEW
 
     # ----------------------------------------------------
-    # RAG (Knowledge Base)
+    # RAG (KB)
     # ----------------------------------------------------
     retrieved_context: Optional[str] = None
     context_quality: Optional[float] = None
 
     # ----------------------------------------------------
-    # Confidence + priority
+    # Confidence & priority
     # ----------------------------------------------------
     confidence_score: Optional[float] = None
     priority: Optional[str] = "normal"
 
     # ----------------------------------------------------
-    # Fallback tracking
+    # Fallback & provenance
     # ----------------------------------------------------
     used_fallback: bool = False
     fallback_reason: Optional[str] = None
@@ -74,20 +67,21 @@ class EmailState:
     # ====================================================
     # METHODS
     # ====================================================
+
     def update_timestamp(self):
         """Refresh last_modified timestamp."""
         self.last_updated = datetime.now().isoformat()
 
+    def mark_sanitization(self, reason: str):
+        """Unified method to mark sanitization events."""
+        self.sanitization_reason = reason
+        self.hallucination_detected = True
+        self.used_fallback = True
+        self.update_timestamp()
+        self.record_history(stage="sanitized", note=reason)
+
     def record_history(self, stage: str, note: str = ""):
-        """
-        Detailed audit trace of each stage.
-        Supervisor calls this:
-            - filter
-            - summarize
-            - respond
-            - formatter
-            - sanitize
-        """
+        """Detailed trace of every stage in the pipeline."""
         self.history.append({
             "stage": stage,
             "timestamp": datetime.now().isoformat(),
@@ -103,6 +97,7 @@ class EmailState:
             "fallback_reason": self.fallback_reason,
             "hallucination_detected": self.hallucination_detected,
             "sanitization_reason": self.sanitization_reason,
+            "fabricated_ids": self.fabricated_ids,
             "error": self.processing_error,
             "note": note,
         })

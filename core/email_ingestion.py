@@ -41,9 +41,16 @@ def fetch_email(simulate: bool = True, limit: int = 10, mark_as_seen: bool = Fal
         try:
             with open(email_file, "r", encoding="utf-8") as f:
                 emails = json.load(f)
+
             logger.info(f"[Email Ingestion] Loaded {len(emails)} emails from {email_file.name}")
+
+            # ★★★ APPLY LIMIT HERE ★★★
+            if limit and isinstance(limit, int):
+                emails = emails[:limit]
+
             time.sleep(2)
             return emails
+
         except Exception as e:
             logger.error(f"[Email Ingestion] Failed to load simulation emails: {e}")
             return []

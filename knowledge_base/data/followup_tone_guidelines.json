@@ -1,0 +1,23 @@
+{
+  "tone_guidelines": {
+    "followup_emails": {
+      "rules": [
+        "Acknowledge customer's previous email",
+        "Keep reply short, clear, and status-focused",
+        "Use reassurance without over-apologizing",
+        "Avoid repeating full explanations unless needed",
+        "Use neutral verification language"
+      ],
+      "recommended_phrases": [
+        "Thank you for your follow-up",
+        "Our team is continuing to review this",
+        "We will update you as soon as we receive confirmation"
+      ],
+      "restricted_phrases": [
+        "We guarantee",
+        "Your shipment will definitely",
+        "We already dispatched (unless verified)"
+      ]
+    }
+  }
+}

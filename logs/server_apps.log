@@ -416,3 +416,49 @@ TypeError: supervisor_langgraph() missing 2 required positional arguments: 'your
 2025-11-21 00:22:23 | INFO | [Init] Prometheus Instrumentator initialized at import time.
 2025-11-21 00:22:23 | INFO | [Startup] Validating KB…
 2025-11-21 00:22:23 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-21 11:17:34 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-21 11:17:34 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-21 11:17:34 | INFO | [Startup] Validating KB…
+2025-11-21 11:17:36 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-21 15:39:57 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-21 15:39:57 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-21 15:39:57 | INFO | [Startup] Validating KB…
+2025-11-21 15:39:58 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-21 15:51:20 | ERROR | [Process Email] Pipeline error: supervisor_langgraph() missing 2 required positional arguments: 'your_name' and 'recipient_name'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 340, in process_email_api
+    state: EmailState = await asyncio.to_thread(
+  File "C:\Drivers\python10\lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+  File "C:\Drivers\python10\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+TypeError: supervisor_langgraph() missing 2 required positional arguments: 'your_name' and 'recipient_name'
+2025-11-21 15:51:21 | INFO | [ProcessEmail] finished | success=False elapsed=0.78s
+2025-11-21 15:54:15 | ERROR | [Process Email] Pipeline error: supervisor_langgraph() missing 2 required positional arguments: 'your_name' and 'recipient_name'
+Traceback (most recent call last):
+  File "C:\Supply-Chain-Client-Management\Email-AI-Agent\server\apps.py", line 340, in process_email_api
+    state: EmailState = await asyncio.to_thread(
+  File "C:\Drivers\python10\lib\asyncio\threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+  File "C:\Drivers\python10\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+TypeError: supervisor_langgraph() missing 2 required positional arguments: 'your_name' and 'recipient_name'
+2025-11-21 15:54:15 | INFO | [ProcessEmail] finished | success=False elapsed=0.06s
+2025-11-24 17:29:50 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-24 17:29:50 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-24 17:29:50 | INFO | [Startup] Validating KB…
+2025-11-24 17:29:51 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-24 20:14:26 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-24 20:14:26 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-24 20:14:26 | INFO | [Startup] Validating KB…
+2025-11-24 20:14:27 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-25 16:07:20 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-25 16:07:20 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-25 16:07:20 | INFO | [Startup] Validating KB…
+2025-11-25 16:07:21 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-25 16:13:08 | INFO | [ProcessEmail] finished | elapsed=6.82s
+2025-11-26 11:11:40 | DEBUG | Logger initialized for 'server.apps' (to_file=True).
+2025-11-26 11:11:40 | INFO | [Init] Prometheus Instrumentator initialized at import time.
+2025-11-26 11:11:40 | INFO | [Startup] Validating KB…
+2025-11-26 11:11:41 | INFO | [Startup] KB Ready. Preview: # ShipCube Company Overview **Company Name:** ShipCube **Industry:** Logistics, Supply Chain Management, and Automation **Founded:** 2016 **Headquarters:** Mumbai, India **Employees:** 500+ **Operatio
+2025-11-26 16:05:24 | INFO | [ProcessEmail] finished | elapsed=6.90s

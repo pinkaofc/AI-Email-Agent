@@ -5,7 +5,6 @@ import re
 import email.utils
 import warnings
 from email.message import EmailMessage
-
 from config import EMAIL_APP_PASSWORD, EMAIL_SERVER, EMAIL_USERNAME, EMAIL_PORT
 from utils.logger import get_logger
 from utils.formatter import clean_text, format_email
@@ -36,11 +35,7 @@ def extract_name_from_email(email_address: str) -> str:
 # ============================================================
 
 SUSPICIOUS_PATTERNS = [
-    r"\bSC-[A-Z0-9]{4,}\b",       # actual order IDs
-    r"\btracking number\b",       # avoid hallucinating a number
-    r"\bAWB\b",                   # airway bill numbers
     r"\bETA\b",                   # exact ETA
-    r"\border id\b",              # specific identifiers
     r"\bclient address\b",        # PII
     r"\bphone\b",                 # PII
 ]

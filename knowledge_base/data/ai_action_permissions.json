@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "missing_items": {
+      "allowed": ["acknowledge issue", "inform verification ongoing"],
+      "not_allowed": ["confirm replacement", "confirm reshipment"]
+    },
+    "damaged_goods": {
+      "allowed": ["request photos", "inform QC review ongoing"],
+      "not_allowed": ["approve compensation", "approve replacement"]
+    },
+    "wrong_delivery": {
+      "allowed": ["inform POD verification ongoing"],
+      "not_allowed": ["confirm location", "promise redelivery"]
+    },
+    "delivery_delay": {
+      "allowed": ["mention SLA investigation timeline"],
+      "not_allowed": ["promise delivery date"]
+    },
+    "customs_issue": {
+      "allowed": ["say document review ongoing"],
+      "not_allowed": ["promise clearance"]
+    },
+    "billing_error": {
+      "allowed": ["say finance team reviewing"],
+      "not_allowed": ["confirm corrected invoice"]
+    },
+    "tracking_issue": {
+      "allowed": ["mention courier verification ongoing"],
+      "not_allowed": ["generate tracking ID", "invent tracking data"]
+    },
+    "return_pickup": {
+      "allowed": ["mention partner assignment pending"],
+      "not_allowed": ["confirm pickup time without partner confirmation"]
+    }
+  }
+}

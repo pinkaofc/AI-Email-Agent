@@ -1,33 +1,30 @@
 # agents/filtering_agent.py
 
 import time
-import random
 import re
-from langchain_core.prompts import PromptTemplate
-from langchain_google_genai import ChatGoogleGenerativeAI
 from transformers import pipeline
-
-from config import get_gemini_api_key
 from utils.logger import get_logger
 from utils.formatter import clean_text
-from utils.rate_limit_guard import rate_limit_safe_call
 
-# NEW: Monitoring metrics (correct imports)
+# Monitoring metrics
 from monitoring.metrics import (
-    GEMINI_CALLS,
-    GEMINI_FAILURES,
-    GEMINI_FALLBACK_USED,
-    EMAIL_CLASSIFICATION_COUNTER,
+    FILTERING_COUNT,
+    FILTERING_FAILURES,
+    FILTERING_LATENCY,
+    FILTERING_MODEL_USED,
+    safe_increment_counter,
+    safe_observe,
 )
 
 logger = get_logger(__name__)
 
 """
-Filtering agent:
-- Fast path keyword checks (spam/promotional)
-- Primary sentiment classification via Gemini (with monitoring)
-- HF fallback
-- Safe final fallback
+Filtering agent — HuggingFace ONLY
+----------------------------------
+✓ HF sentiment model only
+✓ Proper Prometheus metrics added
+✓ Tracks attempts, model used, failures, latency
+✓ No Gemini usage
 """
 
 # --------------------------------------------------
@@ -37,12 +34,14 @@ SPAM_KEYWORDS = [
     "lottery", "win cash", "claim prize", "free money", "work from home",
     "viagra", "buy now", "act now", "limited time", "click here", "buy direct"
 ]
+
 PROMOTIONAL_KEYWORDS = [
-    "sale", "discount", "promo", "subscribe", "newsletter", "offer", "deal", "new arrival"
+    "sale", "discount", "promo", "subscribe", "newsletter",
+    "offer", "deal", "new arrival"
 ]
 
 # --------------------------------------------------
-# Hugging Face fallback sentiment model (pinned)
+# Hugging Face Sentiment Model (Primary)
 # --------------------------------------------------
 try:
     hf_classifier = pipeline(
@@ -50,84 +49,14 @@ try:
         model="distilbert-base-uncased-finetuned-sst-2-english",
         revision="af0f99b",
     )
-    logger.info("[Filter] HF fallback sentiment model loaded.")
+    logger.info("[Filter] HF sentiment model loaded.")
 except Exception as e:
     hf_classifier = None
-    logger.error(f"[Filter] HF fallback model failed to initialize: {e}")
+    logger.error(f"[Filter] HF classifier failed to initialize: {e}")
 
 
 # --------------------------------------------------
-# Gemini sentiment classifier (with monitoring)
-# --------------------------------------------------
-def _use_gemini(prompt: str, retry_attempts: int = 3) -> str:
-    """
-    Attempt to get a single-word sentiment label from Gemini.
-    Emits monitoring metrics for calls/failures/fallback usage.
-    """
-    for attempt in range(1, retry_attempts + 1):
-
-        api_key = get_gemini_api_key()
-        # Count attempt (we call this before invoking)
-        try:
-            GEMINI_CALLS.labels(module="filtering").inc()
-        except Exception:
-            pass
-
-        logger.info(
-            f"[Filter] Gemini attempt {attempt}/{retry_attempts} using key {api_key[:6]}..."
-        )
-
-        try:
-            model = ChatGoogleGenerativeAI(
-                model="gemini-2.5-pro",
-                temperature=0.0,
-                google_api_key=api_key,
-            )
-
-            # IMPORTANT: do not pass monitoring kwargs into model.invoke
-            result_obj = rate_limit_safe_call(
-                model.invoke,
-                prompt
-            )
-
-            # result_obj may be an object — access .content if present
-            raw = getattr(result_obj, "content", result_obj)
-            sentiment_text = clean_text(raw).strip().lower()
-            logger.debug(f"[Filter] Raw Gemini output: {sentiment_text!r}")
-
-            if sentiment_text.startswith("neg"):
-                return "negative"
-            if sentiment_text in ("positive", "neutral", "negative"):
-                return sentiment_text
-
-            logger.warning("[Filter] Unexpected Gemini output → defaulting to 'neutral'.")
-            return "neutral"
-
-        except Exception as e:
-            err = str(e).lower()
-            reason = (err[:80]) if err else "unknown"
-
-            # record failure and fallback usage
-            try:
-                GEMINI_FAILURES.labels(module="filtering", reason=reason).inc()
-                GEMINI_FALLBACK_USED.labels(module="filtering").inc()
-            except Exception:
-                pass
-
-            # rotate on quota/429
-            if "429" in err or "quota" in err:
-                logger.warning("[Filter] Gemini quota/429 detected — rotating key and retrying.")
-                continue
-
-            logger.error(f"[Filter] Gemini unrecoverable error: {e}")
-            # escalate unrecoverable error upward to allow HF fallback to run
-            raise e
-
-    raise RuntimeError("Gemini sentiment classification failed after retries.")
-
-
-# --------------------------------------------------
-# Helper
+# Keyword helper
 # --------------------------------------------------
 def _contains_keyword_list(text: str, keywords: list) -> bool:
     t = (text or "").lower()
@@ -135,108 +64,79 @@ def _contains_keyword_list(text: str, keywords: list) -> bool:
 
 
 # --------------------------------------------------
-# Main Entry Point
+# Main Entry — HuggingFace ONLY + Metrics
 # --------------------------------------------------
 def filter_email(email: dict) -> str:
     """
-    Classify the incoming email into one of:
-      - 'positive', 'neutral', 'negative', 'spam', 'promotional'
-    This function ensures metrics are incremented for important outcomes.
+    Classify email as:
+    'positive', 'neutral', 'negative', 'spam', 'promotional'
     """
+
+    start_time = time.time()
+    safe_increment_counter(FILTERING_COUNT)
+
     subject = email.get("subject", "") or ""
     content = email.get("body", "") or ""
     combined = f"{subject}\n\n{content}"
 
-    # ---------------------------------------
-    # Fast path → Spam
-    # ---------------------------------------
-    if _contains_keyword_list(combined, SPAM_KEYWORDS):
-        try:
-            EMAIL_CLASSIFICATION_COUNTER.labels(classification="spam").inc()
-        except Exception:
-            pass
-        return "spam"
+    result_label = "neutral"
 
-    # ---------------------------------------
-    # Fast path → Promotional
-    # ---------------------------------------
-    if _contains_keyword_list(combined, PROMOTIONAL_KEYWORDS):
-        try:
-            EMAIL_CLASSIFICATION_COUNTER.labels(classification="promotional").inc()
-        except Exception:
-            pass
-        return "promotional"
-
-    # ---------------------------------------
-    # Empty email
-    # ---------------------------------------
-    if not content.strip():
-        try:
-            EMAIL_CLASSIFICATION_COUNTER.labels(classification="neutral").inc()
-        except Exception:
-            pass
-        return "neutral"
-
-    # ---------------------------------------
-    # Build Gemini prompt
-    # ---------------------------------------
-    prompt = PromptTemplate(
-        input_variables=["subject", "content"],
-        template=(
-            "Analyze this email and classify its overall sentiment as "
-            "'positive', 'neutral', or 'negative'. Reply ONLY with the label.\n\n"
-            "Subject: {subject}\n"
-            "Content: {content}\n"
-            "Sentiment:"
-        ),
-    ).format(subject=subject, content=content)
-
-    # ---------------------------------------
-    # Try Gemini First
-    # ---------------------------------------
     try:
-        sentiment = _use_gemini(prompt)
-        try:
-            EMAIL_CLASSIFICATION_COUNTER.labels(classification=sentiment).inc()
-        except Exception:
-            pass
-        return sentiment
+        # -------------------------
+        # 1. Fast path — Spam
+        # -------------------------
+        if _contains_keyword_list(combined, SPAM_KEYWORDS):
+            result_label = "spam"
+            safe_increment_counter(FILTERING_MODEL_USED, model="keyword")
+            return result_label
 
-    except Exception as e:
-        logger.warning(f"[Filter] Gemini failed — will try HuggingFace fallback: {e}")
+        # -------------------------
+        # 2. Fast path — Promotional
+        # -------------------------
+        if _contains_keyword_list(combined, PROMOTIONAL_KEYWORDS):
+            result_label = "promotional"
+            safe_increment_counter(FILTERING_MODEL_USED, model="keyword")
+            return result_label
 
-    # ---------------------------------------
-    # HuggingFace fallback
-    # ---------------------------------------
-    if hf_classifier:
-        try:
-            result = hf_classifier(content[:500])[0]
-            label = result.get("label", "").lower()
+        # -------------------------
+        # 3. Empty Email → Neutral
+        # -------------------------
+        if not content.strip():
+            result_label = "neutral"
+            safe_increment_counter(FILTERING_MODEL_USED, model="keyword")
+            return result_label
 
-            sentiment = (
+        # -------------------------
+        # 4. HuggingFace Sentiment (Primary)
+        # -------------------------
+        if hf_classifier:
+            hf_res = hf_classifier(content[:500])[0]
+            label = hf_res.get("label", "").lower()
+
+            result_label = (
                 "negative" if "neg" in label
                 else "positive" if "pos" in label
                 else "neutral"
             )
 
-            try:
-                GEMINI_FALLBACK_USED.labels(module="filtering").inc()
-                EMAIL_CLASSIFICATION_COUNTER.labels(classification=sentiment).inc()
-            except Exception:
-                pass
+            safe_increment_counter(FILTERING_MODEL_USED, model="huggingface")
+            return result_label
 
-            return sentiment
+        # -------------------------
+        # 5. No HF model available → fallback to neutral
+        # -------------------------
+        safe_increment_counter(FILTERING_MODEL_USED, model="fallback")
+        result_label = "neutral"
+        return result_label
 
-        except Exception as e:
-            logger.error(f"[Filter] HF fallback failed: {e}")
+    except Exception as e:
+        logger.error(f"[Filter] Unexpected error: {e}")
+        safe_increment_counter(FILTERING_FAILURES)
+        safe_increment_counter(FILTERING_MODEL_USED, model="fallback")
+        result_label = "neutral"
+        return result_label
 
-    # ---------------------------------------
-    # Final fallback
-    # ---------------------------------------
-    try:
-        GEMINI_FALLBACK_USED.labels(module="filtering").inc()
-        EMAIL_CLASSIFICATION_COUNTER.labels(classification="neutral").inc()
-    except Exception:
-        pass
-
-    return "neutral"
+    finally:
+        duration = time.time() - start_time
+        safe_observe(FILTERING_LATENCY, duration)
+        logger.debug(f"[Filter] Completed in {duration:.4f}s → {result_label}")

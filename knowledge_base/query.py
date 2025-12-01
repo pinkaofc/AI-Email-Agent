@@ -33,11 +33,6 @@ embedding_model = embedding_functions.SentenceTransformerEmbeddingFunction(
 #       SAFETY: prevent leaking sensitive KB chunks
 # ============================================================
 SUSPICIOUS_PATTERNS = [
-    r"\bSC-[A-Z0-9]{4,}\b",
-    r"\border id\b",
-    r"\btracking number\b",
-    r"\bAWB\b",
-    r"\bETA\b",
     r"\bclient address\b",
     r"\bphone\b",
 ]

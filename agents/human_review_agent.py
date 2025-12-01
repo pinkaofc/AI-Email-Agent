@@ -5,120 +5,123 @@ from utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-# ----------------------------------------------------------------------
-# Suspicious patterns for detecting fabricated or sensitive details
-# (same patterns used across response_agent, summarization_agent, supervisor)
-# ----------------------------------------------------------------------
-SUSPICIOUS_PATTERNS = [
-    r"\bSC-[A-Z0-9]{4,}\b",       # fabricated order IDs
-    r"\btracking number\b",
-    r"\bAWB\b",
-    r"\bETA\b",
-    r"\border id\b",
-    r"\bclient address\b",
-    r"\bphone\b",
+"""
+Human Review Logic 
+-----------------------------
+Only flag for review when:
+
+  • Dangerous hallucinations exist
+  • Promises of delivery dates, numbers, ETA, or commitments
+  • Fake IDs not present in original email
+  • Security-risk content appears
+
+NOT flagged:
+  • tone issues
+  • generic operational statements
+  • normal replies
+"""
+
+# ------------------------------------------------------
+# Truly dangerous patterns (strict + minimal)
+# ------------------------------------------------------
+DANGEROUS_PATTERNS = [
+    r"\bAWB\s*\d+",                   # fabricated airway bill
+    r"\bETA\s*\d",                    # fake ETA
+    r"\bETA[:\- ]+\d",                # ETA: 22
+    r"\b\d{10,}\b",                   # suspicious phone number
 ]
 
+# ------------------------------------------------------
+# Promises that AI must not invent
+# ------------------------------------------------------
+PROMISE_PATTERNS = [
+    r"\bwill\s+arrive\b",
+    r"\bwill\s+deliver\b",
+    r"\bby\s+\d{1,2}\s+\w+",          # by 12 March
+    r"\bexpected\s+on\b",
+    r"\bdelivery\s+on\b",
+]
 
-def _find_suspicious_snippets(text: str):
+# ------------------------------------------------------
+# Security red flags
+# ------------------------------------------------------
+SECURITY_PATTERNS = [
+    r"click\s+here",
+    r"login\s+here",
+    r"verify\s+your\s+account",
+    r"enter\s+your\s+card",
+]
+
+# Combined for scanning
+ALL_REVIEW_PATTERNS = (
+    DANGEROUS_PATTERNS +
+    PROMISE_PATTERNS +
+    SECURITY_PATTERNS
+)
+
+
+def requires_human_review(response: str, original_email: str) -> bool:
     """
-    Returns localized text snippets around suspicious operational patterns.
-    Helpful for human reviewers to see exactly what looks unsafe.
+    Returns TRUE only when human review is *strictly needed*.
     """
+
+    if not response or len(response.strip()) < 20:
+        return True  # Too short → unsafe
+
+    # ---- Step 1: dangerous hallucinations ----
+    for p in DANGEROUS_PATTERNS:
+        if re.search(p, response, re.IGNORECASE):
+            logger.warning(f"[HumanReview] Dangerous hallucination detected: {p}")
+            return True
+
+    # ---- Step 2: hallucinated IDs ----
+    # Extract actual IDs from customer email
+    real_ids = {
+        oid.upper().replace(" ", "")
+        for oid in re.findall(r"\b(?:SC|PO|ORDER|INVOICE)[-\s]?[A-Z0-9]{4,10}\b",
+                              original_email,
+                              flags=re.IGNORECASE)
+    }
+
+    # Extract IDs mentioned in response
+    model_ids = {
+        oid.upper().replace(" ", "")
+        for oid in re.findall(r"\b(?:SC|PO|ORDER|INVOICE)[-\s]?[A-Z0-9]{4,10}\b",
+                              response,
+                              flags=re.IGNORECASE)
+    }
+
+    for mid in model_ids:
+        if mid not in real_ids:
+            logger.warning(f"[HumanReview] Hallucinated order ID in response: {mid}")
+            return True
+
+    # ---- Step 3: fabricated promises ----
+    for p in PROMISE_PATTERNS:
+        if re.search(p, response, re.IGNORECASE):
+            logger.warning(f"[HumanReview] AI invented a promise: {p}")
+            return True
+
+    # ---- Step 4: security triggers ----
+    for p in SECURITY_PATTERNS:
+        if re.search(p, response, re.IGNORECASE):
+            logger.warning(f"[HumanReview] Suspicious/phishy phrase detected: {p}")
+            return True
+
+    # If none of the above → safe
+    return False
+
+
+# ------------------------------------------------------
+# Extract helpful review snippets
+# ------------------------------------------------------
+def get_review_snippets(response: str):
     snippets = []
-    for pattern in SUSPICIOUS_PATTERNS:
-        for match in re.finditer(pattern, text, re.IGNORECASE):
-            start = max(0, match.start() - 30)
-            end = min(len(text), match.end() + 30)
-            snippet = text[start:end].strip()
-            snippets.append(snippet)
 
-    # Remove duplicates while preserving order
+    for p in ALL_REVIEW_PATTERNS:
+        for match in re.finditer(p, response, re.IGNORECASE):
+            start = max(0, match.start() - 25)
+            end = min(len(response), match.end() + 25)
+            snippets.append(response[start:end])
+
     return list(dict.fromkeys(snippets))
-
-
-# ----------------------------------------------------------------------
-# Interactive review tool — for LOCAL USE ONLY (NOT API)
-# ----------------------------------------------------------------------
-def review_email(email: dict, response: str) -> str:
-    """
-    CLI-based human review helper.
-    Displays the generated AI response in the terminal
-    and allows the reviewer to:
-        - ACCEPT
-        - EDIT
-        - REPLACE
-
-    Returns a final safe response string.
-    """
-
-    print("\n\n=======================================")
-    print("           GENERATED RESPONSE          ")
-    print("=======================================\n")
-    print(response)
-    print("\n---------------------------------------\n")
-
-    suspicious = _find_suspicious_snippets(response)
-
-    # ------------------------------------------------------
-    # Highlight potential hallucinations / sensitive leaks
-    # ------------------------------------------------------
-    if suspicious:
-        print("  WARNING: Suspicious or sensitive details detected!\n")
-        for i, snippet in enumerate(suspicious, start=1):
-            print(f" {i}. ...{snippet}...")
-        print("\nReview is highly recommended before sending.\n")
-
-    # ------------------------------------------------------
-    # Interactive feedback loop (Accept/Edit/Reject)
-    # ------------------------------------------------------
-    while True:
-        choice = input("(a)ccept / (e)dit / (r)eject → ").strip().lower()
-
-        # ACCEPT
-        if choice in ("a", "accept"):
-            final = response.strip()
-            if not final:
-                print("Cannot accept an empty response. Please edit instead.")
-                continue
-
-            logger.info("[HumanReview] Reviewer accepted the AI response.")
-            return final
-
-        # EDIT
-        if choice in ("e", "edit"):
-            print("\nEnter your corrected response (blank line to finish):\n")
-            lines = []
-            while True:
-                line = input()
-                if line == "":
-                    break
-                lines.append(line)
-
-            edited = "\n".join(lines).strip()
-            if not edited:
-                print("Edited response cannot be empty. Try again.")
-                continue
-
-            logger.info("[HumanReview] Reviewer edited the AI response.")
-            return edited
-
-        # REJECT / REPLACE
-        if choice in ("r", "reject", "replace"):
-            print("\nEnter replacement response (blank line to finish):\n")
-            lines = []
-            while True:
-                line = input()
-                if line == "":
-                    break
-                lines.append(line)
-
-            replacement = "\n".join(lines).strip()
-            if not replacement:
-                print("Replacement cannot be empty. Try again.")
-                continue
-
-            logger.info("[HumanReview] Reviewer replaced the AI response entirely.")
-            return replacement
-
-        print("Invalid choice. Please enter 'a', 'e', or 'r'.")

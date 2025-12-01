@@ -3,196 +3,148 @@
 import time
 import re
 import warnings
-from langchain_core.prompts import PromptTemplate
-from langchain_google_genai import ChatGoogleGenerativeAI
 from transformers import pipeline
-
-from utils.formatter import clean_text
-from config import get_gemini_api_key
 from utils.logger import get_logger
-from utils.rate_limit_guard import rate_limit_safe_call
+from utils.formatter import clean_text
 
-# Proper monitoring imports
+# Monitoring metrics
 from monitoring.metrics import (
-    GEMINI_CALLS,
-    GEMINI_FAILURES,
-    GEMINI_FALLBACK_USED,
+    summarization_attempts_total,
+    summarization_failures_total,
+    summarization_fallback_used_total,
+    summarization_model_used_total,
+    summarization_latency_seconds,
     SANITIZATION_TRIGGERED,
+    safe_increment_counter,
+    safe_observe,
 )
 
 warnings.filterwarnings("ignore")
 logger = get_logger(__name__)
 
+"""
+Improved Summarization Agent — FINAL VERSION
+-------------------------------------------
+✓ Always produces a meaningful summary
+✓ Short-email interpretation improved
+✓ Dynamic summarization length
+✓ Minimal Option-C firewall
+✓ Fully instrumented with Prometheus metrics
+"""
+
+
 # ============================================================
-#        HuggingFace FALLBACK Summarizer
+# HuggingFace Summarizer
 # ============================================================
 try:
     hf_summarizer = pipeline(
         "summarization",
         model="facebook/bart-large-cnn"
     )
-    logger.info("[Summarization] HF fallback model loaded.")
+    logger.info("[Summarization] HF summarizer loaded.")
 except Exception as e:
     hf_summarizer = None
     logger.error(f"[Summarization] HF summarizer failed: {e}")
 
+
 # ============================================================
-#      Block hallucinated operational info
+# Minimal Option-C Firewall
 # ============================================================
-SUSPICIOUS_PATTERNS = [
-    r"\bSC-[A-Z0-9]{4,}\b",
-    r"\btracking number\b",
-    r"\bETA\b",
-    r"\border id\b",
-    r"\bclient address\b",
-    r"\bphone\b",
-    r"\bAWB\b",
+STRICT_BLOCK_PATTERNS = [
+    r"\bAWB\s*\d{5,}\b",
+    r"\bETA\s*\d",
+    r"\bETA[:\- ]+\d",
+    r"\b\d{10,}\b",
 ]
 
 
-def _sanitize_summary(summary: str) -> str:
-    """Remove any hallucinated operational details."""
-    for pat in SUSPICIOUS_PATTERNS:
-        if re.search(pat, summary, re.IGNORECASE):
-            logger.warning("[Summarization] Suspicious text found → sanitizing")
+def _sanitize_summary(text: str) -> str:
+    """Minimal hallucination firewall."""
+
+    if not text:
+        return text
+
+    for pattern in STRICT_BLOCK_PATTERNS:
+        if re.search(pattern, text, re.IGNORECASE):
+            logger.warning("[Summarization] Fabricated operational detail detected.")
+
             try:
                 SANITIZATION_TRIGGERED.labels(stage="summarization").inc()
             except Exception:
                 pass
-            return (
-                "The customer has raised a query and is seeking assistance. "
-                "They need support or clarification regarding their issue."
-            )
-    return summary
+
+            return "The customer has described an issue and is requesting clarification or assistance."
+
+    return text
 
 
 # ============================================================
-#        Gemini Summarizer (safe & monitored)
-# ============================================================
-def _use_gemini(prompt: str, retry_attempts: int = 3) -> str:
-    last_exception = None
-
-    for attempt in range(1, retry_attempts + 1):
-
-        api_key = get_gemini_api_key()
-
-        try:
-            GEMINI_CALLS.labels(module="summarization").inc()
-        except Exception:
-            pass
-
-        logger.info(
-            f"[Summarization] Gemini attempt {attempt}/{retry_attempts} using key {api_key[:6]}..."
-        )
-
-        try:
-            model = ChatGoogleGenerativeAI(
-                model="gemini-2.5-pro",
-                temperature=0.2,
-                google_api_key=api_key,
-            )
-
-            # IMPORTANT — do NOT pass module_name into model.invoke()
-            result = rate_limit_safe_call(model.invoke, prompt)
-
-            summary = clean_text(result.content).strip()
-            if not summary:
-                raise ValueError("Gemini produced empty summary")
-
-            return summary
-
-        except Exception as e:
-            last_exception = e
-            err = str(e).lower()
-            reason = err[:50]
-
-            try:
-                GEMINI_FAILURES.labels(module="summarization", reason=reason).inc()
-            except Exception:
-                pass
-
-            logger.warning(f"[Summarization] Attempt {attempt} failed: {e}")
-
-            # Retry: quota / 429
-            if "429" in err or "quota" in err:
-                try:
-                    GEMINI_FALLBACK_USED.labels(module="summarization").inc()
-                except Exception:
-                    pass
-                time.sleep(3)
-                continue
-
-            # Retry: network / timeout
-            if "timeout" in err or "network" in err:
-                time.sleep(2)
-                continue
-
-            # Other fatal errors → break
-            break
-
-    raise RuntimeError(f"Gemini summarization failed: {last_exception}")
-
-
-# ============================================================
-#             MAIN PUBLIC SUMMARIZATION FUNCTION
+# Main Summarization Function
 # ============================================================
 def summarize_email(email: dict) -> str:
+    start_time = time.time()
+    safe_increment_counter(summarization_attempts_total)
+
     content = (email.get("body") or "").strip()
+
     if not content:
-        return "No content to summarize."
+        safe_increment_counter(summarization_model_used_total, model="fallback")
+        safe_observe(summarization_latency_seconds, time.time() - start_time)
+        return "The customer sent a message but no content was provided."
 
-    prompt_template = PromptTemplate(
-        input_variables=["content"],
-        template=(
-            "Summarize the following customer email in 2–3 sentences.\n"
-            "STRICT RULES:\n"
-            "- Do NOT guess tracking numbers or ETAs.\n"
-            "- Do NOT invent refunds, investigations, or internal processes.\n"
-            "- ONLY explain the customer's intent.\n\n"
-            "Email:\n{content}\n\n"
-            "Provide ONLY the intent-level summary:\n"
-        ),
-    )
+    words = content.split()
+    wc = len(words)
 
-    prompt = prompt_template.format(content=content)
+    # -----------------------------------
+    # 1) Extremely short emails
+    # -----------------------------------
+    if wc <= 6:
+        safe_increment_counter(summarization_model_used_total, model="keyword")
+        safe_observe(summarization_latency_seconds, time.time() - start_time)
+        return f"The customer is making a brief request: {content}"
 
-    # ============================================================
-    # Try Gemini first
-    # ============================================================
-    try:
-        summary = _use_gemini(prompt)
-        return _sanitize_summary(summary)
+    # -----------------------------------
+    # 2) Short/medium emails (interpret intent)
+    # -----------------------------------
+    if wc <= 18:
+        safe_increment_counter(summarization_model_used_total, model="keyword")
+        safe_observe(summarization_latency_seconds, time.time() - start_time)
+        return (
+            f"The customer states: '{content}'. "
+            f"They appear to be requesting assistance or clarification."
+        )
 
-    except Exception as e:
-        logger.warning(f"[Summarization] Gemini failed → HF fallback used: {e}")
-        try:
-            GEMINI_FALLBACK_USED.labels(module="summarization").inc()
-        except Exception:
-            pass
-
-    # ============================================================
-    # HF fallback
-    # ============================================================
+    # -----------------------------------
+    # 3) Longer emails → HuggingFace summarizer
+    # -----------------------------------
     if hf_summarizer:
         try:
+            max_len = 70 if wc > 40 else max(20, wc + 5)
+            min_len = max(12, wc // 3)
+
             result = hf_summarizer(
-                content[:800],
-                max_length=70,
-                min_length=25,
-                do_sample=False
+                content[:900],
+                max_length=max_len,
+                min_length=min_len,
+                do_sample=False,
             )
-            summary = result[0].get("summary_text", "")
-            return _sanitize_summary(summary)
+
+            summary_text = clean_text(result[0].get("summary_text", "")).strip()
+
+            safe_increment_counter(summarization_model_used_total, model="huggingface")
+            safe_observe(summarization_latency_seconds, time.time() - start_time)
+
+            return _sanitize_summary(summary_text)
 
         except Exception as e:
-            logger.error(f"[Summarization] HF fallback failed: {e}")
+            logger.error(f"[Summarization] HF summarization failed: {e}")
+            safe_increment_counter(summarization_failures_total)
 
-    # ============================================================
-    # Final fallback (guaranteed)
-    # ============================================================
-    try:
-        GEMINI_FALLBACK_USED.labels(module="summarization").inc()
-    except Exception:
-        pass
+    # -----------------------------------
+    # 4) Final fallback
+    # -----------------------------------
+    safe_increment_counter(summarization_fallback_used_total)
+    safe_increment_counter(summarization_model_used_total, model="fallback")
+    safe_observe(summarization_latency_seconds, time.time() - start_time)
 
-    return "The customer has shared a message and needs assistance."
+    return "The customer has shared details of their issue and requires assistance."

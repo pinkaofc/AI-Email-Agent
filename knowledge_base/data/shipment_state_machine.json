@@ -1,0 +1,27 @@
+{
+  "shipment_states": [
+    "Order Received",
+    "Processing",
+    "Awaiting Stock",
+    "Packed",
+    "Quality Check",
+    "Handover Pending",
+    "Dispatched",
+    "In Transit",
+    "Destination Hub Arrived",
+    "Out for Delivery",
+    "Delivery Attempted",
+    "Returned to Origin",
+    "Delivered",
+    "Hold - Address Verification",
+    "Hold - Customs",
+    "Hold - Courier Review",
+    "Hold - Damage Claim",
+    "Hold - Documentation Review"
+  ],
+  "rules": {
+    "ai_must_not_invent": true,
+    "allowed_phrases": ["under review", "being verified", "awaiting update"],
+    "not_allowed_phrases": ["your package is at ___ hub", "guaranteed delivery"]
+  }
+}

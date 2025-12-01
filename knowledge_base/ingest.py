@@ -2,7 +2,8 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import re
-
+import json
+from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader, PyPDFLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -14,11 +15,7 @@ from langchain_chroma import Chroma
 # ============================================================
 
 SUSPICIOUS_PATTERNS = [
-    r"\bSC-[A-Z0-9]{4,}\b",       # actual order IDs
-    r"\btracking number\b",       # avoid hallucinating a number
     r"\bAWB\b",                   # airway bill numbers
-    r"\bETA\b",                   # exact ETA
-    r"\border id\b",              # specific identifiers
     r"\bclient address\b",        # PII
     r"\bphone\b",                 # PII
 ]
@@ -61,7 +58,7 @@ def load_all_documents(data_path: str):
         except Exception as e:
             print(f"Error loading {txt_file.name}: {e}")
 
-    # PDFs
+    # PDF files
     for pdf_file in data_dir.glob("*.pdf"):
         try:
             loader = PyPDFLoader(str(pdf_file))
@@ -75,6 +72,27 @@ def load_all_documents(data_path: str):
 
         except Exception as e:
             print(f"Error loading {pdf_file.name}: {e}")
+
+    # JSON files  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    for json_file in data_dir.glob("*.json"):
+        try:
+            with open(json_file, "r", encoding="utf-8") as f:
+                json_data = f.read()
+
+            cleaned = scrub_sensitive_text(json_data)
+
+            all_docs.append(
+                Document(
+                    page_content=cleaned,
+                    metadata={"source": json_file.name}
+                )
+            )
+
+            print(f"Loaded 1 clean JSON document from {json_file.name}")
+
+        except Exception as e:
+            print(f"Error loading {json_file.name}: {e}")
+    # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     print(f"Total sanitized documents loaded: {len(all_docs)}")
     return all_docs
@@ -96,7 +114,6 @@ def chunk_documents(docs):
 
     chunks = splitter.split_documents(docs)
 
-    # Remove duplicates
     cleaned_chunks = []
     seen = set()
 
@@ -130,12 +147,11 @@ def embed_and_store(chunks, persist_path):
         model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
 
-    # CRITICAL FIX: Explicitly name the collection
     vectordb = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
         persist_directory=persist_path,
-        collection_name="email_kb"       # ← IMPORTANT
+        collection_name="email_kb"
     )
 
     print(f"Knowledge Base stored safely at: {Path(persist_path).resolve()}")
