@@ -35,6 +35,13 @@ def fetch_email(simulate: bool = True, limit: int = 10, mark_as_seen: bool = Fal
         limit (int): Number of emails to fetch.
         mark_as_seen (bool): Mark fetched emails as read.
     """
+    # ============================================================
+    # SAFETY FIX: ensure limit is a positive integer
+    # ============================================================
+    if not isinstance(limit, int) or limit < 0:
+        logger.warning(f"[Email Ingestion] Invalid limit '{limit}' — forcing limit=0")
+        limit = 0
+
     if simulate:
         email_file = Path(__file__).parent.parent / "sample_emails.json"
         logger.info("[Email Ingestion] Simulation mode enabled — using local email dataset.")
@@ -44,9 +51,11 @@ def fetch_email(simulate: bool = True, limit: int = 10, mark_as_seen: bool = Fal
 
             logger.info(f"[Email Ingestion] Loaded {len(emails)} emails from {email_file.name}")
 
-            # ★★★ APPLY LIMIT HERE ★★★
-            if limit and isinstance(limit, int):
+            # ★★★ SAFE LIMIT APPLY ★★★
+            if limit > 0:
                 emails = emails[:limit]
+            elif limit == 0:
+                emails = []  # fetch none
 
             time.sleep(2)
             return emails

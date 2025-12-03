@@ -7,10 +7,28 @@ logger = get_logger(__name__)
 
 
 # ============================================================
-# INTENT PATTERNS (kept same as provided)
+# INTENT PATTERNS (Enhanced)
 # ============================================================
 INTENT_PATTERNS = {
-    "appreciation": [r"\bthank(s| you)\b", r"\bappreciat", r"\bexcellent\b", r"\bdelight(ed)?\b"],
+    "appreciation": [
+        r"\bthank(s| you)\b",
+        r"\bappreciat",
+        r"\bexcellent\b",
+        r"\bdelight(ed)?\b",
+    ],
+
+    # NEW — Highly missing category in your pipeline
+    "return_request": [
+        r"\breturn\b",
+        r"\breturn pending\b",
+        r"\breturn pickup\b",
+        r"\breverse pickup\b",
+        r"\bpickup pending\b",
+        r"\bpickup request\b",
+        r"\binitiate return\b",
+        r"\brefund\b",
+    ],
+
     "missing_items": [r"\bmissing\b", r"\bshortage\b", r"\bnot received\b", r"\bmissing items\b"],
     "wrong_address": [r"\bwrong address\b", r"\bdelivered to another\b", r"\bwrongly delivered\b"],
     "delayed": [r"\bdelay", r"\bdelayed\b", r"\bout for delivery\b", r"\bover a week\b", r"\bnot arrived\b"],
@@ -22,11 +40,12 @@ INTENT_PATTERNS = {
 
 
 # ============================================================
-# INTENT PRIORITY (strongest → weakest)
+# INTENT PRIORITY (Enhanced → Strongest to Weakest)
 # ============================================================
 INTENT_PRIORITY = [
     "damaged",
     "missing_items",
+    "return_request",     
     "wrong_address",
     "delayed",
     "billing",
@@ -40,36 +59,50 @@ INTENT_PRIORITY = [
 # RESPONSE TEMPLATES
 # ============================================================
 TEMPLATES = {
+    "return_request": (
+        "Thanks for contacting us. Your return pickup request has been noted. "
+        "Our logistics team is checking the pickup status and will share the updated schedule soon. "
+        "If you have any supporting details or images, feel free to reply to this email."
+    ),
+
     "appreciation": (
         "Thank you for your kind message. We're delighted your order arrived ahead of schedule — "
         "your feedback has been shared with our team. We appreciate your business and look forward to serving you again."
     ),
+
     "missing_items": (
         "Thanks for letting us know. We’re sorry to hear items are missing. "
         "We’ve forwarded your message to our operations team for verification. "
         "They will review the dispatch records and get back to you with the next steps."
     ),
+
     "wrong_address": (
         "We’re sorry for the inconvenience. The operations team has been notified and will investigate the delivery details. "
         "We will update you as soon as we have more information."
     ),
+
     "delayed": (
         "Thank you for reaching out. We understand the urgency — our operations team is checking the shipment status and will provide an update shortly."
     ),
+
     "damaged": (
         "We apologize for the damaged items. Please share photos and the shipment details if available. "
         "Our returns & claims team will review and advise on the replacement or claims process."
     ),
+
     "billing": (
         "Thanks for raising this billing concern. We have forwarded the invoice details to our Finance team; they will verify and provide a corrected invoice if needed."
     ),
+
     "customs": (
         "Thanks for the heads up. Our export team will re-check the documentation and share the required commercial invoice or declaration with you shortly."
     ),
+
     "security": (
         "This message looks suspicious. For your safety, do not share login or card details via email. "
         "Please confirm the sender's email and we will investigate further."
     ),
+
     "default": (
         "Thank you for reaching out. We’ve received your message and our team will get back to you shortly."
     ),
@@ -96,24 +129,22 @@ def _collect_intents(text: str) -> List[str]:
 
 
 # ============================================================
-# MAIN FALLBACK SELECTOR (Weighted)
+# MAIN FALLBACK SELECTOR (Weighted & Corrected)
 # ============================================================
 def get_custom_fallback(summary: str, original_body: str) -> str:
     """
-    Returns the strongest intent fallback using weighted priority.
-    Example:
-      damaged + delayed → damaged
-      missing_items + delayed → missing_items
+    Weighted fallback selector.
+    Strongest matching intent is selected based on PRIORITY order.
     """
 
     try:
         combined = " ".join([s for s in (summary or "", original_body or "") if s]).lower()
 
-        # gather all matching intents
+        # gather matched intents from patterns
         matched_intents = _collect_intents(combined)
 
         if matched_intents:
-            # pick the strongest based on INTENT_PRIORITY
+            # pick strongest based on PRIORITY
             for strong_intent in INTENT_PRIORITY:
                 if strong_intent in matched_intents:
                     logger.info(
@@ -121,8 +152,9 @@ def get_custom_fallback(summary: str, original_body: str) -> str:
                     )
                     return TEMPLATES.get(strong_intent, TEMPLATES["default"])
 
-        # keyword fallback (secondary)
+        # keyword fallback (secondary safety net)
         keywords = {
+            "return_request": ["return", "pickup", "reverse", "refund", "pending"],
             "damaged": ["damag", "broken", "crush"],
             "missing_items": ["missing", "short", "not received"],
             "wrong_address": ["wrong address", "another address"],

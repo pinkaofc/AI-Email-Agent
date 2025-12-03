@@ -1,140 +1,127 @@
 +-------------------------------------------------------------+
-|                   AI EMAIL AGENT PIPELINE                   |
-|    Initialize environment, logger, config, and Prometheus   |
+|                    EMAIL BOT PIPELINE                       |
+|       Initialize environment, logger, config, metrics       |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|                    SELECT EMAIL INPUT SOURCE                |
-|  - IMAP inbox (unread)                                      |
-|  - sample_emails.json (simulation/testing)                  |
-|  - Mark-as-seen or retention handled dynamically            |
+|                    FETCH EMAIL (Input Source)               |
+|  - IMAP: Fetch unread emails from inbox                     |
+|  - JSON: Load emails from sample_emails.json (test mode)    |
+|  - mark_as_seen and fetch_limit handled dynamically         |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|                 CREATE INITIAL EmailState OBJECT            |
-|  - Stores email ID, body, subject, metadata                 |
-|  - Tracks all agent outputs, flags, errors                  |
-|  - Initializes metrics counters for this message            |
+|              CREATE INITIAL EmailState OBJECT               |
+|  - Stores subject, body, sender, metadata                   |
+|  - Holds pipeline flags (review, spam, error state)         |
+|  - Initializes Prometheus counters for this email           |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|                  SUPERVISOR (LANGGRAPH ENGINE)             |
-|  Orchestrates the multi-agent reasoning workflow            |
-|  Ensures deterministic transitions + state persistence      |
+|                    SUPERVISOR PIPELINE                     |
+|     (LangGraph orchestrates multi-agent state transitions)  |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|                  PREPROCESSING & EXTRACTION                 |
-|  - Extract Customer Account ID from email text              |
-|  - Lookup corresponding company + margin rules              |
-|  - Prepare parameters for downstream invoice logic          |
+|                 PREPROCESSING / EXTRACTION                  |
+|  - Extract account ID, company name, margin, parameters     |
+|  - Normalizes subject/body for downstream agents            |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|                 FILTERING AGENT (Gemini LLM)                |
-|  - Classifies email into categories                         |
-|    spam / informational / positive / negative / neutral     |
-|    requires_review / action_required                        |
-|  - Sentiment + intent detection                             |
-|  - Spam or promo emails are skipped                         |
+|                 FILTERING NODE (Gemini Model)               |
+|  - Analyze subject + body                                   |
+|  - Predict: spam / neutral / positive / negative            |
+|    informational / needs_review / action_required           |
+|  - Spam or promotion → auto-skip                            |
 +-------------------------------------------------------------+
                               |
                               v
-               +-----------------------------------+
-               |  Is classification == spam/promo? |
-               +-----------------------------------+
-                       |                 |
-                 Yes ->|     SKIP EMAIL  |<- No
-                       |  Update metrics |
-                       v
+                +----------------------------------+
+                |  Is classification == spam?       |
+                +----------------------------------+
+                        |                 |
+            Yes --------|-----> SKIP EMAIL         |
+                        |        Update metrics     |
+            No  --------v
 +-------------------------------------------------------------+
-|          SUMMARIZATION AGENT (Gemini LLM)                   |
-|  - Generates 2–3 sentence high-quality summary              |
-|  - Extracts key request, issue, or intent                   |
-|  - Output stored in EmailState for dashboard                |
-+-------------------------------------------------------------+
-                              |
-                              v
-+-------------------------------------------------------------+
-|            KNOWLEDGE BASE RETRIEVAL (RAG ENGINE)            |
-|  - ChromaDB vector search using MiniLM embeddings           |
-|  - Retrieves company FAQs, policies, workflow docs          |
-|  - RAG hit ratio logged for monitoring                      |
+|                SUMMARIZATION NODE (Gemini)                  |
+|  - Generate concise 2–3 sentence summary                    |
+|  - Extract problem, request, or intent                      |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|             RESPONSE GENERATION AGENT (Gemini LLM)          |
-|  - Generates final response using:                          |
-|    summary + classification + retrieved context + margin    |
-|  - Produces structured, clean, professional replies         |
-|  - Generates invoice-level outputs if required              |
+|                  KNOWLEDGE BASE RETRIEVAL (RAG)             |
+|  - ChromaDB + MiniLM embeddings                             |
+|  - Semantic search using summary + email context            |
+|  - Retrieve relevant FAQ/policy/company data                |
+|  - Log RAG hit ratio (Prometheus)                           |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|                      FORMATTING MODULE                      |
-|  - Removes duplicate greetings                              |
-|  - Extracts sender name                                     |
-|  - Builds final template:                                   |
+|               RESPONSE GENERATION NODE (Gemini)             |
+|  - Generate final structured reply                          |
+|  - Use: summary + classification + RAG context + margin     |
+|  - Maintain polite, professional tone                       |
++-------------------------------------------------------------+
+                              |
+                              v
++-------------------------------------------------------------+
+|                   EMAIL FORMATTING MODULE                   |
+|  - Remove duplicate greetings                               |
+|  - Detect sender name                                        |
+|  - Build final structure:                                   |
 |       Hi <Name>,                                            |
-|       <Generated Body>                                      |
+|       <Generated Response>                                  |
 |       Regards,                                              |
 |       <Your Name>                                           |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|              HUMAN REVIEW DECISION (State Flag)             |
-|  - If EmailState.requires_human_review == True              |
-|       → Save draft to Gmail                                 |
-|  - Else                                                     |
-|       → Auto-send email via SMTP                            |
+|               HUMAN REVIEW DECISION NODE                    |
+|  - If EmailState.requires_human_review == True             |
+|       → route to Gmail Draft                                |
+|  - Else                                                    |
+|       → auto-send via SMTP                                  |
 +-------------------------------------------------------------+
-          /                                         \
-         /                                           \
-        v                                             v
-+----------------------------------+     +----------------------------------+
-|        send_draft_to_gmail()     |     |           send_email()           |
-|  - Draft created in Gmail        |     |  - SMTP delivery to sender       |
-|  - Visible in FastAPI dashboard  |     |  - Delivery metrics recorded     |
-+----------------------------------+     +----------------------------------+
-         \                                             /
-          \                                           /
-           +-----------------------------------------+
+           /                                               \
+          /                                                 \
+         v                                                   v
++-------------------------------------+     +--------------------------------+
+|          send_draft_to_gmail()      |     |            send_email()        |
+|  - Save email to Gmail Drafts       |     |  - Send email via SMTP         |
+|  - Visible on dashboard             |     |  - Deliver to recipient        |
++-------------------------------------+     +--------------------------------+
+          \                                                  /
+           \                                                /
+            +----------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|                  STORE ALL RESULTS & FILES                  |
-|  - Save entry to records/records.csv                        |
-|  - Save transformed Excel invoice file to /drive storage    |
-|  - Expose records via FastAPI for dashboard                 |
-|  - Emit Prometheus metrics (duration, status, type, etc.)   |
-+-------------------------------------------------------------+
-                              |
-                              v
-+-------------------------------------------------------------+
-|                 FASTAPI + GRAFANA MONITORING                |
-|  - /dashboard shows processed emails, outputs, insights     |
-|  - /metrics exposes Prometheus counters                     |
-|  - Grafana panels show lifetime totals, performance trends  |
+|                  UPDATE RECORDS & METRICS                   |
+|  - Append entry to records/records.csv                      |
+|  - Log summary, classification, reply, status               |
+|  - Update Prometheus counters (latency, success, failures) |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|          RATE LIMIT GUARD AND CONTINUE TO NEXT EMAIL        |
-|  - Sleep if necessary to avoid spam-detection throttling    |
-|  - Move to next message in queue                            |
+|       CONTINUE PIPELINE (Rate Limit & Next Email)           |
+|  - Optional sleep for Gmail safety throttling               |
+|  - Move to next fetched or simulated email                  |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|                  END OF PIPELINE EXECUTION                  |
-|  - All emails processed                                      |
-|  - Final summary logged + metrics pushed                     |
+|                   END PIPELINE EXECUTION                    |
+|  - All emails processed or limit reached                    |
+|  - Final summary logged + metrics pushed                    |
 +-------------------------------------------------------------+

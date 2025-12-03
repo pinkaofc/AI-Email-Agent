@@ -30,7 +30,7 @@ from utils.records_manager import (
     initialize_csv,
     RECORDS_CSV_PATH,
 )
-from utils.formatter import FALLBACK_RESPONSE
+from utils.formatter import FALLBACK_RESPONSE, ask_yes_no, ask_positive_int
 from core.email_sender import extract_name_from_email
 
 # ============================================================
@@ -123,14 +123,14 @@ def main():
 
     initialize_csv(RECORDS_CSV_PATH)
 
-    simulate = input("Use sample_emails.json instead of IMAP? (y/n): ").strip().lower() == "y"
-    limit = int(input("How many emails? (1,5,10...): ") or "1")
-    dry_run = input("Send ONLY drafts? (y/n): ").strip().lower() == "y"
-    mark_seen = (
-        input("Mark IMAP emails as seen? (y/n): ").strip().lower() == "y"
-        if not simulate
-        else False
-    )
+    # ------------------------------------------------------------
+    # FIXED INPUT VALIDATION (DO NOT BREAK PIPELINE FLOW)
+    # ------------------------------------------------------------
+    simulate = ask_yes_no("Use sample_emails.json instead of IMAP? (y/n): ")
+    limit = ask_positive_int("How many emails? (1,5,10...): ")
+    dry_run = ask_yes_no("Send ONLY drafts? (y/n): ")
+
+    mark_seen = ask_yes_no("Mark IMAP emails as seen? (y/n): ") if not simulate else False
 
     # Fetch emails
     logger.info("[Main] Fetching emails…")

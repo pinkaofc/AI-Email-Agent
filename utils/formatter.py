@@ -99,7 +99,6 @@ def format_email(subject: str, recipient_name: str, body: str, user_name: str) -
 
     # ------------------------------------------------------------
     # 2. Remove accidental AI-generated greetings
-    # (Gemini may add 'Hi,' or 'Hello,' even though we tell it not to)
     # ------------------------------------------------------------
     greeting_starters = ["hi", "hello", "dear", "good morning", "good afternoon", "good evening"]
 
@@ -162,3 +161,39 @@ Best regards,
     logger.debug(f"[Formatter] Preview:\n{formatted}")
 
     return formatted.strip()
+
+
+# ============================================================
+# NEW INPUT VALIDATION HELPERS (SAFE & PIPELINE-INDEPENDENT)
+# ============================================================
+
+def ask_yes_no(prompt: str) -> bool:
+    """
+    Safe yes/no input.
+    Accepts: y, n, yes, no (any case).
+    Repeats until valid.
+    """
+    valid_yes = {"y", "yes"}
+    valid_no = {"n", "no"}
+
+    while True:
+        user_input = input(prompt).strip().lower()
+        if user_input in valid_yes:
+            return True
+        if user_input in valid_no:
+            return False
+        print("Invalid input. Please type y/n or yes/no.")
+
+
+def ask_positive_int(prompt: str) -> int:
+    """
+    Only accepts integers >= 1.
+    Rejects negative, zero, float, text.
+    """
+    while True:
+        user_input = input(prompt).strip()
+        if user_input.isdigit():
+            value = int(user_input)
+            if value > 0:
+                return value
+        print("Invalid number. Please enter a positive integer (1, 5, 10...).")
