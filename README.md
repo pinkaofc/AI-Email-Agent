@@ -1,22 +1,37 @@
-
 # AI Email Agent (ShipCube)
 
-An upgraded AI-driven email automation system designed for enterprise-grade processing of inbound emails. The system fetches, filters, transforms, summarizes, augments, and generates intelligent responses using a multi-agent workflow built on LangGraph and Google Gemini. It now includes a robust FastAPI backend, a real-time monitoring dashboard, Prometheus metrics, and full historical logging for long-term analytics.
+ShipCube’s AI Email Agent is a complete automation system designed to read, understand, summarize, and respond to emails intelligently. It uses a LangGraph-powered multi-agent workflow, processes emails via IMAP/SMTP, retrieves contextual data using a RAG knowledge base, and generates structured responses using Google Gemini.
+
+The system includes a FastAPI dashboard for real-time monitoring, Prometheus metrics for observability, Dockerized Grafana dashboards, and detailed logging for production use.
+
+---
+
+## Table of Contents
+
+* [Overview](#overview)
+* [Features](#features)
+* [Tech Stack](#tech-stack)
+* [Installation](#installation)
+
+  * [Prerequisites](#prerequisites)
+  * [Setup](#setup)
+* [Configuration](#configuration)
+* [SMTP and IMAP Setup Guide](#smtp-and-imap-setup-guide)
+* [Usage](#usage)
+* [Monitoring Setup (Prometheus + Grafana)](#monitoring-setup-prometheus--grafana)
+* [Execution Flow](#execution-flow)
+* [Directory Structure](#directory-structure)
+* [Testing](#testing)
+* [Contributing](#contributing)
+* [Acknowledgments](#acknowledgments)
 
 ---
 
 ## Overview
 
-ShipCube’s AI Email Agent automates the end-to-end lifecycle of email processing. It integrates rule-based filtering, LLM-driven reasoning, RAG-powered retrieval, and a state-managed workflow graph. The system supports both fully autonomous execution and human-review modes, ensuring reliability and transparency.
+The AI Email Agent automates the full lifecycle of email handling. It fetches messages from your inbox, identifies intent, summarizes content, retrieves relevant knowledge entries, generates high-quality replies, and sends them via SMTP or saves them as Gmail drafts for review.
 
-Recent upgrades include:
-
-* FastAPI backend with endpoints for predictions, logs, health checks, and real-time data access
-* Prometheus metrics capturing pipeline activity, latency, and agent performance
-* Grafana dashboard with lifetime counts, throughput, trends, and agent-level instrumentation
-* Storage of transformed Excel outputs for invoice-processing workflows
-* Margin-based company lookup logic and dynamic parameter extraction
-* Improved agentic workflow for multi-step email → data → output transformations
+LangGraph enables deterministic multi-agent transitions, while FastAPI provides a dashboard to visualize processing. Prometheus and Grafana offer metrics and long-term monitoring suited for production environments.
 
 ---
 
@@ -24,45 +39,90 @@ Recent upgrades include:
 
 ### Email Intelligence
 
-* Automatic ingestion via IMAP with label-based filtering
-* Multi-stage reasoning: extraction, categorization, sentiment, summarization, RAG retrieval, and response generation
-* AI-structured replies using Gemini with enforceable formatting guidelines
-* Optional draft mode or direct SMTP send-out
+* Fetches emails using IMAP
+* Extracts sender metadata and intent
+* Performs LLM-based classification
+* Produces concise summaries
+* Generates professional, structured replies
 
-### Workflow Automation
+### Multi-Agent Workflow
 
-* LangGraph-based agents with deterministic state transitions
-* Agents include: ingestion, preprocessing, filtering, summarization, retrieval, response generation, human review, and error recovery
-* Retry + fallback logic, timeout guards, and message-level isolation
-* Fully auditable execution path per email
+* LangGraph orchestrated pipeline
+* Agents include: Preprocessing, Filtering, Summarization, Retrieval, Response Generation, Human Review
+* Supports retries, fallbacks, and custom behaviors
 
-### Retrieval-Augmented Generation (RAG)
+### RAG Knowledge Base
 
-* ChromaDB vector store with MiniLM embeddings
-* Semantic knowledge retrieval for company data, FAQs, business policies, and profile details
-* Supports multi-doc and multi-section retrieval with ranking
+* ChromaDB vector search
+* Sentence-Transformer embeddings
+* Retrieves FAQs, business policies, and internal docs
 
-### Monitoring and Metrics
+### Monitoring & Dashboard
 
-* Live FastAPI Dashboard displaying processed emails, summaries, outputs, predictions, and errors
-* Prometheus metrics:
+* FastAPI dashboard showing:
+
+  * Processed emails
+  * Summaries
+  * Predictions
+  * Responses
+  * Pipeline metadata
+* Prometheus metrics for:
 
   * Total emails processed
-  * Agent-level execution durations
-  * Success/failure counts
-  * RAG hit ratio
-  * Response generation latency
-* Grafana dashboard with lifetime (no time-window) metrics and panels
-* Integrated logging: both CSV and structured logs
+  * Latency
+  * Agent execution time
+  * Failures and retries
+* Grafana dashboards (Dockerized) for visualization
 
-### Developer-Friendly
+### Logging & Storage
 
-* Clear modular structure
-* Extensible agent system
-* Centralized configuration
-* Separately testable modules
-* Works in simulation or production mode
-* Supports pluggable LLMs and embedding models
+* All processed emails stored in `records/records.csv`
+* Excel files generated automatically as needed
+* Structured logs for audits and debugging
+
+---
+
+## Tech Stack
+
+### LangChain & Workflow
+
+* langchain
+* langchain-core
+* langchain-community
+* langchain-chroma
+* langchain-google-genai
+* langgraph
+* langsmith
+
+### Models & Transformers
+
+* transformers
+* sentence-transformers
+* torch + accelerate
+* tiktoken
+* pydantic
+
+### Environment & Utilities
+
+* python-dotenv
+* pandas
+* openpyxl
+* typing-extensions
+* email-validator
+
+### Web API & Metrics
+
+* fastapi
+* uvicorn
+* prometheus-fastapi-instrumentator
+* prometheus-client
+
+### Additional Dependencies
+
+* beautifulsoup4
+* nltk
+* jinja2
+* requests
 
 ---
 
@@ -70,10 +130,10 @@ Recent upgrades include:
 
 ### Prerequisites
 
-* Python 3.9 or above
+* Python 3.9+
 * pip
-* virtualenv recommended
-* Gmail App Password for IMAP/SMTP
+* Gmail account with App Password
+* IMAP enabled
 
 ### Setup
 
@@ -84,13 +144,17 @@ git clone https://github.com/pinkaofc/AI-Email-Agent.git
 cd AI-Email-Agent
 ```
 
-Create and activate a virtual environment:
+Create a virtual environment:
 
 ```bash
 python -m venv venv
+```
 
-# macOS/Linux
-source venv/bin/activate  
+Activate environment:
+
+```bash
+# macOS / Linux
+source venv/bin/activate
 
 # Windows
 venv\Scripts\activate
@@ -109,22 +173,23 @@ pip install -r requirements.txt
 Create a `.env` file:
 
 ```dotenv
-# Gemini API
-
-HUGGINGFACEHUB_API_TOKEN=your_key
+# Gemini API Keys
 GEMINI_API_KEY1=your_key
 GEMINI_API_KEY2=your_key
 
-# SMTP
+# Hugging Face Token
+HUGGINGFACEHUB_API_TOKEN=your_hf_token
+
+# SMTP Settings
 EMAIL_SERVER=smtp.gmail.com
 EMAIL_USERNAME=your_email@gmail.com
-EMAIL_PASSWORD=your_app_password
+EMAIL_APP_PASSWORD=your_app_password
 EMAIL_PORT=587
 
-# IMAP
+# IMAP Settings
 IMAP_SERVER=imap.gmail.com
 IMAP_USERNAME=your_email@gmail.com
-IMAP_PASSWORD=your_app_password
+IMAP_APP_PASSWORD=your_app_password
 IMAP_PORT=993
 
 # Developer
@@ -134,9 +199,51 @@ YOUR_GMAIL_ADDRESS_FOR_DRAFTS=your_email@gmail.com
 
 ---
 
+## SMTP and IMAP Setup Guide
+
+### 1. Enable 2-Step Verification
+
+Enable at:
+[https://myaccount.google.com/security](https://myaccount.google.com/security)
+
+### 2. Generate a Gmail App Password
+
+Go to:
+[https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
+
+Choose:
+
+* App: Mail
+* Device: Other
+
+Paste password into `.env`:
+
+```dotenv
+EMAIL_APP_PASSWORD=xxxx xxxx xxxx xxxx
+IMAP_APP_PASSWORD=xxxx xxxx xxxx xxxx
+```
+
+### 3. Enable IMAP in Gmail
+
+Settings → See all settings → Forwarding and POP/IMAP → Enable IMAP
+
+### 4. Required Ports
+
+**SMTP**
+
+* Host: smtp.gmail.com
+* Port: 587 (TLS)
+
+**IMAP**
+
+* Host: imap.gmail.com
+* Port: 993 (SSL)
+
+---
+
 ## Usage
 
-Start the full pipeline:
+Start the Email Agent:
 
 ```bash
 python main.py
@@ -148,52 +255,85 @@ Start the FastAPI server:
 uvicorn server.apps:app --reload
 ```
 
-Prometheus metrics are exposed at:
+Useful endpoints:
+
+* `/dashboard`
+* `/records`
+* `/metrics`
+* `/health`
+* Test endpoints using GET/POST
+
+---
+
+## Monitoring Setup (Prometheus + Grafana)
+
+The project includes a complete monitoring stack located inside:
+
+```
+/monitoring
+├── grafana
+│   ├── dashboards
+│   └── provisioning
+│       ├── dashboards
+│       └── datasources
+├── prometheus.yml
+├── docker-compose.yml
+└── metrics.py
+```
+
+### Start Prometheus + Grafana
+
+```bash
+cd monitoring
+docker-compose up -d
+```
+
+### Access Services
+
+Grafana:
+[http://localhost:3000](http://localhost:3000)
+
+Prometheus:
+[http://localhost:9090](http://localhost:9090)
+
+Default Grafana login:
+`admin / admin`
+
+Dashboards load automatically from:
+
+```
+monitoring/grafana/provisioning/
+```
+
+### Prometheus Integration
+
+Prometheus scrapes FastAPI metrics from:
 
 ```
 /metrics
 ```
 
-Health checks:
+Metrics captured include:
 
-```
-/health
-```
+* Email processing counts
+* Agent execution durations
+* Error/success ratio
+* Latency
+* RAG search performance
 
-### Execution Flow
+---
 
-The updated workflow operates as follows:
+## Execution Flow
 
-1. Email Fetching
-   Emails are fetched via IMAP or loaded from sample JSON for offline testing.
-
-2. Data Extraction & Transformation
-   Customer Account IDs, company identifiers, and parameters are extracted for downstream margin-lookup processing.
-
-3. Filtering and Classification
-   Categorization, sentiment evaluation, and intent recognition.
-
-4. Summarization
-   Gemini generates concise summaries for storage and dashboard display.
-
-5. Knowledge Base Retrieval
-   Relevant documents are retrieved using vector search for enriched contextual output.
-
-6. Response Generation
-   Context-aware responses are generated using the Response Agent with safety and formatting guards.
-
-7. Output Storage
-   Results saved to:
-
-   * `records/records.csv`
-   * Excel sheets for invoice-processing logic
-   * Dashboard storage for historical display
-
-8. Email Delivery or Draft
-   The reply is either drafted or sent automatically.
-
-9. Monitoring
-   All stages emit Prometheus metrics and structured logs consumed by Grafana.
+1. **Email Fetching** – Retrieve emails via IMAP or JSON.
+2. **Preprocessing** – Extract IDs, names, margin values.
+3. **Filtering Agent** – Predict spam, category, intent, sentiment.
+4. **Summarization Agent** – Generate a 2–3 sentence summary.
+5. **Knowledge Base Retrieval** – Query ChromaDB.
+6. **Response Generation Agent** – Create structured final reply.
+7. **Formatting Module** – Clean greeting and signature.
+8. **Human Review Decision** – Draft to Gmail or send automatically.
+9. **Logging** – Store results in CSV, logs, and metrics.
 
 ---
 
@@ -202,60 +342,24 @@ The updated workflow operates as follows:
 ```plaintext
 .
 ├── agents
-│   ├── filtering_agent.py
-│   ├── summarization_agent.py
-│   ├── response_agent.py
-│   ├── human_review_agent.py
-│   └── ...
-│
 ├── core
-│   ├── email_ingestion.py
-│   ├── email_sender.py
-│   ├── state.py
-│   ├── supervisor.py
-│   └── ...
-│
-├── server
-│   ├── apps.py
-│   ├── static
-│   └── templates
-│
-├── monitoring
-│   ├── metrics.py
-│   
-│
 ├── knowledge_base
-│   ├── ingest.py
-│   ├── query.py
-│   └── data
-│
 ├── vector_store
-│   └── chroma.sqlite3
-│
-├── notebooks
-│   └── model training notebooks
-│
-├── utils
-│   ├── formatter.py
-│   ├── logger.py
-│   ├── records_manager.py
-│   └── rate_limit_guard.py
-│
+├── server
+├── monitoring
+├── docker-compose.yml
 ├── records
-│   └── records.csv
-│
-├── flowchart.md
+├── utils
+├── logs
 ├── sample_emails.json
+├── requirements.txt
 ├── main.py
-├── config.py
 └── README.md
 ```
 
 ---
 
 ## Testing
-
-Run the test suite:
 
 ```bash
 pytest
@@ -271,17 +375,23 @@ python -m unittest discover
 
 ## Contributing
 
-* Fork the repository
-* Create a new branch
-* Add your feature or fix
-* Open a Pull Request with a clear explanation
-* Follow PEP8 and include logs for new pipelines
+* Fork repository
+* Create a feature branch
+* Commit and push
+* Submit a Pull Request
 
 ---
 
 ## Acknowledgments
 
-ShipCube's AI Email Agent uses contributions from the open-source community and incorporates technologies such as Google Gemini, LangGraph, LangChain, Hugging Face embeddings, ChromaDB, Prometheus, and Grafana.
+* Google Gemini
+* LangChain / LangGraph
+* Hugging Face
+* ChromaDB
+* FastAPI
+* Prometheus
+* Grafana
+* Open-source community
 
 ---
 
