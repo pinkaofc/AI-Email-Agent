@@ -1,0 +1,48 @@
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+
+# Environment Variables
+.env
+*.env
+
+# Logs and Records
+logs/
+records/
+*.log
+
+# Vector Store / Database
+vector_store/
+*.sqlite3
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Output Files
+*.csv
+*.xlsx
+*.xls
+
+# Docker Generated Files
+monitoring/grafana/data/
+monitoring/prometheus/data/
+
+# Node / Other caches (if applicable)
+node_modules/
+
+# OS / Editor Files
+.DS_Store
+Thumbs.db
+
+# Backup Files
+*.bak
+*.tmp
+
+# Flask / FastAPI Auto Files
+*.pid
