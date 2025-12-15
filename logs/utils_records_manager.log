@@ -96,3 +96,7 @@
 2025-11-26 17:06:21 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
 2025-11-26 17:07:21 | INFO | [Records] Saved record #1 | Sender=no-reply@flashdelivery.net | Classification=negative | Status=Sent Directly
 2025-11-26 17:08:20 | INFO | [Records] Saved record #2 | Sender=raj.malhotra@malhotragoods.in | Classification=negative | Status=Sent Directly
+2025-12-03 14:19:41 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-12-03 14:21:20 | INFO | [Records] Saved record #1 | Sender=no-reply@flashdelivery.net | Classification=negative | Status=Drafted
+2025-12-03 14:41:20 | DEBUG | Logger initialized for 'utils.records_manager' (to_file=True).
+2025-12-03 14:42:09 | INFO | [Records] Saved record #1 | Sender=meera.sharma@indomax.in | Classification=negative | Status=Sent Directly

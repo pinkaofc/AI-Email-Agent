@@ -895,3 +895,258 @@ NameError: name 'EMAIL_APP_PASSWORD' is not defined
 2025-11-21 00:32:15 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
 2025-11-21 00:32:19 | INFO | [Main] All emails processed.
 2025-11-21 00:32:19 | INFO | ============================================================
+2025-11-21 17:59:37 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-21 17:59:37 | INFO | ============================================================
+2025-11-21 17:59:37 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-21 17:59:37 | INFO | ============================================================
+2025-11-21 17:59:46 | INFO | [Main] Fetching emails…
+2025-11-21 17:59:48 | INFO | [Main] Processing 30 email(s)
+2025-11-21 17:59:48 | INFO | ------------------------------------------------------------
+2025-11-21 17:59:48 | INFO | [Main] Processing 1/30
+2025-11-21 17:59:48 | INFO |        ID: 1
+2025-11-21 17:59:48 | INFO |        From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-21 17:59:48 | INFO |        Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-21 18:00:07 | WARNING | [Main] Interrupted by user.
+2025-11-21 18:09:54 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-21 18:09:54 | INFO | ============================================================
+2025-11-21 18:09:54 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-21 18:09:54 | INFO | ============================================================
+2025-11-21 18:10:06 | INFO | [Main] Fetching emails…
+2025-11-21 18:10:07 | INFO | [Main] No emails fetched. Exiting.
+2025-11-24 15:10:56 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-24 15:10:56 | INFO | ============================================================
+2025-11-24 15:10:56 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-24 15:10:56 | INFO | ============================================================
+2025-11-24 15:11:06 | INFO | [Main] Fetching emails…
+2025-11-24 15:11:13 | INFO | [Main] Processing 1 email(s)
+2025-11-24 15:11:13 | INFO | ------------------------------------------------------------
+2025-11-24 15:11:13 | INFO | [Main] Processing 1/1
+2025-11-24 15:11:13 | INFO |        ID: 801
+2025-11-24 15:11:13 | INFO |        From: Stephen from Exponent <hello@tryexponent.com>
+2025-11-24 15:11:13 | INFO |        Subject: Practice 1:1 mock interviews with peers or AI.
+2025-11-24 15:11:13 | INFO | [Main] All emails processed.
+2025-11-24 15:11:13 | INFO | ============================================================
+2025-11-24 15:58:31 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-24 15:58:31 | INFO | ============================================================
+2025-11-24 15:58:31 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-24 15:58:31 | INFO | ============================================================
+2025-11-24 15:58:40 | INFO | [Main] Fetching emails…
+2025-11-24 15:58:47 | INFO | [Main] Processing 1 email(s)
+2025-11-24 15:58:47 | INFO | ------------------------------------------------------------
+2025-11-24 15:58:47 | INFO | [Main] Processing 1/1
+2025-11-24 15:58:47 | INFO |        ID: 796
+2025-11-24 15:58:47 | INFO |        From: Stephen from Exponent <hello@tryexponent.com>
+2025-11-24 15:58:47 | INFO |        Subject: 👀 Intro to statistics and experimentation interviews.
+2025-11-24 15:58:47 | INFO | [Main] All emails processed.
+2025-11-24 15:58:47 | INFO | ============================================================
+2025-11-24 15:59:25 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-24 15:59:25 | INFO | ============================================================
+2025-11-24 15:59:25 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-24 15:59:25 | INFO | ============================================================
+2025-11-24 15:59:34 | INFO | [Main] Fetching emails…
+2025-11-24 15:59:41 | INFO | [Main] Processing 1 email(s)
+2025-11-24 15:59:41 | INFO | ------------------------------------------------------------
+2025-11-24 15:59:41 | INFO | [Main] Processing 1/1
+2025-11-24 15:59:41 | INFO |        ID: 795
+2025-11-24 15:59:41 | INFO |        From: Oye.Its.Pvt <oye.its.pvt@gmail.com>
+2025-11-24 15:59:41 | INFO |        Subject: Draft: Re: Draft: Re: Shipment SC-97694 Delivered to Wrong Address
+2025-11-24 16:00:11 | WARNING | [Main] Interrupted by user.
+2025-11-24 16:31:08 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-24 16:31:08 | INFO | ============================================================
+2025-11-24 16:31:08 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-24 16:31:08 | INFO | ============================================================
+2025-11-24 16:31:29 | INFO | [Main] Fetching emails…
+2025-11-24 16:31:31 | INFO | [Main] Processing 30 email(s)
+2025-11-24 16:31:31 | INFO | ------------------------------------------------------------
+2025-11-24 16:31:31 | INFO | [Main] Processing 1/30
+2025-11-24 16:31:31 | INFO |        ID: 1
+2025-11-24 16:31:31 | INFO |        From: Sophia Gonzalez <sophia.gonzalez@globalimports.mx>
+2025-11-24 16:31:31 | INFO |        Subject: Appreciation for Timely Delivery - Order SC-11592
+2025-11-24 16:31:55 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-24 16:31:59 | INFO | [Main] Cooling down 40s (Gemini API limit)…
+2025-11-24 16:32:39 | INFO | ------------------------------------------------------------
+2025-11-24 16:32:39 | INFO | [Main] Processing 2/30
+2025-11-24 16:32:39 | INFO |        ID: 2
+2025-11-24 16:32:39 | INFO |        From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-24 16:32:39 | INFO |        Subject: Missing Items in Shipment SC-PO53804
+2025-11-24 16:32:55 | WARNING | [Main] Interrupted by user.
+2025-11-25 13:36:35 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-25 13:36:35 | INFO | ============================================================
+2025-11-25 13:36:35 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-25 13:36:35 | INFO | ============================================================
+2025-11-25 13:37:45 | INFO | [Main] Fetching emails…
+2025-11-25 13:37:47 | INFO | [Main] Processing 29 email(s)
+2025-11-25 13:37:47 | INFO | ------------------------------------------------------------
+2025-11-25 13:37:47 | INFO | [Main] Processing 1/29
+2025-11-25 13:37:47 | INFO |        ID: 1
+2025-11-25 13:37:47 | INFO |        From: No Reply <no-reply@flashdelivery.net>
+2025-11-25 13:37:47 | INFO |        Subject: Update Needed
+2025-11-25 13:40:02 | WARNING | [Main] Interrupted by user.
+2025-11-25 13:48:37 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-25 13:48:37 | INFO | ============================================================
+2025-11-25 13:48:37 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-25 13:48:37 | INFO | ============================================================
+2025-11-25 13:48:43 | INFO | [Main] Fetching emails…
+2025-11-25 13:48:45 | INFO | [Main] Processing 1 email(s)
+2025-11-25 13:48:45 | INFO | ------------------------------------------------------------
+2025-11-25 13:48:45 | INFO | [Main] Processing 1/1
+2025-11-25 13:48:45 | INFO |        ID: 1
+2025-11-25 13:48:45 | INFO |        From: No Reply <no-reply@flashdelivery.net>
+2025-11-25 13:48:45 | INFO |        Subject: Update Needed
+2025-11-25 13:49:05 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-25 13:49:10 | INFO | [Main] All emails processed.
+2025-11-25 13:49:10 | INFO | ============================================================
+2025-11-25 14:12:32 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-25 14:12:32 | INFO | ============================================================
+2025-11-25 14:12:32 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-25 14:12:32 | INFO | ============================================================
+2025-11-25 14:12:42 | INFO | [Main] Fetching emails…
+2025-11-25 14:12:49 | INFO | [Main] Processing 1 email(s)
+2025-11-25 14:12:49 | INFO | ------------------------------------------------------------
+2025-11-25 14:12:49 | INFO | [Main] Processing 1/1
+2025-11-25 14:12:49 | INFO |        ID: 801
+2025-11-25 14:12:49 | INFO |        From: Oye.Its.Pvt <oye.its.pvt@gmail.com>
+2025-11-25 14:12:49 | INFO |        Subject: Draft: Re: Update Needed
+2025-11-25 14:13:06 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-25 14:13:10 | INFO | [Main] All emails processed.
+2025-11-25 14:13:10 | INFO | ============================================================
+2025-11-25 14:30:19 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-25 14:30:19 | INFO | ============================================================
+2025-11-25 14:30:19 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-25 14:30:19 | INFO | ============================================================
+2025-11-25 14:30:44 | INFO | [Main] Fetching emails…
+2025-11-25 14:30:51 | INFO | [Main] Processing 1 email(s)
+2025-11-25 14:30:51 | INFO | ------------------------------------------------------------
+2025-11-25 14:30:51 | INFO | [Main] Processing 1/1
+2025-11-25 14:30:51 | INFO |        ID: 807
+2025-11-25 14:30:51 | INFO |        From: Aayush Tyagi <aayushtyagi301@gmail.com>
+2025-11-25 14:30:51 | INFO |        Subject: Product Quality Concern - PO76518
+2025-11-25 14:31:40 | WARNING | [Main] Interrupted by user.
+2025-11-25 15:01:10 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-25 15:01:10 | INFO | ============================================================
+2025-11-25 15:01:10 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-25 15:01:10 | INFO | ============================================================
+2025-11-25 15:01:49 | INFO | [Main] Fetching emails…
+2025-11-25 15:01:56 | INFO | [Main] Processing 1 email(s)
+2025-11-25 15:01:56 | INFO | ------------------------------------------------------------
+2025-11-25 15:01:56 | INFO | [Main] Processing 1/1
+2025-11-25 15:01:56 | INFO |        ID: 806
+2025-11-25 15:01:56 | INFO |        From: Aayush Tyagi <aayushtyagi301@gmail.com>
+2025-11-25 15:01:56 | INFO |        Subject: Confirmation Required for New Order PO99833
+2025-11-25 15:02:11 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-25 15:02:15 | INFO | [Main] All emails processed.
+2025-11-25 15:02:15 | INFO | ============================================================
+2025-11-25 15:12:18 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-25 15:12:18 | INFO | ============================================================
+2025-11-25 15:12:18 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-25 15:12:18 | INFO | ============================================================
+2025-11-25 15:12:30 | INFO | [Main] Fetching emails…
+2025-11-25 15:12:32 | INFO | [Main] Processing 2 email(s)
+2025-11-25 15:12:32 | INFO | ------------------------------------------------------------
+2025-11-25 15:12:32 | INFO | [Main] Processing 1/2
+2025-11-25 15:12:32 | INFO |        ID: 1
+2025-11-25 15:12:32 | INFO |        From: No Reply <no-reply@flashdelivery.net>
+2025-11-25 15:12:32 | INFO |        Subject: Update Needed
+2025-11-25 15:12:54 | WARNING | [Main] Interrupted by user.
+2025-11-25 15:14:51 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-25 15:14:51 | INFO | ============================================================
+2025-11-25 15:14:51 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-25 15:14:51 | INFO | ============================================================
+2025-11-25 15:15:07 | INFO | [Main] Fetching emails…
+2025-11-25 15:15:15 | INFO | [Main] Processing 1 email(s)
+2025-11-25 15:15:15 | INFO | ------------------------------------------------------------
+2025-11-25 15:15:15 | INFO | [Main] Processing 1/1
+2025-11-25 15:15:15 | INFO |        ID: 808
+2025-11-25 15:15:15 | INFO |        From: Oye.Its.Pvt <oye.its.pvt@gmail.com>
+2025-11-25 15:15:15 | INFO |        Subject: Draft: Re: Confirmation Required for New Order PO99833
+2025-11-25 15:15:34 | WARNING | [Main] Interrupted by user.
+2025-11-25 15:24:35 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-25 15:24:35 | INFO | ============================================================
+2025-11-25 15:24:35 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-25 15:24:35 | INFO | ============================================================
+2025-11-25 15:24:48 | INFO | [Main] Fetching emails…
+2025-11-25 15:24:56 | INFO | [Main] Processing 1 email(s)
+2025-11-25 15:24:56 | INFO | ------------------------------------------------------------
+2025-11-25 15:24:56 | INFO | [Main] Processing 1/1
+2025-11-25 15:24:56 | INFO |        ID: 805
+2025-11-25 15:24:56 | INFO |        From: Aayush Tyagi <aayushtyagi301@gmail.com>
+2025-11-25 15:24:56 | INFO |        Subject: Damaged Packages Received - Order SC-84578
+2025-11-25 15:25:09 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-25 15:25:12 | INFO | [Main] All emails processed.
+2025-11-25 15:25:12 | INFO | ============================================================
+2025-11-26 14:19:20 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-26 14:19:20 | INFO | ============================================================
+2025-11-26 14:19:20 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-26 14:19:20 | INFO | ============================================================
+2025-11-26 14:19:39 | INFO | [Main] Fetching emails…
+2025-11-26 14:19:47 | INFO | [Main] Processing 1 email(s)
+2025-11-26 14:19:47 | INFO | ------------------------------------------------------------
+2025-11-26 14:19:47 | INFO | [Main] Processing 1/1
+2025-11-26 14:19:47 | INFO |        ID: 810
+2025-11-26 14:19:47 | INFO |        From: Stephen from Exponent <hello@tryexponent.com>
+2025-11-26 14:19:47 | INFO |        Subject: Ends tomorrow! 20% off Exponent.
+2025-11-26 14:19:47 | INFO | [Main] All emails processed.
+2025-11-26 14:19:47 | INFO | ============================================================
+2025-11-26 14:21:29 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-26 14:21:29 | INFO | ============================================================
+2025-11-26 14:21:29 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-26 14:21:29 | INFO | ============================================================
+2025-11-26 14:21:36 | INFO | [Main] Fetching emails…
+2025-11-26 14:21:38 | INFO | [Main] Processing 1 email(s)
+2025-11-26 14:21:38 | INFO | ------------------------------------------------------------
+2025-11-26 14:21:38 | INFO | [Main] Processing 1/1
+2025-11-26 14:21:38 | INFO |        ID: simulated_1
+2025-11-26 14:21:38 | INFO |        From: No Reply <no-reply@flashdelivery.net>
+2025-11-26 14:21:38 | INFO |        Subject: Re: Update Needed
+2025-11-26 14:21:53 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-11-26 14:21:57 | INFO | [Main] All emails processed.
+2025-11-26 14:21:57 | INFO | ============================================================
+2025-11-26 17:06:47 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-11-26 17:06:47 | INFO | ============================================================
+2025-11-26 17:06:47 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-11-26 17:06:47 | INFO | ============================================================
+2025-11-26 17:06:56 | INFO | [Main] Fetching emails…
+2025-11-26 17:06:58 | INFO | [Main] Processing 2 email(s)
+2025-11-26 17:06:58 | INFO | ------------------------------------------------------------
+2025-11-26 17:06:58 | INFO | [Main] Processing 1/2
+2025-11-26 17:06:58 | INFO |        ID: simulated_1
+2025-11-26 17:06:58 | INFO |        From: No Reply <no-reply@flashdelivery.net>
+2025-11-26 17:06:58 | INFO |        Subject: Re: Update Needed
+2025-11-26 17:07:14 | INFO | [Main] Sending email to no-reply@flashdelivery.net
+2025-11-26 17:07:21 | INFO | [Main] Cooling down 40s (Gemini API limit)…
+2025-11-26 17:08:01 | INFO | ------------------------------------------------------------
+2025-11-26 17:08:01 | INFO | [Main] Processing 2/2
+2025-11-26 17:08:01 | INFO |        ID: simulated_2
+2025-11-26 17:08:01 | INFO |        From: Raj Malhotra <raj.malhotra@malhotragoods.in>
+2025-11-26 17:08:01 | INFO |        Subject: Re: Missing Items in Shipment SC-PO53804
+2025-11-26 17:08:12 | INFO | [Main] Sending email to raj.malhotra@malhotragoods.in
+2025-11-26 17:08:20 | INFO | [Main] All emails processed.
+2025-11-26 17:08:20 | INFO | ============================================================
+2025-12-03 14:20:33 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-12-03 14:20:33 | INFO | ============================================================
+2025-12-03 14:20:33 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-12-03 14:20:33 | INFO | ============================================================
+2025-12-03 14:20:59 | INFO | [Main] Fetching emails…
+2025-12-03 14:21:01 | INFO | [Main] Processing 1 email(s)
+2025-12-03 14:21:01 | INFO | ------------------------------------------------------------
+2025-12-03 14:21:01 | INFO | [Main] Processing 1/1
+2025-12-03 14:21:01 | INFO |        ID: simulated_1
+2025-12-03 14:21:01 | INFO |        From: No Reply <no-reply@flashdelivery.net>
+2025-12-03 14:21:01 | INFO |        Subject: Re: Update Needed
+2025-12-03 14:21:16 | INFO | [Main] Drafting email → oye.its.pvt@gmail.com
+2025-12-03 14:21:20 | INFO | [Main] All emails processed.
+2025-12-03 14:21:20 | INFO | ============================================================
+2025-12-03 14:41:40 | DEBUG | Logger initialized for '__main__' (to_file=True).
+2025-12-03 14:41:40 | INFO | ============================================================
+2025-12-03 14:41:40 | INFO | [Main] Starting ShipCube AI Email Pipeline
+2025-12-03 14:41:40 | INFO | ============================================================
+2025-12-03 14:41:48 | INFO | [Main] Fetching emails…
+2025-12-03 14:41:50 | INFO | [Main] Processing 1 email(s)
+2025-12-03 14:41:50 | INFO | ------------------------------------------------------------
+2025-12-03 14:41:50 | INFO | [Main] Processing 1/1
+2025-12-03 14:41:50 | INFO |        ID: simulated_1
+2025-12-03 14:41:50 | INFO |        From: Meera Sharma <meera.sharma@indomax.in>
+2025-12-03 14:41:50 | INFO |        Subject: Re: Return Pickup Pending - SC-11321
+2025-12-03 14:42:01 | INFO | [Main] Sending email to meera.sharma@indomax.in
+2025-12-03 14:42:09 | INFO | [Main] All emails processed.
+2025-12-03 14:42:09 | INFO | ============================================================

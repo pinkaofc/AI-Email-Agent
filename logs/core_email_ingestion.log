@@ -156,3 +156,11 @@
 2025-11-26 17:06:21 | INFO | [Email Ingestion] Logger initialized successfully.
 2025-11-26 17:06:56 | INFO | [Email Ingestion] Simulation mode enabled — using local email dataset.
 2025-11-26 17:06:56 | INFO | [Email Ingestion] Loaded 24 emails from sample_emails.json
+2025-12-03 14:19:41 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-12-03 14:19:41 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-12-03 14:20:59 | INFO | [Email Ingestion] Simulation mode enabled — using local email dataset.
+2025-12-03 14:20:59 | INFO | [Email Ingestion] Loaded 24 emails from sample_emails.json
+2025-12-03 14:41:20 | DEBUG | Logger initialized for 'core.email_ingestion' (to_file=True).
+2025-12-03 14:41:20 | INFO | [Email Ingestion] Logger initialized successfully.
+2025-12-03 14:41:48 | INFO | [Email Ingestion] Simulation mode enabled — using local email dataset.
+2025-12-03 14:41:48 | INFO | [Email Ingestion] Loaded 23 emails from sample_emails.json
